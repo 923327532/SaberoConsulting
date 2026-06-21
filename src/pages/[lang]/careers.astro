@@ -1,0 +1,38 @@
+---
+import type { SupportedLocale } from '../../i18n/utils/types';
+import { LOCALES } from '../../i18n/utils/types';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({
+    params: { lang: locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props;
+
+const meta: Record<string, { title: string; description: string }> = {
+  es: { title: 'Careers - SABERO Consulting', description: 'Sumate a un equipo que construye productos digitales con foco en ingenieria, negocio y evolucion continua.' },
+  en: { title: 'Careers - SABERO Consulting', description: 'Join a team that builds digital products with a focus on engineering, business and continuous evolution.' },
+  pt: { title: 'Carreiras - SABERO Consulting', description: 'Junte-se a uma equipe que constroi produtos digitais com foco em engenharia, negocios e evolucao continua.' },
+  fr: { title: 'Carrieres - SABERO Consulting', description: 'Rejoignez une equipe qui construit des produits numeriques axes sur l\'ingenierie, les affaires et l\'evolution continue.' },
+};
+
+const pageMeta = meta[locale as string] || meta.es;
+const path = `/${locale}/careers`;
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description} locale={locale as SupportedLocale} path={path}>
+  <section class="page-header section">
+    <div class="container">
+      <h1>{locale === 'es' ? 'Careers' : locale === 'en' ? 'Careers' : locale === 'pt' ? 'Carreiras' : 'Carrieres'}</h1>
+      <p class="section-subtitle">{pageMeta.description}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <p class="text-tertiary">{locale === 'es' ? 'No hay vacantes activas en este momento. Siguenos en LinkedIn para futuras oportunidades.' : locale === 'en' ? 'No active vacancies at this time. Follow us on LinkedIn for future opportunities.' : locale === 'pt' ? 'Nao ha vagas ativas no momento. Siga-nos no LinkedIn para futuras oportunidades.' : 'Pas d\'offres actives pour le moment. Suivez-nous sur LinkedIn pour les opportunites futures.'}</p>
+    </div>
+  </section>
+</BaseLayout>

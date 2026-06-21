@@ -1,0 +1,332 @@
+---
+import type { SupportedLocale } from '../../i18n/utils/types';
+import { getNavigation } from '../../data/navigation/index';
+import { siteSettings } from '../../data/settings/site';
+import { t } from '../../i18n/ui/index';
+import { localizeNavHref } from '../../i18n/routes/map';
+import LanguageSwitcher from '../navigation/LanguageSwitcher.astro';
+import MegaMenu from '../navigation/MegaMenu.astro';
+import MobileMenu from '../navigation/MobileMenu.astro';
+
+interface Props {
+  currentLocale: SupportedLocale;
+  path: string;
+}
+
+const { currentLocale, path } = Astro.props;
+const navigation = getNavigation(currentLocale);
+const megaMenuKeys = Object.keys(navigation.megaMenus);
+---
+
+<header class="site-header" role="banner">
+  <div class="header-container">
+    <!-- Logo - extrema izquierda -->
+    <a href={currentLocale === 'es' ? '/' : `/${currentLocale}/`} class="header-logo" aria-label={siteSettings.name}>
+      <img src="/images/saberologo.png" alt={siteSettings.name} class="header-logo-img" width="180" height="48" />
+    </a>
+
+    <!-- Navigation - centro -->
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul class="nav-list" role="list">
+        {navigation.main.map((item, index) => {
+          const menuKey = megaMenuKeys[index];
+          const megaSection = menuKey ? navigation.megaMenus[menuKey] : null;
+          const localizedHref = localizeNavHref(item.href, currentLocale);
+
+          return (
+            <li class="nav-item" data-mega={menuKey || ''}>
+              <a
+                href={localizedHref}
+                class="nav-link"
+                aria-haspopup={megaSection ? 'true' : undefined}
+                aria-expanded={megaSection ? 'false' : undefined}
+              >
+                {item.label}
+              </a>
+              {megaSection && (
+                <MegaMenu section={megaSection} isOpen={false} id={menuKey} locale={currentLocale} />
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+
+    <!-- Actions - extrema derecha -->
+    <div class="header-actions">
+      <LanguageSwitcher currentLocale={currentLocale} path={path} variant="desktop" />
+      <span class="action-separator" aria-hidden="true"></span>
+      <a href={localizeNavHref('/contacto', currentLocale)} class="header-contact-link">
+        {t(currentLocale, 'header.cta')}
+      </a>
+      <button class="hamburger" aria-label={t(currentLocale, 'header.menu')} data-toggle-mobile>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <MobileMenu
+    navigation={navigation}
+    currentLocale={currentLocale}
+    path={path}
+    isOpen={false}
+  />
+</header>
+
+<script>
+  let activeMega: string | null = null;
+
+  document.querySelectorAll('.nav-item[data-mega]').forEach((item) => {
+    const megaId = item.getAttribute('data-mega');
+    if (!megaId) return;
+
+    const trigger = item.querySelector('.nav-link') as HTMLElement;
+    const menu = item.querySelector('.mega-menu') as HTMLElement;
+
+    if (!trigger || !menu) return;
+
+    function openMega() {
+      if (activeMega && activeMega !== megaId) {
+        const prev = document.querySelector(`.nav-item[data-mega="${activeMega}"]`);
+        prev?.querySelector('.nav-link')?.setAttribute('aria-expanded', 'false');
+        prev?.querySelector('.mega-menu')?.classList.remove('open');
+      }
+      activeMega = megaId;
+      trigger.setAttribute('aria-expanded', 'true');
+      menu.classList.add('open');
+    }
+
+    function closeMega() {
+      activeMega = null;
+      trigger.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('open');
+    }
+
+    item.addEventListener('mouseenter', openMega);
+    item.addEventListener('mouseleave', (e) => {
+      const related = (e as MouseEvent).relatedTarget as HTMLElement;
+      if (related && item.contains(related)) return;
+      setTimeout(() => {
+        if (!item.matches(':hover')) closeMega();
+      }, 100);
+    });
+
+    trigger.addEventListener('focus', openMega);
+    trigger.addEventListener('blur', (e) => {
+      const related = (e as FocusEvent).relatedTarget as HTMLElement;
+      if (related && item.contains(related)) return;
+      closeMega();
+    });
+  });
+
+  // Mobile menu toggle
+  const toggleBtn = document.querySelector('[data-toggle-mobile]');
+  const mobileMenu = document.querySelector('.mobile-menu');
+
+  toggleBtn?.addEventListener('click', () => {
+    if (mobileMenu) {
+      const isOpen = mobileMenu.classList.toggle('open');
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+  });
+
+  // Close mega menus on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.mega-menu.open').forEach((m) => m.classList.remove('open'));
+      document.querySelectorAll('.nav-link[aria-expanded="true"]').forEach((l) => l.setAttribute('aria-expanded', 'false'));
+      activeMega = null;
+    }
+  });
+
+  // Close mega menus on click outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (activeMega && !target.closest('.nav-item')) {
+      const prev = document.querySelector(`.nav-item[data-mega="${activeMega}"]`);
+      prev?.querySelector('.nav-link')?.setAttribute('aria-expanded', 'false');
+      prev?.querySelector('.mega-menu')?.classList.remove('open');
+      activeMega = null;
+    }
+  });
+</script>
+
+<style>
+  /* ============================================
+     SABERO Consulting - Premium Header
+     Fondo blanco, logo original, estilo Globant
+     ============================================ */
+
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-100);
+    z-index: 1000;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    height: 100%;
+  }
+
+  /* ---- Logo - extrema izquierda ---- */
+  .header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+    margin-right: var(--space-10);
+  }
+
+  .header-logo-img {
+    display: block;
+    height: 42px;
+    width: auto;
+  }
+
+  /* ---- Navigation - centro ---- */
+  .header-nav {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .nav-item {
+    position: static;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-600);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast);
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: var(--color-deep-blue);
+  }
+
+  /* ---- Actions - extrema derecha ---- */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-shrink: 0;
+    margin-left: var(--space-10);
+  }
+
+  .action-separator {
+    display: block;
+    width: 1px;
+    height: 18px;
+    background-color: var(--color-gray-200);
+  }
+
+  .header-contact-link {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-gray-600);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .header-contact-link:hover {
+    color: var(--color-deep-blue);
+  }
+
+  /* ---- Hamburger ---- */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+    background: none;
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color var(--transition-fast);
+  }
+
+  .hamburger:hover {
+    border-color: var(--color-gray-400);
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-gray-600);
+    border-radius: 2px;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 1200px) {
+    .nav-link {
+      padding: var(--space-2) var(--space-2);
+      font-size: var(--text-xs);
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .header-logo-img {
+      height: 36px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .site-header {
+      height: var(--header-height-mobile);
+    }
+
+    .header-nav {
+      display: none;
+    }
+
+    .header-actions .action-separator,
+    .header-actions .header-contact-link,
+    .header-actions .lang-switcher {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-logo-img {
+      height: 30px;
+    }
+  }
+</style>

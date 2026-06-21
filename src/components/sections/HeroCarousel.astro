@@ -1,0 +1,562 @@
+---
+import type { SupportedLocale } from '../../i18n/utils/types';
+import { heroSlides, type HeroSlide } from '../../data/home/hero-slides';
+import { localizeNavHref } from '../../i18n/routes/map';
+
+interface Props {
+  locale: SupportedLocale;
+}
+
+const { locale } = Astro.props;
+const slides: HeroSlide[] = heroSlides[locale] || heroSlides.es;
+const slidesCount = slides.length;
+---
+
+<section class="hero-carousel" aria-label="Hero carousel" data-carousel>
+  <div class="carousel-viewport">
+    <div class="carousel-track" data-track>
+      {slides.map((slide, index) => (
+        <article
+          class="carousel-slide"
+          data-slide={index}
+          aria-roledescription="slide"
+          aria-label={`Slide ${index + 1} of ${slidesCount}`}
+          aria-hidden={index !== 0}
+        >
+          <img
+            src={slide.image}
+            alt={slide.alt}
+            class="carousel-image"
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+          <div class="carousel-overlay" aria-hidden="true"></div>
+          <div class="carousel-content">
+            <div class="carousel-text">
+              {slide.eyebrow && <span class="carousel-eyebrow">{slide.eyebrow}</span>}
+              <h1 class="carousel-title">{slide.title}</h1>
+              <p class="carousel-description">{slide.description}</p>
+              <div class="carousel-actions">
+                <a
+                  href={localizeNavHref(slide.primaryCtaHref, locale)}
+                  class="btn btn-primary carousel-cta"
+                >
+                  {slide.primaryCtaLabel}
+                </a>
+                {slide.secondaryCtaLabel && slide.secondaryCtaHref && (
+                  <a
+                    href={localizeNavHref(slide.secondaryCtaHref, locale)}
+                    class="btn btn-outline carousel-cta-secondary"
+                  >
+                    {slide.secondaryCtaLabel}
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Navigation arrows -->
+  <button class="carousel-arrow carousel-arrow-prev" data-prev aria-label="Previous slide" type="button">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+  <button class="carousel-arrow carousel-arrow-next" data-next aria-label="Next slide" type="button">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+  </button>
+
+  <!-- Dots -->
+  <div class="carousel-dots" role="tablist" aria-label="Slide navigation">
+    {slides.map((_, index) => (
+      <button
+        class="carousel-dot"
+        data-dot={index}
+        role="tab"
+        aria-selected={index === 0}
+        aria-label={`Go to slide ${index + 1}`}
+        type="button"
+      ></button>
+    ))}
+  </div>
+</section>
+
+<script>
+  (function () {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const AUTOPLAY_INTERVAL = 5000;
+    const TRANSITION_DURATION = 600;
+
+    const carousel = document.querySelector('[data-carousel]') as HTMLElement | null;
+    if (!carousel) return;
+
+    const track = carousel.querySelector('[data-track]') as HTMLElement | null;
+    if (!track) return;
+
+    const slides = Array.from(carousel.querySelectorAll('[data-slide]')) as HTMLElement[];
+    const dots = Array.from(carousel.querySelectorAll('[data-dot]')) as HTMLButtonElement[];
+    const prevBtn = carousel.querySelector('[data-prev]') as HTMLButtonElement | null;
+    const nextBtn = carousel.querySelector('[data-next]') as HTMLButtonElement | null;
+
+    const totalSlides = slides.length;
+    if (totalSlides < 2) return;
+
+    let currentIndex = 0;
+    let autoplayTimer: ReturnType<typeof setInterval> | null = null;
+    let isTransitioning = false;
+
+    function goToSlide(index: number) {
+      if (isTransitioning) return;
+      if (index === currentIndex) return;
+
+      isTransitioning = true;
+
+      // Update track position
+      track!.style.transform = `translateX(-${index * 100}%)`;
+
+      // Update slide aria
+      slides.forEach((slide, i) => {
+        slide.setAttribute('aria-hidden', i !== index ? 'true' : 'false');
+      });
+
+      // Update dots
+      dots.forEach((dot, i) => {
+        dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+
+      currentIndex = index;
+
+      setTimeout(() => {
+        isTransitioning = false;
+      }, TRANSITION_DURATION);
+    }
+
+    function nextSlide() {
+      const next = (currentIndex + 1) % totalSlides;
+      goToSlide(next);
+    }
+
+    function prevSlide() {
+      const prev = (currentIndex - 1 + totalSlides) % totalSlides;
+      goToSlide(prev);
+    }
+
+    function startAutoplay() {
+      if (prefersReducedMotion) return;
+      stopAutoplay();
+      autoplayTimer = setInterval(nextSlide, AUTOPLAY_INTERVAL);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer !== null) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    function resetAutoplay() {
+      stopAutoplay();
+      startAutoplay();
+    }
+
+    // Event listeners
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoplay();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoplay();
+      });
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.getAttribute('data-dot') || '0', 10);
+        goToSlide(index);
+        resetAutoplay();
+      });
+    });
+
+    // Keyboard navigation
+    carousel.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        prevSlide();
+        resetAutoplay();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+        resetAutoplay();
+      }
+    });
+
+    // Pause on hover/focus
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('focusin', stopAutoplay);
+    carousel.addEventListener('focusout', startAutoplay);
+
+    // Touch support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', (e: TouchEvent) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e: TouchEvent) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+        resetAutoplay();
+      }
+    }, { passive: true });
+
+    // Start
+    startAutoplay();
+  })();
+</script>
+
+<style>
+  /* ============================================
+     SABERO Consulting - Hero Carousel
+     Premium, corporativo, alto impacto
+     ============================================ */
+
+  .hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 85vh;
+    min-height: 500px;
+    max-height: 900px;
+    overflow: hidden;
+    background-color: var(--color-deep-blue);
+  }
+
+  .carousel-viewport {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+
+  .carousel-slide {
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .carousel-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 22, 40, 0.92) 0%,
+      rgba(10, 22, 40, 0.7) 40%,
+      rgba(10, 22, 40, 0.3) 100%
+    );
+    z-index: 1;
+  }
+
+  .carousel-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    padding-top: var(--header-height);
+  }
+
+  .carousel-text {
+    max-width: 640px;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .carousel-eyebrow {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+    margin-bottom: var(--space-4);
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid rgba(0, 102, 255, 0.3);
+    border-radius: var(--radius-full);
+    background-color: rgba(0, 102, 255, 0.08);
+  }
+
+  .carousel-title {
+    font-size: var(--text-6xl);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--color-white);
+    margin-bottom: var(--space-5);
+    letter-spacing: -0.02em;
+  }
+
+  .carousel-description {
+    font-size: var(--text-lg);
+    color: var(--color-gray-300);
+    line-height: 1.7;
+    margin-bottom: var(--space-8);
+    max-width: 520px;
+  }
+
+  .carousel-actions {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .carousel-cta {
+    padding: var(--space-3) var(--space-8);
+    font-size: var(--text-base);
+    font-weight: 600;
+  }
+
+  .carousel-cta-secondary {
+    padding: var(--space-3) var(--space-8);
+    font-size: var(--text-base);
+    font-weight: 600;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--color-white);
+  }
+
+  .carousel-cta-secondary:hover {
+    border-color: var(--color-white);
+    color: var(--color-white);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  /* ---- Arrows ---- */
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.06);
+    color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .hero-carousel:hover .carousel-arrow {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .carousel-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .carousel-arrow:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+
+  .carousel-arrow-prev {
+    left: var(--space-6);
+  }
+
+  .carousel-arrow-next {
+    right: var(--space-6);
+  }
+
+  /* ---- Dots ---- */
+  .carousel-dots {
+    position: absolute;
+    bottom: var(--space-8);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+    background-color: rgba(255, 255, 255, 0.25);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: 0;
+  }
+
+  .carousel-dot[aria-selected='true'] {
+    background-color: var(--accent-color);
+    width: 28px;
+    border-radius: 5px;
+  }
+
+  .carousel-dot:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .carousel-dot:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+
+  /* ---- Animation ---- */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ---- Reduced motion ---- */
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+      transition: none;
+    }
+
+    .carousel-text {
+      animation: none;
+    }
+
+    .carousel-arrow {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  /* ---- Responsive ---- */
+
+  /* Tablet landscape */
+  @media (max-width: 1100px) {
+    .hero-carousel {
+      height: 70vh;
+      min-height: 450px;
+    }
+
+    .carousel-title {
+      font-size: var(--text-5xl);
+    }
+
+    .carousel-description {
+      font-size: var(--text-base);
+    }
+  }
+
+  /* Tablet portrait */
+  @media (max-width: 768px) {
+    .hero-carousel {
+      height: 65vh;
+      min-height: 400px;
+    }
+
+    .carousel-title {
+      font-size: var(--text-3xl);
+    }
+
+    .carousel-description {
+      font-size: var(--text-sm);
+      max-width: 100%;
+    }
+
+    .carousel-text {
+      max-width: 100%;
+    }
+
+    .carousel-arrow {
+      width: 40px;
+      height: 40px;
+    }
+
+    .carousel-arrow-prev {
+      left: var(--space-3);
+    }
+
+    .carousel-arrow-next {
+      right: var(--space-3);
+    }
+
+    .carousel-dots {
+      bottom: var(--space-6);
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .hero-carousel {
+      height: 60vh;
+      min-height: 380px;
+    }
+
+    .carousel-title {
+      font-size: var(--text-2xl);
+    }
+
+    .carousel-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .carousel-cta,
+    .carousel-cta-secondary {
+      width: 100%;
+      text-align: center;
+    }
+
+    .carousel-arrow {
+      display: none;
+    }
+
+    .carousel-dots {
+      bottom: var(--space-4);
+    }
+  }
+</style>

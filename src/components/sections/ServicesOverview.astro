@@ -1,0 +1,143 @@
+---
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+
+const content = {
+  es: {
+    title: 'Nuestra oferta',
+    subtitle: 'Disenamos, desarrollamos y evolucionamos plataformas digitales para empresas que necesitan escalar procesos, productos y operaciones.',
+    services: [
+      { title: 'Desarrollo de software a medida', desc: 'Construimos productos digitales desde cero con arquitectura escalable y enfoque en negocio.' },
+      { title: 'Plataformas web y marketplaces', desc: 'Creamos plataformas multi-usuario, marketplaces y portales B2B/B2C con experiencia de clase mundial.' },
+      { title: 'Modernizacion de sistemas', desc: 'Evolucionamos plataformas legacy hacia arquitecturas modernas sin interrumpir operaciones.' },
+      { title: 'Integraciones y automatizacion', desc: 'Conectamos sistemas, automatizamos flujos y eliminamos cuellos de botella operativos.' },
+      { title: 'Cloud y DevOps', desc: 'Implementamos infraestructura cloud, CI/CD y practicas DevOps para entrega continua.' },
+      { title: 'QA y evolucion continua', desc: 'Aseguramos calidad con testing automatizado, monitoreo y mejora continua de producto.' },
+      { title: 'Data, analitica y AI enablement', desc: 'Transformamos datos en decisiones con analitica, dashboards e inteligencia artificial aplicada.' },
+      { title: 'Arquitectura de producto', desc: 'Disenamos la columna vertebral tecnica de tu producto para que sea escalable, mantenible y seguro.' },
+    ],
+  },
+  en: {
+    title: 'Our offering',
+    subtitle: 'We design, develop and evolve digital platforms for companies that need to scale processes, products and operations.',
+    services: [
+      { title: 'Custom software development', desc: 'We build digital products from scratch with scalable architecture and business focus.' },
+      { title: 'Web platforms & marketplaces', desc: 'We create multi-user platforms, marketplaces and B2B/B2C portals with world-class experience.' },
+      { title: 'System modernization', desc: 'We evolve legacy platforms into modern architectures without disrupting operations.' },
+      { title: 'Integrations & automation', desc: 'We connect systems, automate workflows and eliminate operational bottlenecks.' },
+      { title: 'Cloud & DevOps', desc: 'We implement cloud infrastructure, CI/CD and DevOps practices for continuous delivery.' },
+      { title: 'QA & continuous evolution', desc: 'We ensure quality with automated testing, monitoring and continuous product improvement.' },
+      { title: 'Data, analytics & AI enablement', desc: 'We transform data into decisions with analytics, dashboards and applied AI.' },
+      { title: 'Product architecture', desc: 'We design the technical backbone of your product to be scalable, maintainable and secure.' },
+    ],
+  },
+  pt: {
+    title: 'Nossa oferta',
+    subtitle: 'Projetamos, desenvolvemos e evoluimos plataformas digitais para empresas que precisam escalar processos, produtos e operacoes.',
+    services: [
+      { title: 'Desenvolvimento de software sob medida', desc: 'Construimos produtos digitais do zero com arquitetura escalavel e foco em negocios.' },
+      { title: 'Plataformas web e marketplaces', desc: 'Criamos plataformas multi-usuario, marketplaces e portais B2B/B2C com experiencia de classe mundial.' },
+      { title: 'Modernizacao de sistemas', desc: 'Evoluimos plataformas legadas para arquiteturas modernas sem interromper operacoes.' },
+      { title: 'Integracoes e automacao', desc: 'Conectamos sistemas, automatizamos fluxos e eliminamos gargalos operacionais.' },
+      { title: 'Cloud e DevOps', desc: 'Implementamos infraestrutura cloud, CI/CD e praticas DevOps para entrega continua.' },
+      { title: 'QA e evolucao continua', desc: 'Garantimos qualidade com testes automatizados, monitoramento e melhoria continua do produto.' },
+      { title: 'Dados, analitica e AI enablement', desc: 'Transformamos dados em decisoes com analitica, dashboards e inteligencia artificial aplicada.' },
+      { title: 'Arquitetura de produto', desc: 'Projetamos a espinha dorsal tecnica do seu produto para ser escalavel, viavel e segura.' },
+    ],
+  },
+  fr: {
+    title: 'Notre offre',
+    subtitle: 'Nous concevons, developpons et faisons evoluer des plateformes numeriques pour les entreprises qui doivent passer a l\'echelle.',
+    services: [
+      { title: 'Developpement logiciel sur mesure', desc: 'Nous construisons des produits numeriques desde zero avec une architecture evolutive.' },
+      { title: 'Plateformes web et marketplaces', desc: 'Nous creons des plateformes multi-utilisateurs, marketplaces et portails B2B/B2C.' },
+      { title: 'Modernisation de systemes', desc: 'Nous faisons evoluer les plateformes legacy vers des architectures modernes.' },
+      { title: 'Integrations et automatisation', desc: 'Nous connectons les systemes, automatisons les flux et eliminons les goulots.' },
+      { title: 'Cloud et DevOps', desc: 'Nous implementons l\'infrastructure cloud, CI/CD et les pratiques DevOps.' },
+      { title: 'QA et evolution continue', desc: 'Nous assurons la qualite avec des tests automatises et l\'amelioration continue.' },
+      { title: 'Donnees, analytique et IA', desc: 'Nous transformons les donnees en decisions avec l\'analytique et l\'IA appliquee.' },
+      { title: 'Architecture produit', desc: 'Nous concevons l\'epine dorsale technique de votre produit.' },
+    ],
+  },
+}[locale] || {
+  title: 'Nuestra oferta',
+  subtitle: 'Disenamos, desarrollamos y evolucionamos plataformas digitales para empresas que necesitan escalar procesos, productos y operaciones.',
+  services: [],
+};
+---
+
+<section class="services section" id="oferta" aria-label={content.title}>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{content.title}</h2>
+      <p class="section-subtitle">{content.subtitle}</p>
+    </div>
+    <div class="services-grid">
+      {content.services.map((service) => (
+        <article class="service-card">
+          <h3 class="service-title">{service.title}</h3>
+          <p class="service-desc">{service.desc}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background-color: var(--bg-secondary);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+
+  .service-card {
+    padding: var(--space-6);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+  }
+
+  .service-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .service-title {
+    font-size: var(--text-base);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+  }
+
+  .service-desc {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

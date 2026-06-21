@@ -1,0 +1,153 @@
+---
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+
+const content = {
+  es: {
+    title: 'Industrias',
+    subtitle: 'Cada industria tiene procesos, metricas y retos distintos. Adaptamos producto, arquitectura y experiencia segun tu contexto.',
+    industries: [
+      { title: 'PropTech', desc: 'Plataformas inmobiliarias, portales de propiedades, soluciones de matching y gestion de activos.' },
+      { title: 'Fintech y pagos', desc: 'Procesamiento de pagos, integraciones financieras, wallets y soluciones de banking.' },
+      { title: 'Marketplaces y plataformas', desc: 'Portales B2B y B2C, plataformas multi-vendedor, sistemas de matching y booking.' },
+      { title: 'Educacion y EdTech', desc: 'Plataformas de aprendizaje, campus virtuales, sistemas de gestion educativa.' },
+      { title: 'Logistica y operaciones', desc: 'Sistemas de tracking, gestion de flotas, optimizacion de rutas y WMS.' },
+      { title: 'Soluciones internas empresariales', desc: 'Intranets, ERPs a medida, dashboards de gestion y automatizacion interna.' },
+    ],
+  },
+  en: {
+    title: 'Industries',
+    subtitle: 'Each industry has distinct processes, metrics and challenges. We adapt product, architecture and experience to your context.',
+    industries: [
+      { title: 'PropTech', desc: 'Real estate platforms, property portals, matching solutions and asset management.' },
+      { title: 'Fintech & payments', desc: 'Payment processing, financial integrations, wallets and banking solutions.' },
+      { title: 'Marketplaces & platforms', desc: 'B2B and B2C portals, multi-vendor platforms, matching and booking systems.' },
+      { title: 'Education & EdTech', desc: 'Learning platforms, virtual campuses, educational management systems.' },
+      { title: 'Logistics & operations', desc: 'Tracking systems, fleet management, route optimization and WMS.' },
+      { title: 'Enterprise internal solutions', desc: 'Intranets, custom ERPs, management dashboards and internal automation.' },
+    ],
+  },
+  pt: {
+    title: 'Industrias',
+    subtitle: 'Cada industria tem processos, metricas e desafios distintos. Adaptamos produto, arquitetura e experiencia ao seu contexto.',
+    industries: [
+      { title: 'PropTech', desc: 'Plataformas imobiliarias, portais de propriedades, solucoes de matching e gestao de ativos.' },
+      { title: 'Fintech e pagamentos', desc: 'Processamento de pagamentos, integracoes financeiras, wallets e solucoes bancarias.' },
+      { title: 'Marketplaces e plataformas', desc: 'Portais B2B e B2C, plataformas multi-vendedor, sistemas de matching e booking.' },
+      { title: 'Educacao e EdTech', desc: 'Plataformas de aprendizado, campus virtuais, sistemas de gestao educacional.' },
+      { title: 'Logistica e operacoes', desc: 'Sistemas de tracking, gestao de frotas, otimizacao de rotas e WMS.' },
+      { title: 'Solucoes internas empresariais', desc: 'Intranets, ERPs sob medida, dashboards de gestao e automacao interna.' },
+    ],
+  },
+  fr: {
+    title: 'Industries',
+    subtitle: 'Chaque industrie a des processus, des metriques et des defis distincts. Nous adaptons le produit, l\'architecture et l\'experience a votre contexte.',
+    industries: [
+      { title: 'PropTech', desc: 'Plateformes immobilieres, portails de proprietes, solutions de matching et gestion d\'actifs.' },
+      { title: 'Fintech et paiements', desc: 'Traitement des paiements, integrations financieres, wallets et solutions bancaires.' },
+      { title: 'Marketplaces et plateformes', desc: 'Portails B2B et B2C, plateformes multi-vendeurs, systemes de matching et booking.' },
+      { title: 'Education et EdTech', desc: 'Plateformes d\'apprentissage, campus virtuels, systemes de gestion educative.' },
+      { title: 'Logistique et operations', desc: 'Systemes de tracking, gestion de flotte, optimisation d\'itineraire et WMS.' },
+      { title: 'Solutions internes entreprises', desc: 'Intranets, ERP sur mesure, tableaux de bord et automatisation interne.' },
+    ],
+  },
+}[locale] || {
+  title: 'Industrias',
+  subtitle: '',
+  industries: [],
+};
+---
+
+<section class="industries section" id="industrias" aria-label={content.title}>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{content.title}</h2>
+      <p class="section-subtitle">{content.subtitle}</p>
+    </div>
+    <div class="industries-grid">
+      {content.industries.map((ind) => (
+        <article class="industry-card">
+          <h3 class="industry-title">{ind.title}</h3>
+          <p class="industry-desc">{ind.desc}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .industries {
+    background-color: var(--bg-primary);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-12);
+  }
+
+  .industries-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .industry-card {
+    padding: var(--space-6);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .industry-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background-color: var(--accent-color);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .industry-card:hover::before {
+    opacity: 1;
+  }
+
+  .industry-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .industry-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+  }
+
+  .industry-desc {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .industries-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .industries-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

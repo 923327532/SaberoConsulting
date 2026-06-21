@@ -1,0 +1,105 @@
+---
+import type { SupportedLocale } from '../i18n/utils/types';
+import { DEFAULT_LOCALE, LOCALES } from '../i18n/utils/types';
+import { siteSettings } from '../data/settings/site';
+import { generateSEO, generateOrganizationSchema, generateWebSiteSchema, generateProfessionalServiceSchema } from '../lib/seo/index';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  locale: SupportedLocale;
+  path: string;
+  ogImage?: string;
+  noIndex?: boolean;
+  canonicalPath?: string;
+}
+
+const {
+  title,
+  description,
+  locale,
+  path,
+  ogImage,
+  noIndex,
+  canonicalPath,
+} = Astro.props;
+
+const seo = generateSEO({
+  title,
+  description,
+  canonical: canonicalPath || path,
+  locale,
+  path,
+  ogImage,
+  noIndex,
+});
+
+const organizationSchema = generateOrganizationSchema();
+const websiteSchema = generateWebSiteSchema();
+const professionalServiceSchema = generateProfessionalServiceSchema();
+---
+
+<!DOCTYPE html>
+<html lang={locale} dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={seo.description} />
+
+    <title>{seo.title}</title>
+    <link rel="canonical" href={seo.canonical} />
+
+    {seo.hreflang.map((link) => (
+      <link rel={link.rel} hreflang={link.hreflang} href={link.href} />
+    ))}
+
+    <link rel="alternate" hreflang="x-default" href={`${siteSettings.url}/`} />
+
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:url" content={seo.canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={seo.ogImage} />
+    <meta property="og:locale" content={locale === 'es' ? 'es_PE' : locale === 'en' ? 'en_US' : locale === 'pt' ? 'pt_BR' : 'fr_FR'} />
+    <meta property="og:site_name" content={siteSettings.name} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={seo.ogImage} />
+
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(professionalServiceSchema)}></script>
+  </head>
+  <body>
+    <Header currentLocale={locale} path={path} />
+
+    <main id="main-content" role="main">
+      <slot />
+    </main>
+
+    <Footer currentLocale={locale} />
+  </body>
+</html>
+
+<style>
+  main {
+    padding-top: var(--header-height);
+    min-height: 100vh;
+  }
+
+  @media (max-width: 1024px) {
+    main {
+      padding-top: var(--header-height-mobile);
+    }
+  }
+</style>

@@ -1,0 +1,120 @@
+---
+import type { MegaMenuSection, SupportedLocale } from '../../i18n/utils/types';
+import { localizeNavHref } from '../../i18n/routes/map';
+
+interface Props {
+  section: MegaMenuSection;
+  isOpen: boolean;
+  id: string;
+  locale: SupportedLocale;
+}
+
+const { section, isOpen, id, locale } = Astro.props;
+---
+
+<div
+  class={`mega-menu ${isOpen ? 'open' : ''}`}
+  id={`mega-${id}`}
+  role="region"
+  aria-label={section.columns[0]?.title || id}
+  aria-hidden={!isOpen}
+>
+  <div class="mega-menu-inner">
+    {section.columns.map((column, colIndex) => (
+      <div class={`mega-column col-${colIndex + 1}`}>
+        {column.title && (
+          <h3 class="mega-column-title">{column.title}</h3>
+        )}
+        {column.text && (
+          <p class="mega-column-text">{column.text}</p>
+        )}
+        {column.items.length > 0 && (
+          <ul class="mega-column-list">
+            {column.items.map((item) => (
+              <li>
+                <a href={localizeNavHref(item.href, locale)} class="mega-link">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-elevated);
+    border-top: 1px solid var(--border-color);
+    box-shadow: var(--shadow-xl);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all var(--transition-base);
+    z-index: 100;
+  }
+
+  .mega-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mega-menu-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.2fr;
+    gap: var(--space-8);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-10) var(--space-6);
+  }
+
+  .mega-column-title {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+    margin-bottom: var(--space-4);
+  }
+
+  .mega-column-text {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  .mega-column-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .mega-link {
+    display: block;
+    padding: var(--space-2) 0;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    border-bottom: 1px solid transparent;
+  }
+
+  .mega-link:hover {
+    color: var(--accent-color);
+    padding-left: var(--space-2);
+  }
+
+  @media (max-width: 1024px) {
+    .mega-menu {
+      display: none;
+    }
+  }
+</style>

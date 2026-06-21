@@ -1,0 +1,38 @@
+---
+import type { SupportedLocale } from '../../i18n/utils/types';
+import { LOCALES } from '../../i18n/utils/types';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({
+    params: { lang: locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props;
+
+const meta: Record<string, { title: string; description: string }> = {
+  es: { title: 'Insights - SABERO Consulting', description: 'Contenidos para lideres de negocio y equipos que buscan entender producto digital, automatizacion, escalabilidad y evolucion tecnologica.' },
+  en: { title: 'Insights - SABERO Consulting', description: 'Content for business leaders and teams looking to understand digital product, automation, scalability and technology evolution.' },
+  pt: { title: 'Insights - SABERO Consulting', description: 'Conteudo para lideres de negocios e equipes que buscam entender produto digital, automacao, escalabilidade e evolucao tecnologica.' },
+  fr: { title: 'Insights - SABERO Consulting', description: 'Contenus pour les dirigeants et les equipes qui cherchent a comprendre le produit numerique, l\'automatisation, l\'evolutivite et l\'evolution technologique.' },
+};
+
+const pageMeta = meta[locale as string] || meta.es;
+const path = `/${locale}/insights`;
+---
+
+<BaseLayout title={pageMeta.title} description={pageMeta.description} locale={locale as SupportedLocale} path={path}>
+  <section class="page-header section">
+    <div class="container">
+      <h1>{locale === 'es' ? 'Insights' : locale === 'en' ? 'Insights' : locale === 'pt' ? 'Insights' : 'Insights'}</h1>
+      <p class="section-subtitle">{pageMeta.description}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <p class="text-tertiary">{locale === 'es' ? 'Proximamente: articulos, guias y recursos.' : locale === 'en' ? 'Coming soon: articles, guides and resources.' : locale === 'pt' ? 'Em breve: artigos, guias e recursos.' : 'Prochainement: articles, guides et ressources.'}</p>
+    </div>
+  </section>
+</BaseLayout>

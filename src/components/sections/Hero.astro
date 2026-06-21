@@ -1,0 +1,146 @@
+---
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+
+const content = {
+  es: {
+    badge: 'Digital Product Engineering',
+    title: 'Construimos plataformas digitales que escalan tu negocio en America y Europa',
+    subtitle: 'Transformamos retos complejos en productos, plataformas y operaciones digitales medibles. Desde Peru para el mundo.',
+    cta: 'Conversemos',
+    secondary: 'Nuestra oferta',
+  },
+  en: {
+    badge: 'Digital Product Engineering',
+    title: 'We build digital platforms that scale your business across America and Europe',
+    subtitle: 'We transform complex challenges into measurable digital products, platforms and operations. From Peru to the world.',
+    cta: "Let's talk",
+    secondary: 'Our offering',
+  },
+  pt: {
+    badge: 'Digital Product Engineering',
+    title: 'Construimos plataformas digitais que escalam seu negocio na America e Europa',
+    subtitle: 'Transformamos desafios complexos em produtos, plataformas e operacoes digitais mensuraveis. Do Peru para o mundo.',
+    cta: 'Vamos conversar',
+    secondary: 'Nossa oferta',
+  },
+  fr: {
+    badge: 'Digital Product Engineering',
+    title: 'Nous construisons des plateformes numeriques qui font passer votre entreprise a l\'echelle en Amerique et en Europe',
+    subtitle: 'Nous transformons les defis complexes en produits, plateformes et operations numeriques mesurables. Du Perou vers le monde.',
+    cta: 'Parlons-en',
+    secondary: 'Notre offre',
+  },
+}[locale] || {
+  badge: 'Digital Product Engineering',
+  title: 'Construimos plataformas digitales que escalan tu negocio en America y Europa',
+  subtitle: 'Transformamos retos complejos en productos, plataformas y operaciones digitales medibles. Desde Peru para el mundo.',
+  cta: 'Conversemos',
+  secondary: 'Nuestra oferta',
+};
+---
+
+<section class="hero section" aria-label="Hero">
+  <div class="hero-bg"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-badge">{content.badge}</span>
+      <h1 class="hero-title">{content.title}</h1>
+      <p class="hero-subtitle">{content.subtitle}</p>
+      <div class="hero-actions">
+        <a href={locale === 'es' ? '/contacto' : `/${locale}/contacto`} class="btn btn-primary btn-lg">{content.cta}</a>
+        <a href={locale === 'es' ? '/#oferta' : `/${locale}/#offering`} class="btn btn-outline btn-lg">{content.secondary}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: var(--space-24) 0;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0, 102, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(0, 102, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(230, 57, 70, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 800px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--accent-color);
+    background-color: rgba(0, 102, 255, 0.1);
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--space-6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, var(--text-6xl));
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--space-6);
+    letter-spacing: -1px;
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-tertiary);
+    max-width: 600px;
+    margin-bottom: var(--space-8);
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .btn-lg {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-base);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 70vh;
+      padding: var(--space-16) 0;
+    }
+
+    .hero-title {
+      font-size: var(--text-3xl);
+    }
+
+    .hero-actions {
+      flex-direction: column;
+    }
+
+    .btn-lg {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>

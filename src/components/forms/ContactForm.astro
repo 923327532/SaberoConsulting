@@ -1,0 +1,344 @@
+---
+import type { ContactData } from '../../i18n/utils/types';
+
+interface Props {
+  data: ContactData;
+  locale: string;
+}
+
+const { data, locale } = Astro.props;
+---
+
+<section class="contact-page section" aria-label="Contact form">
+  <div class="container">
+    <div class="contact-header">
+      <h1 class="contact-title">{data.title}</h1>
+      <p class="contact-subtitle">{data.subtitle}</p>
+      <div class="contact-info">
+        <a href={`mailto:${data.email}`} class="contact-email">{data.email}</a>
+        <span class="contact-response">{data.responseTime}</span>
+      </div>
+    </div>
+
+    <div class="contact-layout">
+      <div class="contact-categories">
+        <h3 class="categories-title">{data.categoriesTitle}</h3>
+        <div class="categories-grid">
+          {data.categories.map((cat) => (
+            <label class="category-option">
+              <input type="radio" name="category" value={cat.value} class="category-input" />
+              <span class="category-label">{cat.label}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <form class="contact-form" action="https://formsubmit.co/saberoconsulting@gmail.com" method="POST" data-form>
+        <input type="hidden" name="_subject" value="Nuevo contacto SABERO Consulting" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value={locale === 'es' ? '/gracias' : `/${locale}/gracias`} />
+        <input type="hidden" name="idioma" value={locale} />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name" class="form-label">{data.form.name}</label>
+            <input type="text" id="name" name="nombre" required class="form-input" placeholder={data.form.name} />
+          </div>
+          <div class="form-group">
+            <label for="lastName" class="form-label">{data.form.lastName}</label>
+            <input type="text" id="lastName" name="apellido" required class="form-input" placeholder={data.form.lastName} />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email" class="form-label">{data.form.email}</label>
+            <input type="email" id="email" name="email" required class="form-input" placeholder={data.form.email} />
+          </div>
+          <div class="form-group">
+            <label for="company" class="form-label">{data.form.company}</label>
+            <input type="text" id="company" name="empresa" class="form-input" placeholder={data.form.company} />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="country" class="form-label">{data.form.country}</label>
+            <input type="text" id="country" name="pais" class="form-input" placeholder={data.form.country} />
+          </div>
+          <div class="form-group">
+            <label for="position" class="form-label">{data.form.position}</label>
+            <input type="text" id="position" name="cargo" class="form-input" placeholder={data.form.position} />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="companySize" class="form-label">{data.form.companySize}</label>
+            <select id="companySize" name="tamano_empresa" class="form-input form-select">
+              <option value="">{data.form.companySize}</option>
+              {data.companySizes.map((size) => (
+                <option value={size.value}>{size.label}</option>
+              ))}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="industry" class="form-label">{data.form.industry}</label>
+            <select id="industry" name="industria" class="form-input form-select">
+              <option value="">{data.form.industry}</option>
+              {data.industries.map((ind) => (
+                <option value={ind.value}>{ind.label}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="whatsapp" class="form-label">{data.form.whatsapp}</label>
+          <input type="tel" id="whatsapp" name="whatsapp" class="form-input" placeholder={data.form.whatsapp} />
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="form-label">{data.form.message}</label>
+          <textarea id="message" name="mensaje" rows="5" class="form-input form-textarea" placeholder={data.form.message}></textarea>
+        </div>
+
+        <div class="form-checkboxes">
+          <label class="checkbox-label">
+            <input type="checkbox" name="privacidad" required class="checkbox-input" />
+            <span class="checkbox-text">{data.form.privacy}</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="newsletter" class="checkbox-input" />
+            <span class="checkbox-text">{data.form.newsletter}</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit">{data.form.submit}</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.category-input').forEach((el) => {
+    const input = el as HTMLInputElement;
+    input.addEventListener('change', () => {
+      if (input.checked) {
+        const hiddenCat = document.querySelector('input[name="categoria"]') as HTMLInputElement | null;
+        if (hiddenCat) hiddenCat.value = input.value;
+      }
+    });
+  });
+
+  const form = document.querySelector('[data-form]');
+  if (form) {
+    const hiddenCat = document.createElement('input');
+    hiddenCat.type = 'hidden';
+    hiddenCat.name = 'categoria';
+    hiddenCat.value = '';
+    form.appendChild(hiddenCat);
+  }
+</script>
+
+<style>
+  .contact-page {
+    padding-top: var(--space-16);
+  }
+
+  .contact-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .contact-title {
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-tertiary);
+    max-width: 500px;
+    margin: 0 auto var(--space-6);
+  }
+
+  .contact-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .contact-email {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+
+  .contact-response {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+  }
+
+  .contact-layout {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .contact-categories {
+    margin-bottom: var(--space-10);
+  }
+
+  .categories-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+  }
+
+  .categories-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .category-option {
+    cursor: pointer;
+  }
+
+  .category-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .category-label {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+  }
+
+  .category-input:checked + .category-label {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    background-color: rgba(0, 102, 255, 0.1);
+  }
+
+  .category-label:hover {
+    border-color: var(--accent-color);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .form-label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .form-input {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast);
+    font-family: inherit;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+  }
+
+  .form-input::placeholder {
+    color: var(--text-tertiary);
+  }
+
+  .form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237B8291' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    cursor: pointer;
+  }
+
+  .checkbox-input {
+    margin-top: 4px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent-color);
+  }
+
+  .checkbox-text {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+  }
+
+  .form-submit {
+    align-self: flex-start;
+    padding: var(--space-3) var(--space-8);
+    font-size: var(--text-base);
+  }
+
+  @media (max-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-title {
+      font-size: var(--text-3xl);
+    }
+
+    .form-submit {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>

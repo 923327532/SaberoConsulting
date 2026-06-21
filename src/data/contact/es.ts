@@ -1,0 +1,53 @@
+import type { ContactData } from '../../i18n/utils/types';
+
+export const contactEs: ContactData = {
+  title: 'Conversemos sobre tu proximo proyecto',
+  subtitle:
+    'Cuentanos sobre tu iniciativa y te responderemos en menos de 24 horas. Sin compromisos, sin spam.',
+  email: 'saberoconsulting@gmail.com',
+  whatsapp: '+51999999999',
+  responseTime: 'Respuesta en menos de 24h',
+  categoriesTitle: 'Sobre que te gustaria conversar?',
+  categories: [
+    { value: 'software', label: 'Servicios de software' },
+    { value: 'consulting', label: 'Consultoria tecnologica' },
+    { value: 'product', label: 'Producto digital / MVP' },
+    { value: 'modernization', label: 'Modernizacion' },
+    { value: 'partnership', label: 'Alianzas' },
+    { value: 'press', label: 'Prensa' },
+    { value: 'careers', label: 'Carreras' },
+    { value: 'general', label: 'Consulta general' },
+  ],
+  form: {
+    name: 'Nombre',
+    lastName: 'Apellido',
+    email: 'Correo electronico',
+    company: 'Empresa',
+    country: 'Pais',
+    position: 'Cargo',
+    companySize: 'Tamano de la empresa',
+    industry: 'Industria',
+    whatsapp: 'WhatsApp (opcional)',
+    message: 'Mensaje',
+    privacy: 'He leido y acepto la politica de privacidad',
+    newsletter: 'Deseo recibir novedades y contenidos',
+    submit: 'Enviar mensaje',
+  },
+  companySizes: [
+    { value: '1-10', label: '1-10 empleados' },
+    { value: '11-50', label: '11-50 empleados' },
+    { value: '51-200', label: '51-200 empleados' },
+    { value: '201-1000', label: '201-1000 empleados' },
+    { value: '1000+', label: 'Mas de 1000 empleados' },
+  ],
+  industries: [
+    { value: 'technology', label: 'Tecnologia' },
+    { value: 'finance', label: 'Finanzas' },
+    { value: 'realestate', label: 'Bienes raices' },
+    { value: 'education', label: 'Educacion' },
+    { value: 'logistics', label: 'Logistica' },
+    { value: 'health', label: 'Salud' },
+    { value: 'retail', label: 'Comercio' },
+    { value: 'other', label: 'Otra' },
+  ],
+};

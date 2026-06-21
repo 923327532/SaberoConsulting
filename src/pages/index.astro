@@ -1,0 +1,23 @@
+---
+// Root route - redirects to Spanish default locale
+// Spanish is the default language, served at /es/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroCarousel from '../components/sections/HeroCarousel.astro';
+import ServicesOverview from '../components/sections/ServicesOverview.astro';
+import IndustriesOverview from '../components/sections/IndustriesOverview.astro';
+import AboutOverview from '../components/sections/AboutOverview.astro';
+import CTASection from '../components/sections/CTASection.astro';
+---
+
+<BaseLayout
+  title="SABERO Consulting - Ingenieria de Productos Digitales y Evolucion de Plataformas"
+  description="SABERO Consulting disena, desarrolla y evoluciona plataformas digitales para empresas que necesitan escalar procesos, productos y operaciones en America y Europa."
+  locale="es"
+  path="/"
+>
+  <HeroCarousel locale="es" />
+  <ServicesOverview locale="es" />
+  <IndustriesOverview locale="es" />
+  <AboutOverview locale="es" />
+  <CTASection locale="es" />
+</BaseLayout>

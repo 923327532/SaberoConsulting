@@ -1,0 +1,126 @@
+---
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+
+const content = {
+  es: {
+    title: 'Nosotros',
+    subtitle: 'SABERO Consulting es una software factory nacida en Peru, con enfoque en construir productos y plataformas digitales para organizaciones con vision de crecimiento en America y Europa.',
+    items: [
+      { title: 'Peru como punto de partida', desc: 'Nacimos en Peru con estandar internacional. Nuestra ubicacion nos da ventaja de costo, talento y zona horaria.' },
+      { title: 'Enfoque regional', desc: 'Operamos para America y Europa, combinando cercania cultural con capacidad de entrega remota.' },
+      { title: 'Delivery agil y colaborativo', desc: 'Trabajamos con equipos integrados, ciclos cortos y transparencia total en cada etapa.' },
+      { title: 'Excelencia tecnica', desc: 'Seleccionamos la tecnologia correcta para cada problema, sin modas ni sobreingenieria.' },
+      { title: 'Diseno orientado a negocio', desc: 'Cada decision tecnica responde a un objetivo de negocio medible.' },
+      { title: 'Relaciones de largo plazo', desc: 'Buscamos ser partners, no proveedores. Construimos relaciones que evolucionan con el tiempo.' },
+    ],
+  },
+  en: {
+    title: 'About us',
+    subtitle: 'SABERO Consulting is a software factory born in Peru, focused on building digital products and platforms for organizations with growth ambitions in America and Europe.',
+    items: [
+      { title: 'Peru as starting point', desc: 'Born in Peru with international standards. Our location gives us cost, talent and timezone advantages.' },
+      { title: 'Regional focus', desc: 'We operate for America and Europe, combining cultural proximity with remote delivery capability.' },
+      { title: 'Agile & collaborative delivery', desc: 'We work with integrated teams, short cycles and total transparency at every stage.' },
+      { title: 'Technical excellence', desc: 'We select the right technology for each problem, without trends or overengineering.' },
+      { title: 'Business-driven design', desc: 'Every technical decision responds to a measurable business objective.' },
+      { title: 'Long-term relationships', desc: 'We seek to be partners, not vendors. We build relationships that evolve over time.' },
+    ],
+  },
+  pt: {
+    title: 'Nos',
+    subtitle: 'A SABERO Consulting e uma fabrica de software nascida no Peru, focada em construir produtos e plataformas digitais para organizacoes com visao de crescimento na America e Europa.',
+    items: [
+      { title: 'Peru como ponto de partida', desc: 'Nascemos no Peru com padrao internacional. Nossa localizacao nos da vantagem de custo, talento e fuso horario.' },
+      { title: 'Enfoque regional', desc: 'Operamos para America e Europa, combinando proximidade cultural com capacidade de entrega remota.' },
+      { title: 'Delivery agil e colaborativo', desc: 'Trabalhamos com equipes integradas, ciclos curtos e transparencia total em cada etapa.' },
+      { title: 'Excelencia tecnica', desc: 'Selecionamos a tecnologia certa para cada problema, sem modismos ou superengenharia.' },
+      { title: 'Design orientado a negocios', desc: 'Cada decisao tecnica responde a um objetivo de negocio mensuravel.' },
+      { title: 'Relacoes de longo prazo', desc: 'Buscamos ser parceiros, nao fornecedores. Construimos relacoes que evoluem com o tempo.' },
+    ],
+  },
+  fr: {
+    title: 'Nous',
+    subtitle: 'SABERO Consulting est une fabrique de logiciels nee au Perou, axee sur la construction de produits et plateformes numeriques pour les organisations ayant une vision de croissance en Amerique et en Europe.',
+    items: [
+      { title: 'Perou comme point de depart', desc: 'Nes au Perou avec des standards internationaux. Notre localisation nous donne un avantage de cout, de talent et de fuseau horaire.' },
+      { title: 'Approche regionale', desc: 'Nous operons pour l\'Amerique et l\'Europe, combinant proximite culturelle et capacite de livraison a distance.' },
+      { title: 'Livraison agile et collaborative', desc: 'Nous travaillons avec des equipes integrees, des cycles courts et une transparence totale.' },
+      { title: 'Excellence technique', desc: 'Nous selectionnons la bonne technologie pour chaque probleme, sans mode ni suringenierie.' },
+      { title: 'Design oriente metier', desc: 'Chaque decision technique repond a un objectif metier mesurable.' },
+      { title: 'Relations a long terme', desc: 'Nous cherchons a etre des partenaires, pas des fournisseurs. Nous construisons des relations qui evoluent.' },
+    ],
+  },
+}[locale] || {
+  title: 'Nosotros',
+  subtitle: '',
+  items: [],
+};
+---
+
+<section class="about section section-dark" id="nosotros" aria-label={content.title}>
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{content.title}</h2>
+      <p class="section-subtitle">{content.subtitle}</p>
+    </div>
+    <div class="about-grid">
+      {content.items.map((item) => (
+        <article class="about-card">
+          <h3 class="about-title">{item.title}</h3>
+          <p class="about-desc">{item.desc}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .about-card {
+    padding: var(--space-6);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+  }
+
+  .about-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+  }
+
+  .about-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+  }
+
+  .about-desc {
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

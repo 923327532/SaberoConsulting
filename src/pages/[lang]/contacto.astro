@@ -1,0 +1,48 @@
+---
+import type { SupportedLocale } from '../../i18n/utils/types';
+import { LOCALES } from '../../i18n/utils/types';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactForm from '../../components/forms/ContactForm.astro';
+import { getContact } from '../../data/contact/index';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({
+    params: { lang: locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props;
+
+const meta: Record<string, { title: string; description: string }> = {
+  es: {
+    title: 'Contacto - SABERO Consulting',
+    description: 'Conversemos sobre tu proximo proyecto. Contacta a SABERO Consulting para servicios de software, consultoria tecnologica y productos digitales.',
+  },
+  en: {
+    title: 'Contact - SABERO Consulting',
+    description: "Let's talk about your next project. Contact SABERO Consulting for software services, technology consulting and digital products.",
+  },
+  pt: {
+    title: 'Contato - SABERO Consulting',
+    description: 'Vamos conversar sobre seu proximo projeto. Contate a SABERO Consulting para servicos de software, consultoria tecnologica e produtos digitais.',
+  },
+  fr: {
+    title: 'Contact - SABERO Consulting',
+    description: 'Parlons de votre prochain projet. Contactez SABERO Consulting pour des services logiciels, du conseil technologique et des produits numeriques.',
+  },
+};
+
+const pageMeta = meta[locale as string] || meta.es;
+const contactData = getContact(locale as SupportedLocale);
+const path = `/${locale}/contacto`;
+---
+
+<BaseLayout
+  title={pageMeta.title}
+  description={pageMeta.description}
+  locale={locale as SupportedLocale}
+  path={path}
+>
+  <ContactForm data={contactData} locale={locale as string} />
+</BaseLayout>
