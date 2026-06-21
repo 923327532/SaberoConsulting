@@ -1,44 +1,43 @@
-[2m20:25:48[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
-[2m20:25:49[22m [34m[types][39m Generated [2m308ms[22m
-[2m20:25:49[22m [34m[build][39m output: [34m"static"[39m
-[2m20:25:49[22m [34m[build][39m mode: [34m"static"[39m
-[2m20:25:49[22m [34m[build][39m directory: [34mC:\Users\saberoconsultinglanding\sabero-consulting\dist\[39m
-[2m20:25:49[22m [34m[build][39m Collecting build info...
-[2m20:25:49[22m [34m[build][39m [32m✓ Completed in 337ms.[39m
-[2m20:25:49[22m [34m[build][39m Building static entrypoints...
-[2m20:25:50[22m [34m[vite][39m [32m✓ built in 1.49s[39m
-[2m20:25:50[22m [34m[vite][39m [32m✓ built in 54ms[39m
-[2m20:25:50[22m [34m[build][39m Rearranging server assets...
+[2m20:45:34[22m [34m[types][39m Generated [2m50ms[22m
+[2m20:45:34[22m [34m[build][39m output: [34m"static"[39m
+[2m20:45:34[22m [34m[build][39m mode: [34m"static"[39m
+[2m20:45:34[22m [34m[build][39m directory: [34mC:\Users\saberoconsultinglanding\sabero-consulting\dist\[39m
+[2m20:45:34[22m [34m[build][39m Collecting build info...
+[2m20:45:34[22m [34m[build][39m [32m✓ Completed in 77ms.[39m
+[2m20:45:34[22m [34m[build][39m Building static entrypoints...
+[2m20:45:35[22m [34m[vite][39m [32m✓ built in 1.51s[39m
+[2m20:45:35[22m [34m[vite][39m [32m✓ built in 58ms[39m
+[2m20:45:35[22m [34m[build][39m Rearranging server assets...
 
 [42m[30m generating static routes [39m[49m
-[2m20:25:50[22m   [34m├─[39m [2m/es/careers/index.html[22m [2m(+16ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/en/careers/index.html[22m [2m(+5ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/pt/careers/index.html[22m [2m(+6ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/fr/careers/index.html[22m [2m(+5ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/es/casos/index.html[22m [2m(+4ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/en/casos/index.html[22m [2m(+11ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/pt/casos/index.html[22m [2m(+5ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/fr/casos/index.html[22m [2m(+9ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/es/contacto/index.html[22m [2m(+7ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/en/contacto/index.html[22m [2m(+7ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/pt/contacto/index.html[22m [2m(+6ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/fr/contacto/index.html[22m [2m(+6ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/es/insights/index.html[22m [2m(+6ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/en/insights/index.html[22m [2m(+5ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/pt/insights/index.html[22m [2m(+4ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/fr/insights/index.html[22m [2m(+3ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/es/privacidad/index.html[22m [2m(+5ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/en/privacidad/index.html[22m [2m(+7ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/pt/privacidad/index.html[22m [2m(+8ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/fr/privacidad/index.html[22m [2m(+7ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/es/index.html[22m [2m(+7ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/en/index.html[22m [2m(+5ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/pt/index.html[22m [2m(+4ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/fr/index.html[22m [2m(+4ms)[22m 
-[2m20:25:50[22m   [34m├─[39m [2m/index.html[22m [2m(+6ms)[22m 
-[2m20:25:50[22m [32m✓ Completed in 206ms.
+[2m20:45:35[22m   [34m├─[39m [2m/es/careers/index.html[22m [2m(+17ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/en/careers/index.html[22m [2m(+5ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/pt/careers/index.html[22m [2m(+6ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/fr/careers/index.html[22m [2m(+3ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/es/casos/index.html[22m [2m(+5ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/en/casos/index.html[22m [2m(+5ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/pt/casos/index.html[22m [2m(+3ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/fr/casos/index.html[22m [2m(+3ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/es/contacto/index.html[22m [2m(+4ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/en/contacto/index.html[22m [2m(+5ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/pt/contacto/index.html[22m [2m(+4ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/fr/contacto/index.html[22m [2m(+4ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/es/insights/index.html[22m [2m(+3ms)[22m 
+[2m20:45:35[22m   [34m├─[39m [2m/en/insights/index.html[22m [2m(+3ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/pt/insights/index.html[22m [2m(+9ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/fr/insights/index.html[22m [2m(+3ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/es/privacidad/index.html[22m [2m(+3ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/en/privacidad/index.html[22m [2m(+4ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/pt/privacidad/index.html[22m [2m(+3ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/fr/privacidad/index.html[22m [2m(+3ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/es/index.html[22m [2m(+5ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/en/index.html[22m [2m(+5ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/pt/index.html[22m [2m(+3ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/fr/index.html[22m [2m(+3ms)[22m 
+[2m20:45:36[22m   [34m├─[39m [2m/index.html[22m [2m(+4ms)[22m 
+[2m20:45:36[22m [32m✓ Completed in 170ms.
 [39m
-[2m20:25:50[22m [34m[build][39m [32m✓ Completed in 1.85s.[39m
-[2m20:25:50[22m [34m[@astrojs/sitemap][39m `sitemap-index.xml` created at `dist`
-[2m20:25:50[22m [34m[build][39m 25 page(s) built in [1m2.21s[22m
-[2m20:25:50[22m [34m[build][39m [1mComplete![22m
+[2m20:45:36[22m [34m[build][39m [32m✓ Completed in 1.82s.[39m
+[2m20:45:36[22m [34m[@astrojs/sitemap][39m `sitemap-index.xml` created at `dist`
+[2m20:45:36[22m [34m[build][39m 25 page(s) built in [1m1.91s[22m
+[2m20:45:36[22m [34m[build][39m [1mComplete![22m

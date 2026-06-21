@@ -22,48 +22,50 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
   <div class="header-container">
     <!-- Logo - extrema izquierda -->
     <a href={currentLocale === 'es' ? '/' : `/${currentLocale}/`} class="header-logo" aria-label={siteSettings.name}>
-      <img src="/images/saberologo.png" alt={siteSettings.name} class="header-logo-img" width="180" height="48" />
+      <img src="/images/saberologo.png" alt={siteSettings.name} class="header-logo-img" width="200" height="56" />
     </a>
 
-    <!-- Navigation - centro -->
-    <nav class="header-nav" aria-label="Main navigation">
-      <ul class="nav-list" role="list">
-        {navigation.main.map((item, index) => {
-          const menuKey = megaMenuKeys[index];
-          const megaSection = menuKey ? navigation.megaMenus[menuKey] : null;
-          const localizedHref = localizeNavHref(item.href, currentLocale);
+    <!-- Right side: nav + actions -->
+    <div class="header-right">
+      <!-- Navigation -->
+      <nav class="header-nav" aria-label="Main navigation">
+        <ul class="nav-list" role="list">
+          {navigation.main.map((item, index) => {
+            const menuKey = megaMenuKeys[index];
+            const megaSection = menuKey ? navigation.megaMenus[menuKey] : null;
+            const localizedHref = localizeNavHref(item.href, currentLocale);
 
-          return (
-            <li class="nav-item" data-mega={menuKey || ''}>
-              <a
-                href={localizedHref}
-                class="nav-link"
-                aria-haspopup={megaSection ? 'true' : undefined}
-                aria-expanded={megaSection ? 'false' : undefined}
-              >
-                {item.label}
-              </a>
-              {megaSection && (
-                <MegaMenu section={megaSection} isOpen={false} id={menuKey} locale={currentLocale} />
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+            return (
+              <li class="nav-item" data-mega={menuKey || ''}>
+                <a
+                  href={localizedHref}
+                  class="nav-link"
+                  aria-haspopup={megaSection ? 'true' : undefined}
+                  aria-expanded={megaSection ? 'false' : undefined}
+                >
+                  {item.label}
+                </a>
+                {megaSection && (
+                  <MegaMenu section={megaSection} isOpen={false} id={menuKey} locale={currentLocale} />
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
 
-    <!-- Actions - extrema derecha -->
-    <div class="header-actions">
-      <LanguageSwitcher currentLocale={currentLocale} path={path} variant="desktop" />
-      <span class="action-separator" aria-hidden="true"></span>
-      <a href={localizeNavHref('/contacto', currentLocale)} class="header-contact-link">
-        {t(currentLocale, 'header.cta')}
-      </a>
-      <button class="hamburger" aria-label={t(currentLocale, 'header.menu')} data-toggle-mobile>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
+      <!-- Actions -->
+      <div class="header-actions">
+        <LanguageSwitcher currentLocale={currentLocale} path={path} variant="desktop" />
+        <a href={localizeNavHref('/contacto', currentLocale)} class="header-cta-btn">
+          {t(currentLocale, 'header.cta')}
+        </a>
+        <button class="hamburger" aria-label={t(currentLocale, 'header.menu')} data-toggle-mobile>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -156,8 +158,9 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
 
 <style>
   /* ============================================
-     SABERO Consulting - Premium Header
-     Fondo blanco, logo original, estilo Globant
+     SABERO Consulting - Header Premium
+     Fondo blanco, logo grande, boton gradient pill
+     Inspirado en referencia corporativa moderna
      ============================================ */
 
   .site-header {
@@ -166,8 +169,8 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     left: 0;
     right: 0;
     height: var(--header-height);
-    background-color: var(--color-white);
-    border-bottom: 1px solid var(--color-gray-100);
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeef2;
     z-index: 1000;
   }
 
@@ -181,33 +184,47 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     height: 100%;
   }
 
-  /* ---- Logo - extrema izquierda ---- */
+  /* ---- Logo ---- */
   .header-logo {
     display: flex;
     align-items: center;
     text-decoration: none;
     flex-shrink: 0;
-    margin-right: var(--space-10);
   }
 
   .header-logo-img {
     display: block;
-    height: 42px;
+    height: 48px;
     width: auto;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+    will-change: transform;
   }
 
-  /* ---- Navigation - centro ---- */
+  .header-logo:hover .header-logo-img {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px rgba(0, 102, 255, 0.25));
+  }
+
+  /* ---- Right wrapper ---- */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  /* ---- Navigation ---- */
   .header-nav {
     display: flex;
     align-items: center;
-    flex: 1;
-    justify-content: center;
   }
 
   .nav-list {
     display: flex;
     align-items: center;
     gap: var(--space-1);
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   .nav-item {
@@ -218,48 +235,60 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     display: inline-flex;
     align-items: center;
     padding: var(--space-2) var(--space-3);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--color-gray-600);
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1a1a2e;
     text-decoration: none;
     border-radius: var(--radius-md);
-    transition: color var(--transition-fast);
+    transition: color 0.2s ease;
     white-space: nowrap;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.1px;
   }
 
   .nav-link:hover,
   .nav-link:focus-visible {
-    color: var(--color-deep-blue);
+    color: #0066ff;
   }
 
-  /* ---- Actions - extrema derecha ---- */
+  /* ---- Actions ---- */
   .header-actions {
     display: flex;
     align-items: center;
     gap: var(--space-4);
     flex-shrink: 0;
-    margin-left: var(--space-10);
   }
 
-  .action-separator {
-    display: block;
-    width: 1px;
-    height: 18px;
-    background-color: var(--color-gray-200);
-  }
-
-  .header-contact-link {
-    font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--color-gray-600);
+  /* ---- CTA Button - Gradient Pill ---- */
+  .header-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 28px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #ffffff;
     text-decoration: none;
-    transition: color var(--transition-fast);
+    border: none;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #4da6ff 0%, #0066ff 50%, #0052cc 100%);
+    background-size: 200% 200%;
+    transition: all 0.3s ease;
     white-space: nowrap;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 102, 255, 0.2);
   }
 
-  .header-contact-link:hover {
-    color: var(--color-deep-blue);
+  .header-cta-btn:hover {
+    background-position: right center;
+    box-shadow: 0 4px 16px rgba(0, 102, 255, 0.35);
+    transform: translateY(-1px);
+  }
+
+  .header-cta-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 102, 255, 0.2);
   }
 
   /* ---- Hamburger ---- */
@@ -272,50 +301,55 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     height: 36px;
     padding: 6px;
     background: none;
-    border: 1px solid var(--color-gray-200);
-    border-radius: var(--radius-md);
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
     cursor: pointer;
-    transition: border-color var(--transition-fast);
+    transition: border-color 0.2s ease;
   }
 
   .hamburger:hover {
-    border-color: var(--color-gray-400);
+    border-color: #98a2b3;
   }
 
   .hamburger-line {
     display: block;
     width: 100%;
     height: 2px;
-    background-color: var(--color-gray-600);
+    background-color: #1a1a2e;
     border-radius: 2px;
   }
 
   /* ---- Responsive ---- */
+
+  /* Tablet landscape */
   @media (max-width: 1200px) {
     .nav-link {
       padding: var(--space-2) var(--space-2);
-      font-size: var(--text-xs);
+      font-size: 0.85rem;
+    }
+
+    .header-cta-btn {
+      padding: 9px 22px;
+      font-size: 0.85rem;
     }
   }
 
-  @media (max-width: 1100px) {
-    .header-logo-img {
-      height: 36px;
-    }
-  }
-
+  /* Tablet */
   @media (max-width: 1024px) {
     .site-header {
       height: var(--header-height-mobile);
+    }
+
+    .header-logo-img {
+      height: 38px;
     }
 
     .header-nav {
       display: none;
     }
 
-    .header-actions .action-separator,
-    .header-actions .header-contact-link,
-    .header-actions .lang-switcher {
+    .header-actions .lang-switcher,
+    .header-actions .header-cta-btn {
       display: none;
     }
 
@@ -324,9 +358,10 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     }
   }
 
+  /* Mobile */
   @media (max-width: 480px) {
     .header-logo-img {
-      height: 30px;
+      height: 32px;
     }
   }
 </style>

@@ -21,7 +21,8 @@ function getLocalizedHref(locale: SupportedLocale): string {
   if (locale === DEFAULT_LOCALE) {
     segments.shift();
   }
-  return '/' + segments.join('/');
+  // Siempre con trailing slash para compatibilidad con trailingSlash: 'always'
+  return '/' + segments.join('/') + '/';
 }
 ---
 
@@ -92,7 +93,10 @@ function getLocalizedHref(locale: SupportedLocale): string {
     });
   });
 
-  document.addEventListener('click', () => {
+  document.addEventListener('click', (e) => {
+    // No cerrar si el clic fue en un enlace del dropdown (para no bloquear navegacion)
+    const target = e.target as HTMLElement;
+    if (target.closest('.lang-option, .lang-mobile-option')) return;
     document.querySelectorAll('[data-lang-dropdown].open').forEach((d) => d.classList.remove('open'));
     document.querySelectorAll('[data-lang-toggle][aria-expanded="true"]').forEach((b) => b.setAttribute('aria-expanded', 'false'));
   });

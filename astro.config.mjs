@@ -19,6 +19,9 @@ export default defineConfig({
   site: siteUrl,
   output: 'static',
   trailingSlash: 'always',
+  build: {
+    format: 'directory',
+  },
   integrations: [
     sitemap({
       i18n: {
