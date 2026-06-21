@@ -1,0 +1,41 @@
+---
+// ============================================
+// SABERO Consulting - Industries Section
+// Orquestador: Hero + 7 sectores individuales
+// ============================================
+import { getIndustriesData } from '../../../data/industries';
+import type { SupportedLocale } from '../../../i18n/utils/types';
+import IndustriesHero from './IndustriesHero.astro';
+import PropTech from './PropTech.astro';
+import Fintech from './Fintech.astro';
+import Marketplaces from './Marketplaces.astro';
+import EdTech from './EdTech.astro';
+import Logistica from './Logistica.astro';
+import Internas from './Internas.astro';
+
+interface Props {
+  locale: SupportedLocale;
+}
+
+const { locale } = Astro.props;
+const content = getIndustriesData(locale);
+const { sectors } = content;
+---
+
+<section class="industries-section" aria-label={content.title}>
+  <IndustriesHero content={content} />
+
+  <PropTech sector={sectors[0]} index={0} isLast={false} />
+  <Fintech sector={sectors[1]} index={1} isLast={false} />
+  <Marketplaces sector={sectors[2]} index={2} isLast={false} />
+  <EdTech sector={sectors[3]} index={3} isLast={false} />
+  <Logistica sector={sectors[4]} index={4} isLast={false} />
+  <Internas sector={sectors[5]} index={5} isLast={true} />
+</section>
+
+<style>
+  .industries-section {
+    background: #FFFFFF;
+    padding: 0;
+  }
+</style>

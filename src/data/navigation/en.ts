@@ -2,8 +2,8 @@ import type { NavigationData } from '../../i18n/utils/types';
 
 export const navEn: NavigationData = {
   main: [
-    { label: 'Our offering', href: '/#offering' },
-    { label: 'Industries', href: '/#industries' },
+    { label: 'Our offering', href: '/en/oferta' },
+    { label: 'Industries', href: '/en/industrias' },
     { label: 'Cases & impact', href: '/casos' },
     { label: 'Insights', href: '/insights' },
     { label: 'About us', href: '/nosotros' },

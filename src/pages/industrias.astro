@@ -1,0 +1,13 @@
+---
+// Root route - Spanish default locale
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IndustriesSection from '../components/sections/industries/IndustriesSection.astro';
+
+const path = '/industrias';
+const title = 'Industrias - SABERO Consulting';
+const description = 'Cada industria tiene procesos, metricas y retos distintos. SABERO adapta producto, arquitectura y experiencia segun ese contexto.';
+---
+
+<BaseLayout {title} {description} locale="es" {path}>
+  <IndustriesSection locale="es" />
+</BaseLayout>

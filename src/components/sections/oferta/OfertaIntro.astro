@@ -1,0 +1,131 @@
+---
+// ============================================
+// SABERO Consulting - Oferta Intro
+// Bloque 1: Mensaje principal premium
+// ============================================
+import { ofertaContent } from '../../../data/home/oferta';
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+const content = ofertaContent[locale] || ofertaContent.es;
+const { intro } = content;
+---
+
+<section class="oferta-intro" id="nuestra-oferta">
+  <div class="container">
+    <div class="oferta-intro-grid">
+      <div class="oferta-intro-left">
+        <span class="oferta-eyebrow">Portafolio integrado</span>
+        <h2 class="oferta-title">
+          {intro.title}
+          <span class="oferta-title-accent">{intro.titleAccent}</span>
+        </h2>
+      </div>
+      <div class="oferta-intro-right">
+        <p class="oferta-description">{intro.description}</p>
+        <div class="oferta-divider"></div>
+        <p class="oferta-microcopy">{intro.microcopy}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .oferta-intro {
+    padding: 140px 0 120px;
+    background: #FFFFFF;
+    position: relative;
+  }
+
+  .oferta-intro::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px);
+    max-width: 1200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D0D8E4, transparent);
+  }
+
+  .oferta-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .oferta-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #2F80FF;
+    margin-bottom: 24px;
+    padding: 5px 16px;
+    background: #F0F5FF;
+    border-radius: 4px;
+  }
+
+  .oferta-title {
+    font-size: 3.8rem;
+    font-weight: 800;
+    color: #0A1628;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+
+  .oferta-title-accent {
+    display: block;
+    background: linear-gradient(135deg, #0B2F7D, #2F80FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .oferta-description {
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: #0A1628;
+    line-height: 1.65;
+    margin: 0 0 28px;
+    max-width: 620px;
+  }
+
+  .oferta-divider {
+    width: 56px;
+    height: 3px;
+    background: linear-gradient(90deg, #0B2F7D, #2F80FF);
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+
+  .oferta-microcopy {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #5E6472;
+    margin: 0;
+    max-width: 560px;
+    font-style: italic;
+  }
+
+  @media (max-width: 1024px) {
+    .oferta-intro { padding: 100px 0 56px; }
+    .oferta-intro-grid { grid-template-columns: 1fr; gap: 32px; }
+    .oferta-title { font-size: 3rem; }
+    .oferta-description { font-size: 1.15rem; }
+  }
+
+  @media (max-width: 640px) {
+    .oferta-intro { padding: 72px 0 40px; }
+    .oferta-title { font-size: 2.4rem; }
+    .oferta-description { font-size: 1rem; }
+    .oferta-microcopy { font-size: 0.9rem; }
+  }
+</style>

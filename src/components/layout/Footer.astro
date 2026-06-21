@@ -62,30 +62,6 @@ const legalLinks = [
 ---
 
 <!-- ============================================
-     AWS BANNER - Pre-Footer
-     Degradado Moventi exacto:
-     #4B00FF -> #234BFF -> #19D1C3 -> #A6E6D7
-     ============================================ -->
-<section class="aws-banner" aria-label="AWS Partnership">
-  <div class="aws-banner-inner">
-    <div class="aws-banner-left">
-      <img src="/images/aws.png" alt="Amazon Web Services" class="aws-logo-img" width="52" height="32" loading="lazy" />
-      <div class="aws-banner-text">
-        <span class="aws-banner-title">
-          Certificados por <span class="aws-banner-highlight">AWS</span>
-        </span>
-        <a href="#" class="aws-banner-btn">
-          Conoce m&aacute;s <span class="aws-banner-arrow">&rarr;</span>
-        </a>
-      </div>
-    </div>
-    <div class="aws-banner-right">
-      <p class="aws-banner-quote">&ldquo;Especialistas en modernizaci&oacute;n de aplicaciones&rdquo;</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
      FOOTER PRINCIPAL
      Fondo negro absoluto (#000000) estilo Moventi
      ============================================ -->
@@ -228,116 +204,6 @@ const legalLinks = [
 </script>
 
 <style>
-  /* ============================================
-     AWS BANNER - Pre-Footer
-     Degradado Moventi exacto:
-     #4B00FF -> #234BFF -> #19D1C3 -> #A6E6D7
-     ============================================ */
-
-  .aws-banner {
-    width: 100%;
-    background: linear-gradient(
-      90deg,
-      #4B00FF 0%,
-      #234BFF 35%,
-      #19D1C3 75%,
-      #A6E6D7 100%
-    );
-    padding: 50px 8%;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-  }
-
-  .aws-banner-inner {
-    width: 100%;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 60px;
-  }
-
-  .aws-banner-left {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    flex-shrink: 0;
-  }
-
-  .aws-logo-img {
-    flex-shrink: 0;
-    filter: brightness(0) invert(1);
-  }
-
-  .aws-banner-text {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .aws-banner-title {
-    font-family: 'Inter', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: #ffffff;
-    line-height: 1.2;
-  }
-
-  .aws-banner-highlight {
-    color: #FFCC33;
-  }
-
-  .aws-banner-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 28px;
-    font-size: 15px;
-    font-weight: 600;
-    font-family: 'Inter', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #234BFF;
-    background-color: #ffffff;
-    border: none;
-    border-radius: 24px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    width: fit-content;
-  }
-
-  .aws-banner-btn:hover {
-    background-color: #f0f4ff;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  }
-
-  .aws-banner-arrow {
-    font-size: 16px;
-    transition: transform 0.2s ease;
-  }
-
-  .aws-banner-btn:hover .aws-banner-arrow {
-    transform: translateX(3px);
-  }
-
-  .aws-banner-right {
-    flex-shrink: 0;
-    max-width: 440px;
-  }
-
-  .aws-banner-quote {
-    font-family: 'Inter', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    font-style: italic;
-    color: #ffffff;
-    line-height: 1.4;
-    margin: 0;
-    text-align: right;
-    letter-spacing: -0.01em;
-  }
-
   /* ============================================
      FOOTER PRINCIPAL
      Fondo negro absoluto (#000000) estilo Moventi
@@ -617,34 +483,6 @@ const legalLinks = [
      ============================================ */
 
   @media (max-width: 1100px) {
-    .aws-banner {
-      padding: 40px 8%;
-    }
-
-    .aws-banner-inner {
-      flex-direction: column;
-      text-align: center;
-      gap: 30px;
-    }
-
-    .aws-banner-left {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .aws-banner-text {
-      align-items: center;
-    }
-
-    .aws-banner-right {
-      max-width: 100%;
-    }
-
-    .aws-banner-quote {
-      text-align: center;
-      font-size: 22px;
-    }
-
     .footer-grid {
       flex-wrap: wrap;
       gap: 40px;
@@ -665,18 +503,6 @@ const legalLinks = [
   }
 
   @media (max-width: 768px) {
-    .aws-banner {
-      padding: 30px 5%;
-    }
-
-    .aws-banner-title {
-      font-size: 22px;
-    }
-
-    .aws-banner-quote {
-      font-size: 18px;
-    }
-
     .footer-container {
       padding: 50px 5% 30px;
     }
@@ -723,14 +549,6 @@ const legalLinks = [
   }
 
   @media (max-width: 480px) {
-    .aws-banner-title {
-      font-size: 20px;
-    }
-
-    .aws-banner-quote {
-      font-size: 16px;
-    }
-
     .footer-legal-links {
       flex-direction: column;
       gap: 4px;

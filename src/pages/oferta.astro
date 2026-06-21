@@ -1,0 +1,13 @@
+---
+// Root route - Spanish default locale
+import BaseLayout from '../layouts/BaseLayout.astro';
+import OfertaSection from '../components/sections/oferta/OfertaSection.astro';
+
+const path = '/oferta';
+const title = 'Nuestra oferta - SABERO Consulting';
+const description = 'SABERO disena, desarrolla y evoluciona plataformas digitales para empresas que necesitan escalar procesos, productos y operaciones en America y Europa.';
+---
+
+<BaseLayout {title} {description} locale="es" {path}>
+  <OfertaSection locale="es" />
+</BaseLayout>

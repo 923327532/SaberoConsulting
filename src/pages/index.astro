@@ -3,11 +3,13 @@
 // Spanish is the default language, served at /es/
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroCarousel from '../components/sections/HeroCarousel.astro';
-import ServicesOverview from '../components/sections/ServicesOverview.astro';
-import IndustriesOverview from '../components/sections/IndustriesOverview.astro';
-import AboutOverview from '../components/sections/AboutOverview.astro';
-import CTASection from '../components/sections/CTASection.astro';
+import HomeHeroSection from '../components/sections/home/HomeHeroSection.astro';
 import CloudPlatformSection from '../components/sections/CloudPlatformSection.astro';
+import HomeOfertaResumen from '../components/sections/home/HomeOfertaResumen.astro';
+import HomeIndustriesResumen from '../components/sections/home/HomeIndustriesResumen.astro';
+import HomeCareersResumen from '../components/sections/home/HomeCareersResumen.astro';
+import HomeTechStack from '../components/sections/home/HomeTechStack.astro';
+import CTASection from '../components/sections/CTASection.astro';
 ---
 
 <BaseLayout
@@ -17,9 +19,11 @@ import CloudPlatformSection from '../components/sections/CloudPlatformSection.as
   path="/"
 >
   <HeroCarousel locale="es" />
+  <HomeHeroSection locale="es" />
+  <HomeCareersResumen locale="es" />
+  <HomeTechStack locale="es" />
   <CloudPlatformSection locale="es" />
-  <ServicesOverview locale="es" />
-  <IndustriesOverview locale="es" />
-  <AboutOverview locale="es" />
+  <HomeOfertaResumen locale="es" />
+  <HomeIndustriesResumen locale="es" />
   <CTASection locale="es" />
 </BaseLayout>

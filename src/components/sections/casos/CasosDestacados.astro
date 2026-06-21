@@ -1,0 +1,234 @@
+---
+// ============================================
+// SABERO Consulting - Casos Section 3: Destacados
+// ============================================
+import type { CasosData } from '../../../data/casos/types';
+
+interface Props {
+  content: CasosData;
+}
+
+const { content } = Astro.props;
+const { destacados } = content;
+---
+
+<section class="casos-destacados" id="casos-destacados" aria-label="Casos destacados">
+  <div class="container">
+    <div class="casos-destacados-header">
+      <span class="casos-destacados-number">0{content.navItems.findIndex(i => i.id === 'casos-destacados') + 1}</span>
+      <h3 class="casos-destacados-title">Casos destacados</h3>
+    </div>
+
+    <div class="casos-destacados-grid">
+      {destacados.map((caso) => (
+        <article class="caso-card">
+          <div class="caso-card-image" style={`background-image: url(${caso.imagen})`}>
+            <div class="caso-card-image-overlay"></div>
+            <div class="caso-card-industry-badge">{caso.industria}</div>
+            <div class="caso-card-impact-badge">{caso.impacto}</div>
+          </div>
+          <div class="caso-card-body">
+            <h4 class="caso-card-title">{caso.nombre}</h4>
+            <div class="caso-card-section">
+              <span class="caso-card-label">Reto</span>
+              <p class="caso-card-text">{caso.reto}</p>
+            </div>
+            <div class="caso-card-section">
+              <span class="caso-card-label">Solución</span>
+              <p class="caso-card-text">{caso.solucion}</p>
+            </div>
+            <div class="caso-card-footer">
+              <span class="caso-card-tipo">{caso.tipoImpacto}</span>
+              <a href={caso.slug} class="caso-card-cta">
+                Ver caso completo
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .casos-destacados {
+    background: #FFFFFF;
+    padding: 0 0 100px;
+  }
+
+  .casos-destacados-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #E8ECF2;
+  }
+
+  .casos-destacados-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #2F80FF;
+    letter-spacing: 2px;
+    background: #F0F5FF;
+    padding: 4px 12px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .casos-destacados-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0A1628;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .casos-destacados-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .caso-card {
+    border: 1px solid #E8ECF2;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #FFFFFF;
+    transition: all 400ms ease;
+  }
+
+  .caso-card:hover {
+    border-color: #C8D0DC;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.04);
+    transform: translateY(-4px);
+  }
+
+  .caso-card-image {
+    position: relative;
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .caso-card-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 30%, rgba(10,22,40,0.85) 100%);
+  }
+
+  .caso-card-industry-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #2F80FF;
+    background: rgba(255,255,255,0.95);
+    padding: 4px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+  }
+
+  .caso-card-impact-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    background: rgba(47, 128, 255, 0.85);
+    padding: 6px 14px;
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+  }
+
+  .caso-card-body {
+    padding: 28px 24px;
+  }
+
+  .caso-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0A1628;
+    margin: 0 0 20px;
+  }
+
+  .caso-card-section {
+    margin-bottom: 14px;
+  }
+
+  .caso-card-label {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #2F80FF;
+    margin-bottom: 4px;
+  }
+
+  .caso-card-text {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: #5E6472;
+    margin: 0;
+  }
+
+  .caso-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #E8ECF2;
+  }
+
+  .caso-card-tipo {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #2F80FF;
+    background: #F0F5FF;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+
+  .caso-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #0A1628;
+    text-decoration: none;
+    transition: all 250ms ease;
+  }
+
+  .caso-card-cta:hover {
+    color: #2F80FF;
+  }
+
+  .caso-card-cta svg {
+    transition: transform 250ms ease;
+  }
+
+  .caso-card-cta:hover svg {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 1024px) {
+    .casos-destacados-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .casos-destacados { padding: 0 0 60px; }
+    .caso-card-image { height: 180px; }
+    .caso-card-body { padding: 20px 16px; }
+  }
+</style>

@@ -1,0 +1,20 @@
+---
+// ============================================
+// SABERO Consulting - Home: Careers Resumen
+// REUTILIZA directamente WhySabero de Careers
+// Mismo componente, mismo diseño, mismo todo
+// ============================================
+import WhySabero from '../careers/WhySabero.astro';
+import { getCareersData } from '../../../data/careers/';
+import type { SupportedLocale } from '../../../i18n/utils/types';
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+const careersData = getCareersData(locale as SupportedLocale);
+const whySaberoData = careersData.whySabero;
+---
+
+<WhySabero data={whySaberoData} />

@@ -1,0 +1,215 @@
+---
+// ============================================
+// SABERO Consulting - Home: Hero Section
+// Layout editorial premium: texto + imagen
+// Réplica exacta de la referencia visual
+// ============================================
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+
+const content: Record<string, {
+  headline: string;
+  highlightWords: string[];
+  paragraph: string;
+  cta: string;
+  ctaLink: string;
+}> = {
+  es: {
+    headline: 'Diseñamos, desarrollamos y evolucionamos plataformas digitales para empresas que necesitan escalar',
+    highlightWords: ['plataformas digitales', 'escalar'],
+    paragraph: 'Acompañamos a empresas y equipos desde la definición del problema hasta la construcción, integración y evolución de productos digitales que generan valor real de negocio.',
+    cta: 'Explorar capacidades',
+    ctaLink: '/nosotros',
+  },
+  en: {
+    headline: 'We design, develop and evolve digital platforms for companies that need to scale',
+    highlightWords: ['digital platforms', 'scale'],
+    paragraph: 'We accompany companies and teams from problem definition to building, integrating and evolving digital products that generate real business value.',
+    cta: 'Explore capabilities',
+    ctaLink: '/en/nosotros',
+  },
+  pt: {
+    headline: 'Projetamos, desenvolvemos e evoluímos plataformas digitais para empresas que precisam escalar',
+    highlightWords: ['plataformas digitais', 'escalar'],
+    paragraph: 'Acompanhamos empresas e equipes desde a definição do problema até a construção, integração e evolução de produtos digitais que geram valor real de negócio.',
+    cta: 'Explorar capacidades',
+    ctaLink: '/pt/nosotros',
+  },
+  fr: {
+    headline: 'Nous concevons, développons et faisons évoluer des plateformes numériques pour les entreprises qui doivent passer à l\'échelle',
+    highlightWords: ['plateformes numériques', 'passer à l\'échelle'],
+    paragraph: 'Nous accompagnons les entreprises et les équipes de la définition du problème à la construction, l\'intégration et l\'évolution de produits numériques qui génèrent une réelle valeur métier.',
+    cta: 'Explorer les capacités',
+    ctaLink: '/fr/nosotros',
+  },
+};
+
+const data = content[locale] || content.es;
+
+function renderHeadline(text: string, highlights: string[]): string {
+  let result = text;
+  for (const word of highlights) {
+    result = result.replace(word, `<span class="hero-highlight">${word}</span>`);
+  }
+  return result;
+}
+---
+
+<section class="home-hero-section" aria-label="Hero section">
+  <div class="container">
+    <div class="hero-top">
+      <div class="hero-left">
+        <h1 class="hero-headline" set:html={renderHeadline(data.headline, data.highlightWords)}></h1>
+        <p class="hero-paragraph">{data.paragraph}</p>
+        <a href={data.ctaLink} class="hero-cta">
+          {data.cta}
+          <span class="hero-cta-arrow">→</span>
+        </a>
+      </div>
+      <div class="hero-right">
+        <img
+          src="https://i.ibb.co/Zz3DFnkM/a.png"
+          alt="SABERO Consulting - Digital Platform Engineering"
+          class="hero-image"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-hero-section {
+    padding: 40px 0 80px;
+    background: #FFFFFF;
+    position: relative;
+  }
+
+  .home-hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #E8ECF2, transparent);
+  }
+
+  .hero-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .hero-headline {
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #0A1628;
+    margin: 0;
+  }
+
+  .hero-headline :global(.hero-highlight) {
+    color: #0B2F7D;
+  }
+
+  .hero-paragraph {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #5E6472;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: #0B2F7D;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 300ms ease;
+    width: fit-content;
+  }
+
+  .hero-cta:hover {
+    background: #E53935;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(229, 57, 53, 0.25);
+  }
+
+  .hero-cta-arrow {
+    transition: transform 300ms ease;
+  }
+
+  .hero-cta:hover .hero-cta-arrow {
+    transform: translateX(4px);
+  }
+
+  .hero-right {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 900px) {
+    .hero-top {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .hero-left {
+      order: 1;
+    }
+
+    .hero-right {
+      order: 0;
+    }
+
+    .hero-headline {
+      font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .home-hero-section {
+      padding: 24px 0 48px;
+    }
+
+    .hero-headline {
+      font-size: 1.5rem;
+    }
+
+    .hero-paragraph {
+      font-size: 0.95rem;
+    }
+
+    .hero-cta {
+      padding: 12px 24px;
+      font-size: 0.85rem;
+    }
+  }
+</style>

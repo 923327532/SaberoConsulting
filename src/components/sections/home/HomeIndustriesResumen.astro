@@ -1,0 +1,309 @@
+---
+// ============================================
+// SABERO Consulting - Home: Industrias Resumen
+// Tabs delgadas arriba + card con imagen
+// ============================================
+import { getIndustriesData } from '../../../data/industries';
+import type { SupportedLocale } from '../../../i18n/utils/types';
+
+interface Props {
+  locale: SupportedLocale;
+}
+
+const { locale } = Astro.props;
+const content = getIndustriesData(locale);
+const { sectors } = content;
+const visibleSectors = sectors.filter(s => s.image);
+---
+
+<section class="home-industries" id="industrias">
+  <div class="home-industries-header container">
+    <div class="home-industries-header-row">
+      <h2 class="home-industries-title">{content.title}</h2>
+      <p class="home-industries-desc">{content.subtitle}</p>
+    </div>
+  </div>
+
+  <div class="home-industries-tabs container" id="industriesTabs">
+    {visibleSectors.map((sector, i) => (
+      <button
+        class="home-industries-tab"
+        data-index={i}
+        aria-selected={i === 0}
+      >
+        {sector.title}
+      </button>
+    ))}
+  </div>
+
+  <div class="home-industries-cards container" id="industriesCards">
+    {visibleSectors.map((sector, i) => (
+      <article
+        class="home-industry-card"
+        data-index={i}
+        aria-hidden={i !== 0}
+      >
+        <div class="home-industry-card-content">
+          <h3 class="home-industry-card-title">{sector.title}</h3>
+          <p class="home-industry-card-text">{sector.context}</p>
+        </div>
+        <div class="home-industry-card-image">
+          <img src={sector.image} alt={sector.title} loading={i === 0 ? 'eager' : 'lazy'} />
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="home-industries-cta container">
+    <a href={locale === 'es' ? '/industrias' : `/${locale}/industrias`} class="home-industries-link">
+      Explorar todas las industrias
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<script is:inline>
+  (function() {
+    var tabs = document.querySelectorAll('#industriesTabs .home-industries-tab');
+    var cards = document.querySelectorAll('#industriesCards .home-industry-card');
+    if (!tabs.length || !cards.length) return;
+
+    function activate(index) {
+      tabs.forEach(function(t, i) {
+        t.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+      cards.forEach(function(c, i) {
+        c.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+      });
+    }
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var idx = parseInt(tab.getAttribute('data-index') || '0');
+        activate(idx);
+      });
+    });
+
+    activate(0);
+  })();
+</script>
+
+<style>
+  .home-industries {
+    padding: 100px 0;
+    background: #F8F9FB;
+    position: relative;
+  }
+
+  .home-industries::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px);
+    max-width: 1200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D0D8E4, transparent);
+  }
+
+  /* ===== HEADER: TÍTULO IZQ + SUBTÍTULO DER ===== */
+  .home-industries-header {
+    margin-bottom: 40px;
+  }
+
+  .home-industries-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .home-industries-title {
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #2F80FF 0%, #E53E3E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .home-industries-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #5E6472;
+    margin: 0;
+    max-width: 560px;
+    text-align: right;
+  }
+
+  /* ===== TABS: RECTÁNGULOS PEQUEÑOS CON BORDE ROJO/AZUL ===== */
+  .home-industries-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+    justify-content: center;
+  }
+
+  .home-industries-tab {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #5E6472;
+    background: #FFFFFF;
+    border: 1.5px solid #D8DEE8;
+    border-radius: 6px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: all 250ms ease;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+
+  .home-industries-tab:hover {
+    border-color: #2F80FF;
+    color: #0A1628;
+    box-shadow: 0 2px 8px rgba(47,128,255,0.08);
+  }
+
+  .home-industries-tab[aria-selected="true"] {
+    border-color: transparent;
+    background: linear-gradient(135deg, #2F80FF 0%, #E53E3E 100%);
+    color: #FFFFFF;
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(47,128,255,0.15);
+  }
+
+  /* ===== CARD RECTANGULAR ELEGANTE ===== */
+  .home-industry-card {
+    display: none;
+    align-items: stretch;
+    min-height: 340px;
+    background: #FFFFFF;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+
+  .home-industry-card[aria-hidden="false"] {
+    display: flex;
+  }
+
+  .home-industry-card-content {
+    flex: 1;
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(135deg, #0A1628 0%, #1A2A4A 100%);
+  }
+
+  .home-industry-card-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0 0 14px;
+    letter-spacing: -0.02em;
+  }
+
+  .home-industry-card-text {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #C8D0DC;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .home-industry-card-image {
+    flex: 0 0 50%;
+    overflow: hidden;
+  }
+
+  .home-industry-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ===== CTA ===== */
+  .home-industries-cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .home-industries-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0B2F7D;
+    text-decoration: none;
+    padding: 12px 28px;
+    border: 1px solid #D0D8E4;
+    border-radius: 10px;
+    transition: all 300ms ease;
+  }
+
+  .home-industries-link:hover {
+    border-color: #2F80FF;
+    background: #F0F5FF;
+    gap: 12px;
+  }
+
+  .home-industries-link svg {
+    transition: transform 200ms ease;
+  }
+
+  .home-industries-link:hover svg {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 768px) {
+    .home-industries { padding: 64px 0; }
+    .home-industries-title { font-size: 2rem; }
+
+    .home-industries-header-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .home-industries-desc {
+      text-align: left;
+    }
+
+    .home-industry-card {
+      flex-direction: column-reverse;
+      min-height: auto;
+    }
+
+    .home-industry-card-content {
+      padding: 28px 24px;
+    }
+
+    .home-industry-card-title {
+      font-size: 1.3rem;
+    }
+
+    .home-industry-card-image {
+      flex: 0 0 200px;
+    }
+
+    .home-industries-tabs {
+      gap: 4px;
+    }
+
+    .home-industries-tab {
+      font-size: 0.72rem;
+      padding: 5px 12px;
+    }
+  }
+</style>

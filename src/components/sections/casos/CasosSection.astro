@@ -1,0 +1,44 @@
+---
+// ============================================
+// SABERO Consulting - Casos Section Orchestrator
+// 5 secciones claras en la home
+// ============================================
+import { getCasosData } from '../../../data/casos';
+import type { SupportedLocale } from '../../../i18n/utils/types';
+import CasosIntro from './CasosIntro.astro';
+import CasosNav from './CasosNav.astro';
+import CasosDestacados from './CasosDestacados.astro';
+import CasosImpacto from './CasosImpacto.astro';
+import CasosCTA from './CasosCTA.astro';
+
+interface Props {
+  locale: SupportedLocale;
+}
+
+const { locale } = Astro.props;
+const content = getCasosData(locale);
+---
+
+<section class="casos-section" aria-label={content.titulo}>
+  <!-- Section 1: Intro general -->
+  <CasosIntro content={content} />
+
+  <!-- Section 2: Navegación / exploración -->
+  <CasosNav content={content} />
+
+  <!-- Section 3: Casos destacados -->
+  <CasosDestacados content={content} />
+
+  <!-- Section 4: Resultados y tipos de impacto -->
+  <CasosImpacto content={content} />
+
+  <!-- Section 5: CTA final -->
+  <CasosCTA content={content} />
+</section>
+
+<style>
+  .casos-section {
+    background: #FFFFFF;
+    padding: 0;
+  }
+</style>

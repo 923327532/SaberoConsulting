@@ -1,0 +1,83 @@
+---
+// ============================================
+// SABERO Consulting - Casos Section 2: Nav
+// ============================================
+import type { CasosData } from '../../../data/casos/types';
+
+interface Props {
+  content: CasosData;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="casos-nav" aria-label="Exploración de casos">
+  <div class="container">
+    <nav class="casos-nav-bar">
+      <span class="casos-nav-label">Explorar</span>
+      <div class="casos-nav-links">
+        {content.navItems.map((item) => (
+          <a href={`#${item.id}`} class="casos-nav-link">
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .casos-nav {
+    background: #FFFFFF;
+    padding: 0 0 60px;
+  }
+
+  .casos-nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 24px;
+    background: #F8F9FB;
+    border: 1px solid #E8ECF2;
+    border-radius: 12px;
+  }
+
+  .casos-nav-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #2F80FF;
+    flex-shrink: 0;
+    padding-right: 20px;
+    border-right: 1px solid #D0D8E4;
+  }
+
+  .casos-nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+
+  .casos-nav-link {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #5E6472;
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: all 250ms ease;
+    white-space: nowrap;
+  }
+
+  .casos-nav-link:hover {
+    color: #2F80FF;
+    border-bottom-color: #2F80FF;
+  }
+
+  @media (max-width: 768px) {
+    .casos-nav-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .casos-nav-label { border-right: none; padding-right: 0; }
+    .casos-nav-links { flex-direction: column; gap: 6px; }
+  }
+</style>

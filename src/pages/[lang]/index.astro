@@ -3,10 +3,12 @@ import type { SupportedLocale } from '../../i18n/utils/types';
 import { LOCALES } from '../../i18n/utils/types';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroCarousel from '../../components/sections/HeroCarousel.astro';
+import HomeHeroSection from '../../components/sections/home/HomeHeroSection.astro';
 import CloudPlatformSection from '../../components/sections/CloudPlatformSection.astro';
-import ServicesOverview from '../../components/sections/ServicesOverview.astro';
-import IndustriesOverview from '../../components/sections/IndustriesOverview.astro';
-import AboutOverview from '../../components/sections/AboutOverview.astro';
+import HomeOfertaResumen from '../../components/sections/home/HomeOfertaResumen.astro';
+import HomeIndustriesResumen from '../../components/sections/home/HomeIndustriesResumen.astro';
+import HomeCareersResumen from '../../components/sections/home/HomeCareersResumen.astro';
+import HomeTechStack from '../../components/sections/home/HomeTechStack.astro';
 import CTASection from '../../components/sections/CTASection.astro';
 
 export function getStaticPaths() {
@@ -49,9 +51,11 @@ const path = '/';
   path={path}
 >
   <HeroCarousel locale={locale as SupportedLocale} />
+  <HomeHeroSection locale={locale as string} />
+  <HomeCareersResumen locale={locale as string} />
+  <HomeTechStack locale={locale as string} />
   <CloudPlatformSection locale={locale as string} />
-  <ServicesOverview locale={locale as string} />
-  <IndustriesOverview locale={locale as string} />
-  <AboutOverview locale={locale as string} />
+  <HomeOfertaResumen locale={locale as string} />
+  <HomeIndustriesResumen locale={locale as SupportedLocale} />
   <CTASection locale={locale as string} />
 </BaseLayout>

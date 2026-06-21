@@ -2,9 +2,9 @@ import type { NavigationData } from '../../i18n/utils/types';
 
 export const navEs: NavigationData = {
   main: [
-    { label: 'Nuestra oferta', href: '/#oferta' },
-    { label: 'Industrias', href: '/#industrias' },
-    { label: 'Casos e impacto', href: '/#casos' },
+    { label: 'Nuestra oferta', href: '/oferta' },
+    { label: 'Industrias', href: '/industrias' },
+    { label: 'Casos e impacto', href: '/casos' },
     { label: 'Insights', href: '/insights' },
     { label: 'Nosotros', href: '/nosotros' },
     { label: 'Careers', href: '/careers' },
@@ -148,22 +148,22 @@ export const navEs: NavigationData = {
         {
           title: 'Conocenos',
           items: [
-            { label: 'Nuestra historia', href: '/#historia' },
-            { label: 'Nuestra vision', href: '/#vision' },
-            { label: 'Nuestro enfoque', href: '/#enfoque' },
-            { label: 'Como trabajamos', href: '/#trabajamos' },
-            { label: 'Cultura y valores', href: '/#valores' },
+            { label: 'Nuestra historia', href: '/nosotros#historia' },
+            { label: 'Nuestra vision', href: '/nosotros#vision' },
+            { label: 'Nuestro enfoque', href: '/nosotros#enfoque' },
+            { label: 'Como trabajamos', href: '/nosotros#trabajamos' },
+            { label: 'Cultura y valores', href: '/nosotros#valores' },
           ],
         },
         {
           title: 'Diferenciadores',
           items: [
-            { label: 'Peru como punto de partida', href: '/#peru' },
-            { label: 'Enfoque regional', href: '/#regional' },
-            { label: 'Delivery agil y colaborativo', href: '/#delivery' },
-            { label: 'Excelencia tecnica', href: '/#excelencia' },
-            { label: 'Diseno orientado a negocio', href: '/#diseno' },
-            { label: 'Relaciones de largo plazo', href: '/#relaciones' },
+            { label: 'Peru como punto de partida', href: '/nosotros#peru' },
+            { label: 'Enfoque regional', href: '/nosotros#regional' },
+            { label: 'Delivery agil y colaborativo', href: '/nosotros#delivery' },
+            { label: 'Excelencia tecnica', href: '/nosotros#excelencia' },
+            { label: 'Diseno orientado a negocio', href: '/nosotros#diseno' },
+            { label: 'Relaciones de largo plazo', href: '/nosotros#relaciones' },
           ],
         },
       ],

@@ -1,0 +1,136 @@
+---
+// ============================================
+// SABERO Consulting - Oferta CTA
+// Bloque 4: Cierre premium con gradiente
+// ============================================
+import { ofertaContent } from '../../../data/home/oferta';
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+const content = ofertaContent[locale] || ofertaContent.es;
+const { cta } = content;
+---
+
+<section class="oferta-cta">
+  <div class="container">
+    <div class="oferta-cta-box">
+      <div class="oferta-cta-text">
+        <h3 class="oferta-cta-heading">¿Listo para construir tu próximo producto digital?</h3>
+        <p class="oferta-cta-sub">Conversemos sin compromiso. Te responderemos en menos de 24 horas.</p>
+      </div>
+      <div class="oferta-cta-actions">
+        <a href={cta.primary.href} class="oferta-cta-btn oferta-cta-btn-primary">
+          {cta.primary.text}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href={cta.secondary.href} class="oferta-cta-btn oferta-cta-btn-secondary">
+          {cta.secondary.text}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .oferta-cta {
+    padding: 120px 0 140px;
+    background: #F8F9FB;
+  }
+
+  .oferta-cta-box {
+    background: linear-gradient(135deg, #0B2F7D, #1A4FA0, #2F80FF);
+    border-radius: 20px;
+    padding: 56px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .oferta-cta-text {
+    max-width: 520px;
+  }
+
+  .oferta-cta-heading {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 12px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+
+  .oferta-cta-sub {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .oferta-cta-actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .oferta-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 300ms ease;
+    white-space: nowrap;
+  }
+
+  .oferta-cta-btn svg { transition: transform 200ms ease; }
+  .oferta-cta-btn:hover svg { transform: translateX(3px); }
+
+  .oferta-cta-btn-primary {
+    background: #FFFFFF;
+    color: #0B2F7D;
+  }
+
+  .oferta-cta-btn-primary:hover {
+    background: #F0F5FF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .oferta-cta-btn-secondary {
+    background: rgba(255,255,255,0.1);
+    color: #FFFFFF;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .oferta-cta-btn-secondary:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .oferta-cta-box {
+      flex-direction: column;
+      text-align: center;
+      padding: 40px 28px;
+    }
+    .oferta-cta-actions { flex-direction: column; width: 100%; }
+    .oferta-cta-btn { justify-content: center; }
+  }
+
+  @media (max-width: 640px) {
+    .oferta-cta { padding: 0 0 56px; }
+    .oferta-cta-heading { font-size: 1.3rem; }
+  }
+</style>

@@ -1,0 +1,175 @@
+---
+// ============================================
+// SABERO Consulting - Casos Section 4: Impacto
+// 4 bloques internos: industria, plataformas, historias, transformación
+// ============================================
+import type { CasosData } from '../../../data/casos/types';
+
+interface Props {
+  content: CasosData;
+}
+
+const { content } = Astro.props;
+const { bloquesImpacto } = content;
+
+const iconMap: Record<string, string> = {
+  industry: 'M12 2l4 4-4 4M8 6l-4 4 4 4',
+  platform: 'M3 3h18v18H3V3zm2 2v14h14V5H5zm4 4h6v6H9V9z',
+  story: 'M12 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4l2-4z',
+  transform: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
+};
+---
+
+<section class="casos-impacto" id="resultados-industria" aria-label="Resultados y tipos de impacto">
+  <div class="container">
+    <div class="casos-impacto-header">
+      <span class="casos-impacto-number">04</span>
+      <h3 class="casos-impacto-title">Resultados y tipos de impacto</h3>
+    </div>
+
+    <div class="casos-impacto-grid">
+      {bloquesImpacto.map((bloque) => (
+        <article class="impacto-bloque" id={bloque.id}>
+          <div class="impacto-bloque-header">
+            <div class="impacto-bloque-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d={iconMap[bloque.icono] || iconMap.story} />
+              </svg>
+            </div>
+            <h4 class="impacto-bloque-title">{bloque.titulo}</h4>
+          </div>
+          <p class="impacto-bloque-desc">{bloque.descripcion}</p>
+          <ul class="impacto-bloque-list">
+            {bloque.items.map((item) => (
+              <li class="impacto-bloque-item">{item}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .casos-impacto {
+    background: #F8F9FB;
+    padding: 100px 0;
+  }
+
+  .casos-impacto-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #D0D8E4;
+  }
+
+  .casos-impacto-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #2F80FF;
+    letter-spacing: 2px;
+    background: #F0F5FF;
+    padding: 4px 12px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .casos-impacto-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0A1628;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .casos-impacto-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .impacto-bloque {
+    background: #FFFFFF;
+    border: 1px solid #E8ECF2;
+    border-radius: 14px;
+    padding: 32px 28px;
+    transition: all 300ms ease;
+  }
+
+  .impacto-bloque:hover {
+    border-color: #C8D0DC;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+  }
+
+  .impacto-bloque-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .impacto-bloque-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F0F5FF;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .impacto-bloque-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0A1628;
+    margin: 0;
+  }
+
+  .impacto-bloque-desc {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #5E6472;
+    margin: 0 0 20px;
+  }
+
+  .impacto-bloque-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .impacto-bloque-item {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: #3A4050;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .impacto-bloque-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #2F80FF;
+    opacity: 0.35;
+  }
+
+  @media (max-width: 1024px) {
+    .casos-impacto-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .casos-impacto { padding: 60px 0; }
+    .impacto-bloque { padding: 24px 20px; }
+  }
+</style>

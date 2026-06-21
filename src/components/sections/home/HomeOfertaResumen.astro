@@ -1,0 +1,170 @@
+---
+// ============================================
+// SABERO Consulting - Home: Oferta Resumen
+// Fondo crema + texto bold centrado + 3 cards
+// ============================================
+import { ofertaContent } from '../../../data/home/oferta';
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+const content = ofertaContent[locale] || ofertaContent.es;
+const { intro, capacidades } = content;
+---
+
+<section class="home-oferta" id="nuestra-oferta">
+  <div class="home-oferta-ribbon">
+    <p class="home-oferta-ribbon-text">{intro.description}</p>
+  </div>
+
+  <div class="container">
+    <div class="home-oferta-grid">
+      {capacidades.items.slice(0, 3).map((cap, i) => (
+        <article class="home-oferta-card" style={`--card-index: ${i}`}>
+          <div class="home-oferta-card-led"></div>
+          <div class="home-oferta-card-border"></div>
+          <h4 class="home-oferta-card-title">{cap.title}</h4>
+          <p class="home-oferta-card-text">{cap.summary}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-oferta {
+    padding: 60px 0;
+    background: #FAF9F5;
+    position: relative;
+  }
+
+  .home-oferta :global(.container) {
+    max-width: 1100px;
+  }
+
+  /* ===== CINTA ===== */
+  .home-oferta-ribbon {
+    text-align: center;
+    padding: 0 24px 40px;
+  }
+
+  .home-oferta-ribbon-text {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #3A404E;
+    margin: 0;
+    font-weight: 700;
+    animation: ribbonTextBlink 2.4s ease-in-out infinite;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @keyframes ribbonTextBlink {
+    0%, 100% { color: #0B2F7D; }
+    25% { color: #E53935; }
+    50% { color: #0B2F7D; }
+    75% { color: #E53935; }
+  }
+
+  /* ===== GRID CARDS ===== */
+  .home-oferta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .home-oferta-card {
+    position: relative;
+    border: 1px solid #E0E6EE;
+    border-radius: 12px;
+    padding: 32px 28px;
+    background: #FFFFFF;
+    overflow: hidden;
+    transition: all 300ms ease;
+  }
+
+  /* Borde superior degradado azul/rojo */
+  .home-oferta-card-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0B2F7D, #E53935, #0B2F7D);
+    background-size: 200% 100%;
+    animation: ofertaAccentMove 3s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  @keyframes ofertaAccentMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .home-oferta-card:hover {
+    transform: translateY(-3px);
+    border-color: #B8C4D4;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  }
+
+  /* LED effect - barrido de luz */
+  .home-oferta-card-led {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(11, 47, 125, 0.04),
+      rgba(229, 57, 53, 0.04),
+      transparent
+    );
+    animation: ofertaLedSweep 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .home-oferta-card:nth-child(2) .home-oferta-card-led {
+    animation-delay: 1.3s;
+  }
+
+  .home-oferta-card:nth-child(3) .home-oferta-card-led {
+    animation-delay: 2.6s;
+  }
+
+  @keyframes ofertaLedSweep {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+  }
+
+  .home-oferta-card-title {
+    position: relative;
+    z-index: 3;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0A1628;
+    margin: 0 0 10px;
+  }
+
+  .home-oferta-card-text {
+    position: relative;
+    z-index: 3;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #5E6472;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .home-oferta { padding: 40px 0; }
+    .home-oferta-ribbon { padding: 0 16px 28px; }
+    .home-oferta-ribbon-text { font-size: 1rem; }
+    .home-oferta-grid { grid-template-columns: 1fr; gap: 16px; }
+    .home-oferta-card { padding: 24px 20px; }
+  }
+</style>

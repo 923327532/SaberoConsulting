@@ -1,0 +1,90 @@
+---
+// ============================================
+// SABERO Consulting - Casos Section 1: Intro
+// ============================================
+import type { CasosData } from '../../../data/casos/types';
+
+interface Props {
+  content: CasosData;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="casos-intro" id="casos-impacto" aria-label={content.titulo}>
+  <div class="container">
+    <div class="casos-intro-grid">
+      <div class="casos-intro-left">
+        <span class="casos-intro-eyebrow">Prueba comercial</span>
+        <h2 class="casos-intro-title">{content.titulo}</h2>
+      </div>
+      <div class="casos-intro-right">
+        <p class="casos-intro-subtitle">{content.subtitulo}</p>
+        <p class="casos-intro-micro">{content.microcopy}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .casos-intro {
+    background: #FFFFFF;
+    padding: 120px 0 60px;
+  }
+
+  .casos-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .casos-intro-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #2F80FF;
+    background: #F0F5FF;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  .casos-intro-title {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    color: #0A1628;
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .casos-intro-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #3A4050;
+    margin: 0 0 16px;
+    font-weight: 500;
+  }
+
+  .casos-intro-micro {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #7A8290;
+    margin: 0;
+    padding: 16px 20px;
+    background: #F8F9FB;
+    border-left: 3px solid #2F80FF;
+    border-radius: 0 8px 8px 0;
+  }
+
+  @media (max-width: 1024px) {
+    .casos-intro-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  @media (max-width: 640px) {
+    .casos-intro { padding: 80px 0 40px; }
+  }
+</style>

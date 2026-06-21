@@ -7,378 +7,583 @@ const { locale } = Astro.props;
 
 const content = {
   es: {
-    eyebrow: 'Cloud engineering & experiencia digital',
-    title: 'Plataformas seguras, escalables y diseñadas para crecimiento real',
-    description: 'Creamos experiencias digitales con ingeniería cloud inteligente, claridad estratégica y un lenguaje visual profesional que fortalece tu marca.',
     features: [
-      { title: 'Diseño de plataforma ágil', desc: 'Arquitecturas flexibles que escalan con tu negocio y mejoran la entrega continua.' },
-      { title: 'Automatización operativa', desc: 'Ciclos de desarrollo más rápidos con despliegues confiables y controlados.' },
-      { title: 'Seguridad desde el inicio', desc: 'Protección de datos y gobernanza integrada en cada capa del producto.' },
-      { title: 'Experiencia de usuario clara', desc: 'Interfaces profesionales y consistentes que generan confianza corporativa.' },
+      {
+        title: 'Diseño de plataforma ágil',
+        desc: 'Arquitecturas flexibles que escalan con tu negocio y mejoran la entrega continua.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkG29BZjHyRnY6RMetdK40anhQWtUkYvXffQ&s',
+        detail: 'Diseñamos arquitecturas de plataforma modulares y flexibles que se adaptan al crecimiento de tu negocio. Nuestro enfoque ágil permite iterar rápidamente, reducir tiempos de entrega y mantener la calidad técnica en cada release. Trabajamos con equipos multidisciplinarios para definir la estructura óptima que soporte escalabilidad, mantenibilidad y evolución continua del producto.',
+      },
+      {
+        title: 'Automatización operativa',
+        desc: 'Ciclos de desarrollo más rápidos con despliegues confiables y controlados.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ09hbezlmUq7_coXT3Mfg364y6RrSH2kwdIA&s',
+        detail: 'Implementamos pipelines de CI/CD, infraestructura como código y entornos automatizados que aceleran el ciclo de desarrollo sin sacrificar estabilidad. Cada despliegue es controlado, reversible y monitoreado. La automatización operativa reduce errores manuales, libera tiempo del equipo técnico y garantiza que los cambios lleguen a producción con confianza y trazabilidad.',
+      },
+      {
+        title: 'Seguridad desde el inicio',
+        desc: 'Protección de datos y gobernanza integrada en cada capa del producto.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFOO8-kkkK9Xr-GD8_lu0gA6iO4kp7xC7WYg&s',
+        detail: 'Integramos seguridad en cada capa del desarrollo: desde la autenticación y autorización hasta el cifrado de datos, gobernanza de accesos y cumplimiento normativo. Aplicamos principios de Security by Design para proteger la información sensible y garantizar que tu plataforma cumpla con los estándares de la industria. La seguridad no es un añadido, es parte de la arquitectura.',
+      },
+      {
+        title: 'Experiencia de usuario clara',
+        desc: 'Interfaces profesionales y consistentes que generan confianza corporativa.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxbZqQ0UYihl7Zc2rSoq4oQCP6-kjDL7itw&s',
+        detail: 'Creamos interfaces limpias, consistentes y profesionales que reflejan la identidad de tu marca. Cada interacción está diseñada para ser intuitiva, accesible y eficiente. Nuestro enfoque en experiencia de usuario corporativa asegura que los equipos internos y clientes finales adopten la plataforma con confianza, reduciendo curvas de aprendizaje y aumentando la productividad.',
+      },
     ],
   },
   en: {
-    eyebrow: 'Cloud engineering & digital experience',
-    title: 'Secure, scalable platforms built for real growth',
-    description: 'We create digital experiences with smart cloud engineering, strategic clarity and a professional visual language that strengthens your brand.',
     features: [
-      { title: 'Agile platform design', desc: 'Flexible architectures that scale with your business and improve continuous delivery.' },
-      { title: 'Operational automation', desc: 'Faster development cycles with reliable, controlled deployments.' },
-      { title: 'Security by design', desc: 'Data protection and governance integrated across every product layer.' },
-      { title: 'Clear user experience', desc: 'Professional, consistent interfaces that build corporate trust.' },
+      {
+        title: 'Agile platform design',
+        desc: 'Flexible architectures that scale with your business and improve continuous delivery.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkG29BZjHyRnY6RMetdK40anhQWtUkYvXffQ&s',
+        detail: 'We design modular, flexible platform architectures that adapt to your business growth. Our agile approach enables rapid iteration, reduced delivery times, and technical quality in every release.',
+      },
+      {
+        title: 'Operational automation',
+        desc: 'Faster development cycles with reliable, controlled deployments.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ09hbezlmUq7_coXT3Mfg364y6RrSH2kwdIA&s',
+        detail: 'We implement CI/CD pipelines, infrastructure as code, and automated environments that accelerate development cycles without sacrificing stability. Every deployment is controlled, reversible, and monitored.',
+      },
+      {
+        title: 'Security by design',
+        desc: 'Data protection and governance integrated across every product layer.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFOO8-kkkK9Xr-GD8_lu0gA6iO4kp7xC7WYg&s',
+        detail: 'We integrate security into every layer of development: from authentication and authorization to data encryption, access governance, and regulatory compliance. Security by Design principles protect sensitive information.',
+      },
+      {
+        title: 'Clear user experience',
+        desc: 'Professional, consistent interfaces that build corporate trust.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxbZqQ0UYihl7Zc2rSoq4oQCP6-kjDL7itw&s',
+        detail: 'We create clean, consistent, professional interfaces that reflect your brand identity. Every interaction is designed to be intuitive, accessible, and efficient, ensuring user adoption with confidence.',
+      },
     ],
   },
   pt: {
-    eyebrow: 'Cloud engineering & experiência digital',
-    title: 'Plataformas seguras, escaláveis e projetadas para crescimento real',
-    description: 'Criamos experiências digitais com engenharia cloud inteligente, clareza estratégica e uma linguagem visual profissional que fortalece sua marca.',
     features: [
-      { title: 'Design ágil de plataforma', desc: 'Arquiteturas flexíveis que escalam com seu negócio.' },
-      { title: 'Automação operacional', desc: 'Ciclos de desenvolvimento mais rápidos com implantações confiáveis.' },
-      { title: 'Segurança desde o início', desc: 'Proteção de dados integrada em cada camada do produto.' },
-      { title: 'Experiência de usuário clara', desc: 'Interfaces profissionais que geram confiança corporativa.' },
+      {
+        title: 'Design ágil de plataforma',
+        desc: 'Arquiteturas flexíveis que escalam com seu negócio e melhoram a entrega contínua.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkG29BZjHyRnY6RMetdK40anhQWtUkYvXffQ&s',
+        detail: 'Projetamos arquiteturas de plataforma modulares e flexíveis que se adaptam ao crescimento do seu negócio. Nossa abordagem ágil permite iterar rapidamente, reduzir prazos de entrega e manter a qualidade técnica.',
+      },
+      {
+        title: 'Automação operacional',
+        desc: 'Ciclos de desenvolvimento mais rápidos com implantações confiáveis e controladas.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ09hbezlmUq7_coXT3Mfg364y6RrSH2kwdIA&s',
+        detail: 'Implementamos pipelines de CI/CD, infraestrutura como código e ambientes automatizados que aceleram o ciclo de desenvolvimento sem sacrificar a estabilidade.',
+      },
+      {
+        title: 'Segurança desde o início',
+        desc: 'Proteção de dados e governança integrada em cada camada do produto.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFOO8-kkkK9Xr-GD8_lu0gA6iO4kp7xC7WYg&s',
+        detail: 'Integramos segurança em cada camada do desenvolvimento: desde autenticação e autorização até criptografia de dados, governança de acessos e conformidade regulatória.',
+      },
+      {
+        title: 'Experiência de usuário clara',
+        desc: 'Interfaces profissionais e consistentes que geram confiança corporativa.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxbZqQ0UYihl7Zc2rSoq4oQCP6-kjDL7itw&s',
+        detail: 'Criamos interfaces limpas, consistentes e profissionais que refletem a identidade da sua marca. Cada interação é projetada para ser intuitiva, acessível e eficiente.',
+      },
     ],
   },
   fr: {
-    eyebrow: 'Cloud engineering & expérience digitale',
-    title: 'Plateformes sécurisées, évolutives conçues pour une croissance réelle',
-    description: 'Nous créons des expériences numériques avec une ingénierie cloud intelligente et un langage visuel professionnel qui renforce votre marque.',
     features: [
-      { title: 'Conception agile de plateforme', desc: 'Des architectures flexibles qui évoluent avec votre entreprise.' },
-      { title: 'Automatisation opérationnelle', desc: 'Des cycles de développement plus rapides avec des déploiements fiables.' },
-      { title: 'Sécurité dès la conception', desc: 'Protection des données intégrée à chaque couche du produit.' },
-      { title: 'Expérience utilisateur claire', desc: 'Des interfaces professionnelles qui inspirent confiance.' },
+      {
+        title: 'Conception agile de plateforme',
+        desc: 'Des architectures flexibles qui évoluent avec votre entreprise et améliorent la livraison continue.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkG29BZjHyRnY6RMetdK40anhQWtUkYvXffQ&s',
+        detail: 'Nous concevons des architectures de plateforme modulaires et flexibles qui s\'adaptent à la croissance de votre entreprise. Notre approche agile permet d\'itérer rapidement.',
+      },
+      {
+        title: 'Automatisation opérationnelle',
+        desc: 'Des cycles de développement plus rapides avec des déploiements fiables et contrôlés.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ09hbezlmUq7_coXT3Mfg364y6RrSH2kwdIA&s',
+        detail: 'Nous mettons en place des pipelines CI/CD, l\'infrastructure en tant que code et des environnements automatisés qui accélèrent le cycle de développement.',
+      },
+      {
+        title: 'Sécurité dès la conception',
+        desc: 'Protection des données et gouvernance intégrées à chaque couche du produit.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFOO8-kkkK9Xr-GD8_lu0gA6iO4kp7xC7WYg&s',
+        detail: 'Nous intégrons la sécurité à chaque couche du développement : de l\'authentification et l\'autorisation au chiffrement des données et à la conformité réglementaire.',
+      },
+      {
+        title: 'Expérience utilisateur claire',
+        desc: 'Des interfaces professionnelles et cohérentes qui inspirent confiance.',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxbZqQ0UYihl7Zc2rSoq4oQCP6-kjDL7itw&s',
+        detail: 'Nous créons des interfaces propres, cohérentes et professionnelles qui reflètent l\'identité de votre marque. Chaque interaction est conçue pour être intuitive et efficace.',
+      },
     ],
   },
 }[locale] || {
-  eyebrow: 'Cloud engineering & experiencia digital',
-  title: 'Plataformas seguras, escalables y diseñadas para crecimiento real',
-  description: 'Creamos experiencias digitales con ingeniería cloud inteligente, claridad estratégica y un lenguaje visual profesional que fortalece tu marca.',
   features: [],
 };
 ---
 
 <section class="cloud-platform" aria-label="Cloud platform showcase">
-  <div class="cloud-bg" aria-hidden="true">
-    <div class="cloud-bg-gradient"></div>
-    <div class="cloud-particles">
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-  </div>
   <div class="container">
-    <div class="cloud-platform-header">
-      <div class="cloud-header-left">
-        <span class="cloud-eyebrow">{content.eyebrow}</span>
-        <h2 class="cloud-title">{content.title}</h2>
-        <p class="cloud-desc">{content.description}</p>
-      </div>
-      <div class="cloud-header-right">
-        <div class="cloud-header-bg" aria-hidden="true"></div>
-      </div>
-    </div>
-    <div class="cloud-platform-grid">
+    <!-- Grid de cards -->
+    <div class="cloud-platform-grid" id="cloudGrid">
       {content.features.map((feature, i) => (
-        <article class="cloud-feature-card">
-          <div class="cloud-feature-number">0{i + 1}</div>
-            <div class="cloud-feature-icon" data-icon={i}>
-              <div class="cloud-icon-shape"></div>
-            </div>
-          <h3 class="cloud-feature-title">{feature.title}</h3>
-          <p class="cloud-feature-desc">{feature.desc}</p>
+        <article
+          class="cloud-feature-card"
+          data-index={i}
+        >
+          <div class="cloud-card-image-wrap">
+            <img src={feature.img} alt={feature.title} class="cloud-card-img" loading="lazy" />
+          </div>
+          <div class="cloud-card-body">
+            <h3 class="cloud-feature-title">{feature.title}</h3>
+            <p class="cloud-feature-desc">{feature.desc}</p>
+          </div>
         </article>
       ))}
+    </div>
+
+    <!-- Book reader (oculto inicialmente) -->
+    <div class="cloud-book" id="cloudBook" aria-hidden="true">
+      <div class="cloud-book-inner">
+        <button class="cloud-book-close" id="bookClose" aria-label="Cerrar libro">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <div class="cloud-book-layout">
+          <!-- Lado izquierdo: imagen -->
+          <div class="cloud-book-image-side">
+            <img id="bookImg" src="" alt="" class="cloud-book-img" />
+          </div>
+          <!-- Lado derecho: texto -->
+          <div class="cloud-book-text-side">
+            <div class="cloud-book-counter" id="bookCounter">1 / 4</div>
+            <h3 id="bookTitle" class="cloud-book-title"></h3>
+            <p id="bookDetail" class="cloud-book-detail"></p>
+          </div>
+        </div>
+
+        <!-- Navegación tipo libro -->
+        <div class="cloud-book-nav">
+          <button class="cloud-book-nav-btn" id="bookPrev" aria-label="Página anterior">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+            <span class="cloud-book-nav-label" id="prevLabel"></span>
+          </button>
+          <div class="cloud-book-dots" id="bookDots"></div>
+          <button class="cloud-book-nav-btn" id="bookNext" aria-label="Página siguiente">
+            <span class="cloud-book-nav-label" id="nextLabel"></span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<script>
+(function() {
+  var features = [
+    {img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkG29BZjHyRnY6RMetdK40anhQWtUkYvXffQ&s', title: 'Diseño de plataforma ágil', detail: 'Diseñamos arquitecturas de plataforma modulares y flexibles que se adaptan al crecimiento de tu negocio. Nuestro enfoque ágil permite iterar rápidamente, reducir tiempos de entrega y mantener la calidad técnica en cada release. Trabajamos con equipos multidisciplinarios para definir la estructura óptima que soporte escalabilidad, mantenibilidad y evolución continua del producto.'},
+    {img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ09hbezlmUq7_coXT3Mfg364y6RrSH2kwdIA&s', title: 'Automatización operativa', detail: 'Implementamos pipelines de CI/CD, infraestructura como código y entornos automatizados que aceleran el ciclo de desarrollo sin sacrificar estabilidad. Cada despliegue es controlado, reversible y monitoreado. La automatización operativa reduce errores manuales, libera tiempo del equipo técnico y garantiza que los cambios lleguen a producción con confianza y trazabilidad.'},
+    {img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFOO8-kkkK9Xr-GD8_lu0gA6iO4kp7xC7WYg&s', title: 'Seguridad desde el inicio', detail: 'Integramos seguridad en cada capa del desarrollo: desde la autenticación y autorización hasta el cifrado de datos, gobernanza de accesos y cumplimiento normativo. Aplicamos principios de Security by Design para proteger la información sensible y garantizar que tu plataforma cumpla con los estándares de la industria. La seguridad no es un añadido, es parte de la arquitectura.'},
+    {img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnxbZqQ0UYihl7Zc2rSoq4oQCP6-kjDL7itw&s', title: 'Experiencia de usuario clara', detail: 'Creamos interfaces limpias, consistentes y profesionales que reflejan la identidad de tu marca. Cada interacción está diseñada para ser intuitiva, accesible y eficiente. Nuestro enfoque en experiencia de usuario corporativa asegura que los equipos internos y clientes finales adopten la plataforma con confianza, reduciendo curvas de aprendizaje y aumentando la productividad.'},
+  ];
+
+  var grid = document.getElementById('cloudGrid') as HTMLElement;
+  var book = document.getElementById('cloudBook') as HTMLElement;
+  var bookImg = document.getElementById('bookImg') as HTMLImageElement;
+  var bookTitle = document.getElementById('bookTitle') as HTMLElement;
+  var bookDetail = document.getElementById('bookDetail') as HTMLElement;
+  var bookCounter = document.getElementById('bookCounter') as HTMLElement;
+  var bookDots = document.getElementById('bookDots') as HTMLElement;
+  var bookPrev = document.getElementById('bookPrev') as HTMLElement;
+  var bookNext = document.getElementById('bookNext') as HTMLElement;
+  var bookClose = document.getElementById('bookClose') as HTMLElement;
+  var prevLabel = document.getElementById('prevLabel') as HTMLElement;
+  var nextLabel = document.getElementById('nextLabel') as HTMLElement;
+
+  var currentPage = 0;
+  var totalPages = features.length;
+
+  function renderPage(index: number) {
+    var f = features[index];
+    if (!f) return;
+    bookImg.src = f.img;
+    bookImg.alt = f.title;
+    bookTitle.textContent = f.title;
+    bookDetail.textContent = f.detail;
+    bookCounter.textContent = (index + 1) + ' / ' + totalPages;
+
+    var dotsHtml = '';
+    for (var i = 0; i < totalPages; i++) {
+      dotsHtml += '<span class="cloud-book-dot' + (i === index ? ' cloud-book-dot--active' : '') + '"></span>';
+    }
+    bookDots.innerHTML = dotsHtml;
+
+    prevLabel.textContent = index > 0 ? features[index - 1].title : '';
+    nextLabel.textContent = index < totalPages - 1 ? features[index + 1].title : '';
+
+    bookPrev.style.opacity = index > 0 ? '1' : '0.3';
+    bookPrev.style.pointerEvents = index > 0 ? 'auto' : 'none';
+    bookNext.style.opacity = index < totalPages - 1 ? '1' : '0.3';
+    bookNext.style.pointerEvents = index < totalPages - 1 ? 'auto' : 'none';
+  }
+
+  function openBook(index: number) {
+    currentPage = index;
+    renderPage(currentPage);
+    book.setAttribute('aria-hidden', 'false');
+    book.classList.add('cloud-book--open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBook() {
+    book.classList.remove('cloud-book--open');
+    book.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  var cards = grid.querySelectorAll('.cloud-feature-card') as NodeListOf<HTMLElement>;
+  for (var i = 0; i < cards.length; i++) {
+    (function(idx: number) {
+      cards[idx].addEventListener('click', function() { openBook(idx); });
+      cards[idx].style.cursor = 'pointer';
+    })(i);
+  }
+
+  bookPrev.addEventListener('click', function() {
+    if (currentPage > 0) { currentPage--; renderPage(currentPage); }
+  });
+  bookNext.addEventListener('click', function() {
+    if (currentPage < totalPages - 1) { currentPage++; renderPage(currentPage); }
+  });
+  bookClose.addEventListener('click', closeBook);
+
+  document.addEventListener('keydown', function(e) {
+    if (book.getAttribute('aria-hidden') === 'false') {
+      if (e.key === 'Escape') closeBook();
+      if (e.key === 'ArrowRight' && currentPage < totalPages - 1) { currentPage++; renderPage(currentPage); }
+      if (e.key === 'ArrowLeft' && currentPage > 0) { currentPage--; renderPage(currentPage); }
+    }
+  });
+})();
+</script>
+
 <style>
   .cloud-platform {
     position: relative;
-    padding: var(--space-24) 0;
-    overflow: hidden;
-    background-color: var(--color-deep-blue);
+    padding: 60px 0;
+    background: #FFFFFF;
   }
 
-  .cloud-bg {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-
-  .cloud-bg-gradient {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(80% 60% at 10% 20%, rgba(0, 102, 255, 0.12) 0%, transparent 70%),
-      radial-gradient(70% 50% at 90% 80%, rgba(0, 102, 255, 0.08) 0%, transparent 70%),
-      radial-gradient(60% 60% at 50% 50%, rgba(10, 22, 40, 0.4) 0%, transparent 100%);
-  }
-
-  .cloud-particles {
-    position: absolute;
-    inset: 0;
-  }
-
-  .cloud-particles span {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(0, 102, 255, 0.3);
-    border-radius: 50%;
-    animation: float-particle 8s infinite ease-in-out;
-  }
-
-  .cloud-particles span:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-  .cloud-particles span:nth-child(2) { top: 25%; left: 15%; width: 6px; height: 6px; animation-delay: 1s; background: rgba(0, 102, 255, 0.2); }
-  .cloud-particles span:nth-child(3) { top: 45%; left: 8%; animation-delay: 2s; }
-  .cloud-particles span:nth-child(4) { top: 70%; left: 12%; width: 5px; height: 5px; animation-delay: 0.5s; }
-  .cloud-particles span:nth-child(5) { top: 85%; left: 5%; animation-delay: 3s; background: rgba(0, 102, 255, 0.15); }
-  .cloud-particles span:nth-child(6) { top: 15%; right: 8%; animation-delay: 1.5s; }
-  .cloud-particles span:nth-child(7) { top: 40%; right: 5%; width: 5px; height: 5px; animation-delay: 0.8s; background: rgba(0, 102, 255, 0.25); }
-  .cloud-particles span:nth-child(8) { top: 60%; right: 15%; animation-delay: 2.5s; }
-  .cloud-particles span:nth-child(9) { top: 80%; right: 8%; width: 6px; height: 6px; animation-delay: 1.2s; }
-  .cloud-particles span:nth-child(10) { top: 90%; right: 3%; animation-delay: 3.5s; background: rgba(0, 102, 255, 0.15); }
-
-  @keyframes float-particle {
-    0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
-    50% { transform: translateY(-30px) scale(1.5); opacity: 1; }
-  }
-
-  .cloud-platform-header {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-12);
-    align-items: center;
-    margin-bottom: var(--space-12);
-  }
-
-  .cloud-header-left {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cloud-header-right {
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--radius-xl);
-    min-height: 320px;
-  }
-
-  .cloud-header-bg {
-    position: absolute;
-    inset: -40px;
-    background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: saturate(0.9) brightness(0.7);
-    transition: transform 0.6s ease, filter 0.6s ease;
-  }
-
-  .cloud-header-right:hover .cloud-header-bg {
-    transform: scale(1.04);
-    filter: saturate(1) brightness(0.8);
-  }
-
-  .cloud-header-right::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(to left, rgba(10, 22, 40, 0) 30%, rgba(10, 22, 40, 0.95) 70%),
-      linear-gradient(to top, rgba(10, 22, 40, 0.3) 0%, transparent 40%);
-    pointer-events: none;
-  }
-
-  .cloud-eyebrow {
-    display: inline-block;
-    font-size: var(--text-xs);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--color-electric-blue);
-    margin-bottom: var(--space-4);
-    padding: var(--space-1) var(--space-3);
-    border: 1px solid rgba(0, 102, 255, 0.3);
-    border-radius: var(--radius-full);
-    background: rgba(0, 102, 255, 0.06);
-  }
-
-  .cloud-title {
-    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: var(--space-4);
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #fff 40%, rgba(0, 102, 255, 0.7));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .cloud-desc {
-    font-size: var(--text-base);
-    color: var(--color-gray-400);
-    line-height: 1.7;
-    margin-bottom: 0;
+  .cloud-platform :global(.container) {
+    max-width: 1280px;
   }
 
   .cloud-platform-grid {
-    position: relative;
-    z-index: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-5);
+    gap: 20px;
   }
 
   .cloud-feature-card {
     position: relative;
-    padding: var(--space-8) var(--space-6);
-    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius-xl);
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    background: #FFFFFF;
+    border: 1px solid #E8ECF2;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
     overflow: hidden;
-    cursor: default;
   }
 
   .cloud-feature-card::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(0, 102, 255, 0.08) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0B2F7D, #E53935, #0B2F7D);
+    background-size: 200% 100%;
+    animation: cloudAccentMove 3s ease-in-out infinite;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+  }
+
+  @keyframes cloudAccentMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .cloud-feature-card:hover {
+    transform: translateY(-4px);
+    border-color: #C8D0DC;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
   }
 
   .cloud-feature-card:hover::before {
     opacity: 1;
   }
 
-  .cloud-feature-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(0, 102, 255, 0.2);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 102, 255, 0.05);
+  .cloud-card-image-wrap {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
   }
 
-  .cloud-feature-number {
-    position: absolute;
-    top: var(--space-3);
-    right: var(--space-4);
-    font-size: var(--text-4xl);
-    font-weight: 900;
-    color: rgba(255,255,255,0.03);
-    line-height: 1;
-    letter-spacing: -0.04em;
-    transition: color 0.5s ease;
+  .cloud-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
   }
 
-  .cloud-feature-card:hover .cloud-feature-number {
-    color: rgba(0, 102, 255, 0.08);
-  }
-
-  .cloud-feature-icon {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: var(--space-5);
-    color: var(--color-electric-blue);
-    background: rgba(0, 102, 255, 0.08);
-    border-radius: 16px;
-    transition: all 0.5s ease;
-  }
-
-  .cloud-icon-shape {
-    width: 24px;
-    height: 24px;
-    border-radius: 8px;
-    background: var(--color-electric-blue);
-    opacity: 0.6;
-    transition: all 0.5s ease;
-  }
-
-  .cloud-feature-icon[data-icon="0"] .cloud-icon-shape {
-    border-radius: 50% 50% 50% 0;
-  }
-  .cloud-feature-icon[data-icon="1"] .cloud-icon-shape {
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    border: 3px solid var(--color-electric-blue);
-    background: transparent;
-    opacity: 1;
-  }
-  .cloud-feature-icon[data-icon="2"] .cloud-icon-shape {
-    border-radius: 4px 20px 4px 20px;
-  }
-  .cloud-feature-icon[data-icon="3"] .cloud-icon-shape {
-    border-radius: 50% 0 50% 0;
-  }
-
-  .cloud-feature-card:hover .cloud-feature-icon {
-    background: rgba(0, 102, 255, 0.2);
-    box-shadow: 0 0 30px rgba(0, 102, 255, 0.15);
+  .cloud-feature-card:hover .cloud-card-img {
     transform: scale(1.05);
   }
 
+  .cloud-card-body {
+    padding: 24px 22px 28px;
+  }
+
   .cloud-feature-title {
-    font-size: var(--text-base);
+    font-size: 1rem;
     font-weight: 700;
-    color: var(--color-white);
-    margin-bottom: var(--space-2);
-    position: relative;
+    color: #0A1628;
+    margin-bottom: 8px;
   }
 
   .cloud-feature-desc {
-    font-size: var(--text-xs);
-    color: var(--color-gray-400);
+    font-size: 0.85rem;
+    color: #5E6472;
     line-height: 1.7;
     margin-bottom: 0;
+  }
+
+  /* ===== BOOK READER ===== */
+  .cloud-book {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    background: rgba(10, 22, 40, 0.88);
+    backdrop-filter: blur(6px);
+  }
+
+  .cloud-book.cloud-book--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .cloud-book-inner {
     position: relative;
+    width: 92%;
+    max-width: 900px;
+    max-height: 82vh;
+    background: #FFFFFF;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+    transform: translateY(30px) scale(0.95);
+    transition: transform 0.4s ease;
+  }
+
+  .cloud-book--open .cloud-book-inner {
+    transform: translateY(0) scale(1);
+  }
+
+  .cloud-book-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #0A1628;
+    transition: background 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .cloud-book-close:hover {
+    background: #FFFFFF;
+  }
+
+  .cloud-book-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 380px;
+    flex: 1;
+  }
+
+  .cloud-book-image-side {
+    overflow: hidden;
+    background: #F0F2F5;
+  }
+
+  .cloud-book-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .cloud-book-text-side {
+    padding: 48px 40px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .cloud-book-counter {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #A3A9B4;
+    letter-spacing: 1px;
+  }
+
+  .cloud-book-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0A1628;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .cloud-book-detail {
+    font-size: 0.95rem;
+    color: #5E6472;
+    line-height: 1.8;
+    margin-bottom: 0;
+  }
+
+  /* ===== NAVEGACIÓN ===== */
+  .cloud-book-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    border-top: 1px solid #E8ECF2;
+    background: #FAFBFC;
+  }
+
+  .cloud-book-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #0A1628;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+
+  .cloud-book-nav-btn:hover {
+    color: #0B2F7D;
+    background: rgba(11, 47, 125, 0.05);
+  }
+
+  .cloud-book-nav-label {
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cloud-book-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .cloud-book-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #D0D4DC;
+    transition: background 0.3s ease;
+  }
+
+  .cloud-book-dot--active {
+    background: #0B2F7D;
+    width: 24px;
+    border-radius: 4px;
   }
 
   @media (max-width: 1100px) {
     .cloud-platform-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-
-    .cloud-platform-header {
-      grid-template-columns: 1fr;
-      gap: var(--space-8);
-    }
-
-    .cloud-header-right {
-      min-height: 180px;
-    }
   }
 
   @media (max-width: 768px) {
     .cloud-platform {
-      padding: var(--space-16) 0;
-    }
-
-    .cloud-platform-header {
-      margin-bottom: var(--space-8);
+      padding: 40px 0;
     }
 
     .cloud-platform-grid {
       grid-template-columns: 1fr;
-      gap: var(--space-4);
+      gap: 16px;
     }
 
-    .cloud-feature-card {
-      padding: var(--space-6);
+    .cloud-card-image-wrap {
+      height: 160px;
     }
 
-    .cloud-header-right {
-      min-height: 160px;
+    .cloud-card-body {
+      padding: 20px 18px 24px;
+    }
+
+    .cloud-book-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .cloud-book-image-side {
+      height: 200px;
+    }
+
+    .cloud-book-text-side {
+      padding: 28px 24px 20px;
+    }
+
+    .cloud-book-title {
+      font-size: 1.2rem;
+    }
+
+    .cloud-book-nav {
+      padding: 12px 16px;
+    }
+
+    .cloud-book-nav-label {
+      display: none;
     }
   }
 </style>

@@ -1,0 +1,305 @@
+---
+// ============================================
+// SABERO Consulting - Home: Tech Stack
+// "Tecnologías que dominamos"
+// Carrusel horizontal automático con logos grandes
+// Fondo oscuro elegante, estilo enterprise
+// ============================================
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+
+const content: Record<string, { title: string; subtitle: string }> = {
+  es: {
+    title: 'Tecnologías que dominamos',
+    subtitle: 'Nuestro equipo trabaja con tecnologías modernas para construir, integrar y escalar plataformas digitales.',
+  },
+  en: {
+    title: 'Technologies we master',
+    subtitle: 'Our team works with modern technologies to build, integrate and scale digital platforms.',
+  },
+  pt: {
+    title: 'Tecnologias que dominamos',
+    subtitle: 'Nossa equipe trabalha com tecnologias modernas para construir, integrar e escalar plataformas digitais.',
+  },
+  fr: {
+    title: 'Technologies que nous maîtrisons',
+    subtitle: 'Notre équipe travaille avec des technologies modernes pour construire, intégrer et faire évoluer des plateformes numériques.',
+  },
+};
+
+const data = content[locale] || content.es;
+
+const technologies = [
+  { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+  { name: 'Spring Boot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+  { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+  { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+  { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+  { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+  { name: 'Astro', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-original.svg' },
+  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+  { name: 'Flutter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
+  { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+  { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+  { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
+  { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+  { name: 'AWS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
+  { name: 'Azure', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg' },
+  { name: 'Oracle', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg' },
+];
+
+
+// Duplicamos para efecto marquee infinito
+const allTechs = [...technologies, ...technologies];
+---
+
+<section class="home-techstack" aria-label={data.title}>
+  <div class="container">
+    <div class="home-techstack-header">
+      <h2 class="home-techstack-title">{data.title}</h2>
+      <p class="home-techstack-subtitle">{data.subtitle}</p>
+    </div>
+  </div>
+
+  <div class="home-techstack-marquee">
+    <div class="home-techstack-track">
+      {allTechs.map((tech, i) => (
+        <div class="home-techstack-item">
+          <div class="home-techstack-circle">
+            <img
+              src={tech.icon}
+              alt={tech.name}
+              class="home-techstack-icon"
+              loading={i < 14 ? 'eager' : 'lazy'}
+            />
+          </div>
+          <span class="home-techstack-name">{tech.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-techstack {
+    padding: 100px 0 80px;
+    background: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .home-techstack::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #E8ECF2, transparent);
+  }
+
+  .home-techstack::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #E8ECF2, transparent);
+  }
+
+  .home-techstack-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .home-techstack-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    animation: ledTechPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes ledTechPulse {
+    0%, 100% {
+      color: #0B2F7D;
+      text-shadow: 0 0 6px rgba(11, 47, 125, 0.3), 0 0 14px rgba(11, 47, 125, 0.15);
+    }
+    10% {
+      color: #0B2F7D;
+      text-shadow: 0 0 10px rgba(11, 47, 125, 0.7), 0 0 24px rgba(11, 47, 125, 0.4), 0 0 40px rgba(11, 47, 125, 0.2);
+    }
+    20% {
+      color: #0B2F7D;
+      text-shadow: 0 0 6px rgba(11, 47, 125, 0.3), 0 0 14px rgba(11, 47, 125, 0.15);
+    }
+    50% {
+      color: #E53935;
+      text-shadow: 0 0 6px rgba(229, 57, 53, 0.3), 0 0 14px rgba(229, 57, 53, 0.15);
+    }
+    60% {
+      color: #E53935;
+      text-shadow: 0 0 10px rgba(229, 57, 53, 0.7), 0 0 24px rgba(229, 57, 53, 0.4), 0 0 40px rgba(229, 57, 53, 0.2);
+    }
+    70% {
+      color: #E53935;
+      text-shadow: 0 0 6px rgba(229, 57, 53, 0.3), 0 0 14px rgba(229, 57, 53, 0.15);
+    }
+    75% {
+      color: #0B2F7D;
+      text-shadow: 0 0 6px rgba(11, 47, 125, 0.3), 0 0 14px rgba(11, 47, 125, 0.15);
+    }
+  }
+
+  .home-techstack-subtitle {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #5E6472;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .home-techstack-marquee {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .home-techstack-marquee::before,
+  .home-techstack-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .home-techstack-marquee::before {
+    left: 0;
+    background: linear-gradient(90deg, #FFFFFF 0%, transparent 100%);
+  }
+
+  .home-techstack-marquee::after {
+    right: 0;
+    background: linear-gradient(270deg, #FFFFFF 0%, transparent 100%);
+  }
+
+  .home-techstack-track {
+    display: flex;
+    gap: 48px;
+    width: max-content;
+    animation: marqueeScroll 40s linear infinite;
+  }
+
+  @keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .home-techstack-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+    transition: transform 400ms ease;
+  }
+
+  .home-techstack-item:hover {
+    transform: translateY(-6px);
+  }
+
+  .home-techstack-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #FDF6E3;
+    border: 1px solid #F0E6CC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 400ms ease;
+    position: relative;
+  }
+
+  .home-techstack-circle::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    transition: all 400ms ease;
+  }
+
+  .home-techstack-item:hover .home-techstack-circle {
+    background: #FCF0D5;
+    border-color: #E8D9B8;
+  }
+
+  .home-techstack-item:hover .home-techstack-circle::after {
+    border-color: rgba(0, 102, 255, 0.25);
+  }
+
+  .home-techstack-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    display: block;
+    filter: none;
+    transition: filter 400ms ease, transform 400ms ease;
+  }
+
+  .home-techstack-item:hover .home-techstack-icon {
+    transform: scale(1.1);
+  }
+
+  .home-techstack-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #5E6472;
+    text-align: center;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    transition: color 300ms ease;
+  }
+
+  .home-techstack-item:hover .home-techstack-name {
+    color: #0A1628;
+  }
+
+  @media (max-width: 768px) {
+    .home-techstack {
+      padding: 72px 0 56px;
+    }
+
+    .home-techstack-title {
+      font-size: 1.8rem;
+    }
+
+    .home-techstack-circle {
+      width: 80px;
+      height: 80px;
+    }
+
+    .home-techstack-icon {
+      width: 42px;
+      height: 42px;
+    }
+
+    .home-techstack-track {
+      gap: 32px;
+    }
+
+    .home-techstack-marquee::before,
+    .home-techstack-marquee::after {
+      width: 60px;
+    }
+  }
+</style>
