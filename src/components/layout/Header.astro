@@ -25,47 +25,44 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
       <img src="/images/saberologo.png" alt={siteSettings.name} class="header-logo-img" width="200" height="56" />
     </a>
 
-    <!-- Right side: nav + actions -->
-    <div class="header-right">
-      <!-- Navigation -->
-      <nav class="header-nav" aria-label="Main navigation">
-        <ul class="nav-list" role="list">
-          {navigation.main.map((item, index) => {
-            const menuKey = megaMenuKeys[index];
-            const megaSection = menuKey ? navigation.megaMenus[menuKey] : null;
-            const localizedHref = localizeNavHref(item.href, currentLocale);
+    <!-- Navigation - centro -->
+    <nav class="header-nav" aria-label="Main navigation">
+      <ul class="nav-list" role="list">
+        {navigation.main.map((item, index) => {
+          const menuKey = megaMenuKeys[index];
+          const megaSection = menuKey ? navigation.megaMenus[menuKey] : null;
+          const localizedHref = localizeNavHref(item.href, currentLocale);
 
-            return (
-              <li class="nav-item" data-mega={menuKey || ''}>
-                <a
-                  href={localizedHref}
-                  class="nav-link"
-                  aria-haspopup={megaSection ? 'true' : undefined}
-                  aria-expanded={megaSection ? 'false' : undefined}
-                >
-                  {item.label}
-                </a>
-                {megaSection && (
-                  <MegaMenu section={megaSection} isOpen={false} id={menuKey} locale={currentLocale} />
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+          return (
+            <li class="nav-item" data-mega={menuKey || ''}>
+              <a
+                href={localizedHref}
+                class="nav-link"
+                aria-haspopup={megaSection ? 'true' : undefined}
+                aria-expanded={megaSection ? 'false' : undefined}
+              >
+                {item.label}
+              </a>
+              {megaSection && (
+                <MegaMenu section={megaSection} isOpen={false} id={menuKey} locale={currentLocale} />
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
 
-      <!-- Actions -->
-      <div class="header-actions">
-        <LanguageSwitcher currentLocale={currentLocale} path={path} variant="desktop" />
-        <a href={localizeNavHref('/contacto', currentLocale)} class="header-cta-btn">
-          {t(currentLocale, 'header.cta')}
-        </a>
-        <button class="hamburger" aria-label={t(currentLocale, 'header.menu')} data-toggle-mobile>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-      </div>
+    <!-- Actions - derecha -->
+    <div class="header-actions">
+      <LanguageSwitcher currentLocale={currentLocale} path={path} variant="desktop" />
+      <a href={localizeNavHref('/contacto', currentLocale)} class="header-cta-btn">
+        {t(currentLocale, 'header.cta')}
+      </a>
+      <button class="hamburger" aria-label={t(currentLocale, 'header.menu')} data-toggle-mobile>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
     </div>
   </div>
 
@@ -205,23 +202,19 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     filter: drop-shadow(0 0 10px rgba(0, 102, 255, 0.25));
   }
 
-  /* ---- Right wrapper ---- */
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: var(--space-6);
-  }
-
-  /* ---- Navigation ---- */
+  /* ---- Navigation - centro ---- */
   .header-nav {
     display: flex;
     align-items: center;
+    flex: 1;
+    justify-content: center;
+    padding: 0 var(--space-8);
   }
 
   .nav-list {
     display: flex;
     align-items: center;
-    gap: var(--space-1);
+    gap: var(--space-2);
     list-style: none;
     margin: 0;
     padding: 0;
