@@ -1,0 +1,159 @@
+---
+import type { OpportunitiesSection } from '../../../data/careers/types';
+
+interface Props {
+  data: OpportunitiesSection;
+  locale: string;
+}
+
+const { data, locale } = Astro.props;
+const contactHref = locale === 'es' ? '/contacto' : `/${locale}/contacto`;
+---
+
+<section class="opportunities-section section" id="oportunidades" aria-label={data.title}>
+  <div class="opportunities-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="opportunities-layout">
+      <div class="opportunities-image">
+        <img
+          src="/images/careers/opportunities.jpg"
+          alt={data.title}
+          loading="lazy"
+          width="300"
+          height="300"
+          class="opportunities-img"
+        />
+      </div>
+      <div class="opportunities-content">
+        <h2 class="opportunities-title">{data.title}</h2>
+        <p class="opportunities-subtitle">{data.subtitle}</p>
+        <div class="opportunities-card">
+          <p class="opportunities-message">{data.message}</p>
+          <a href={contactHref} class="btn btn-primary btn-lg">{data.cta}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .opportunities-section {
+    background-color: var(--bg-secondary);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .opportunities-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2GiCwBXCCiudIWEDhuia19wA8spkagJOOEMKkDcWZhg&s=10');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .opportunities-section .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .opportunities-layout {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .opportunities-image {
+    flex: 0 0 300px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    aspect-ratio: 1;
+  }
+
+  .opportunities-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 500ms ease;
+  }
+
+  .opportunities-image:hover .opportunities-img {
+    transform: scale(1.05);
+  }
+
+  .opportunities-content {
+    flex: 1;
+  }
+
+  .opportunities-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #08152E;
+  }
+
+  .opportunities-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+
+  .opportunities-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E8ECF2;
+    border-radius: 14px;
+    padding: 32px 28px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .opportunities-message {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #5E6472;
+    margin-bottom: 24px;
+  }
+
+  .opportunities-card .btn-lg {
+    padding: 14px 32px;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 768px) {
+    .opportunities-layout {
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .opportunities-image {
+      flex: 0 0 200px;
+      width: 200px;
+      height: 200px;
+    }
+
+    .opportunities-content {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .opportunities-section {
+      padding: 80px 0;
+    }
+
+    .opportunities-card {
+      padding: 24px 20px;
+    }
+
+    .opportunities-title {
+      font-size: 1.4rem;
+    }
+  }
+</style>

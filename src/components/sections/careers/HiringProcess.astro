@@ -1,0 +1,244 @@
+---
+import type { ProcessSection } from '../../../data/careers/types';
+
+interface Props {
+  data: ProcessSection;
+}
+
+const { data } = Astro.props;
+const totalCards = data.steps.length;
+---
+
+<section class="process-section section" aria-label={data.title}>
+  <div class="container">
+    <div class="process-header">
+      <h2 class="section-title">{data.title}</h2>
+      <p class="section-subtitle">{data.subtitle}</p>
+    </div>
+
+    <div class="process-carousel" id="processCarousel">
+      <div class="process-track" id="processTrack">
+        {data.steps.map((step) => (
+          <article class="process-card" data-step={step.step}>
+            <div class="process-card-number">{step.step}</div>
+            <h3 class="process-card-title">{step.title}</h3>
+            <p class="process-card-text">{step.description}</p>
+          </article>
+        ))}
+        {data.steps.slice(0, 4).map((step) => (
+          <article class="process-card is-clone" data-step={step.step}>
+            <div class="process-card-number">{step.step}</div>
+            <h3 class="process-card-title">{step.title}</h3>
+            <p class="process-card-text">{step.description}</p>
+          </article>
+        ))}
+      </div>
+      <div class="process-dots" id="processDots">
+        {data.steps.map((step) => (
+          <span class="process-dot" data-step={step.step}></span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById('processTrack') as HTMLElement;
+  const cards = document.querySelectorAll('.process-card');
+  const dots = document.querySelectorAll('.process-dot');
+  const totalCards = 6;
+  const clonesCount = 4;
+  let isPaused = false;
+  let interval: ReturnType<typeof setInterval>;
+  let currentOffset = 0;
+  const cardWidth = 25;
+
+  function updateDots(index: number) {
+    dots.forEach((d) => {
+      const el = d as HTMLElement;
+      el.classList.remove('active');
+    });
+    const dot = dots[index % totalCards] as HTMLElement;
+    if (dot) dot.classList.add('active');
+  }
+
+  function moveCarousel() {
+    if (isPaused) return;
+
+    currentOffset = currentOffset + 1;
+
+    // Si llegamos al inicio de los clones, saltar al principio sin animacion
+    if (currentOffset >= totalCards) {
+      currentOffset = 0;
+      track.style.transition = 'none';
+      track.style.transform = `translateX(0%)`;
+      void track.offsetHeight;
+      track.style.transition = 'transform 600ms cubic-bezier(0.23, 1, 0.32, 1)';
+    } else {
+      track.style.transform = `translateX(-${currentOffset * cardWidth}%)`;
+    }
+
+    updateDots(currentOffset);
+  }
+
+  function startCarousel() {
+    if (interval) clearInterval(interval);
+    updateDots(0);
+    interval = setInterval(moveCarousel, 3000);
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const el = card as HTMLElement;
+      const stepNum = parseInt(el.dataset.step || '1');
+
+      if (isPaused) {
+        isPaused = false;
+        el.classList.remove('paused');
+        startCarousel();
+      } else {
+        isPaused = true;
+        if (interval) clearInterval(interval);
+        currentOffset = stepNum - 1;
+        track.style.transition = 'transform 600ms cubic-bezier(0.23, 1, 0.32, 1)';
+        track.style.transform = `translateX(-${currentOffset * cardWidth}%)`;
+        updateDots(currentOffset);
+        el.classList.add('paused');
+      }
+    });
+  });
+
+  startCarousel();
+</script>
+
+<style>
+  .process-section {
+    background-color: var(--bg-primary);
+    padding: 48px 0 80px;
+  }
+
+  .process-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .process-header .section-subtitle {
+    margin: 0 auto;
+  }
+
+  .process-carousel {
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .process-track {
+    display: flex;
+    gap: 24px;
+    transition: transform 600ms cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform;
+  }
+
+  .process-card {
+    flex: 0 0 calc(25% - 18px);
+    min-width: 0;
+    background: #FFFFFF;
+    border: 1px solid #E8ECF2;
+    border-radius: 14px;
+    padding: 32px 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .process-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0B2F7D 0%, #2F80FF 50%, #E53935 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .process-card.paused::before {
+    opacity: 1;
+  }
+
+  .process-card.paused {
+    border-color: #2F80FF;
+    box-shadow: 0 4px 20px rgba(47, 128, 255, 0.12);
+    transform: translateY(-4px);
+  }
+
+  .process-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .process-card-number {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #2F80FF;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+
+  .process-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #08152E;
+  }
+
+  .process-card-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #5E6472;
+    margin-bottom: 0;
+  }
+
+  .process-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 32px;
+  }
+
+  .process-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #D0D8E4;
+    transition: all 400ms ease;
+  }
+
+  .process-dot.active {
+    background: #0B2F7D;
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 1024px) {
+    .process-card {
+      flex: 0 0 calc(33.33% - 16px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .process-card {
+      flex: 0 0 calc(50% - 12px);
+      padding: 24px 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .process-card {
+      flex: 0 0 100%;
+    }
+  }
+</style>

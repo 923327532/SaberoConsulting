@@ -1,0 +1,483 @@
+---
+import type { TeamsSection } from '../../../data/careers/types';
+
+interface Props {
+  data: TeamsSection;
+}
+
+const { data } = Astro.props;
+
+const teamIcons = [
+  {
+    paths: [
+      'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'
+    ]
+  },
+  {
+    paths: [
+      'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z',
+      'M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z',
+      'M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z'
+    ]
+  },
+  {
+    paths: [
+      'M17 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM7 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z',
+      'M12 12c0 2.76 2.24 5 5 5M12 12c0-2.76 2.24-5 5-5M12 12c0 2.76-2.24 5-5 5M12 12c0-2.76-2.24-5-5-5'
+    ]
+  },
+  {
+    paths: [
+      'M9 12l2 2 4-4M7.86 2h8.28C17.17 2 18 2.83 18 3.86v16.28c0 1.03-.83 1.86-1.86 1.86H7.86C6.83 22 6 21.17 6 20.14V3.86C6 2.83 6.83 2 7.86 2z'
+    ]
+  },
+  {
+    paths: [
+      'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z',
+      'M12 22V12M12 12L3 7M12 12l9-5'
+    ]
+  },
+  {
+    paths: [
+      'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z',
+      'M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'
+    ]
+  }
+];
+---
+
+<section class="teams-section section" aria-label={data.title}>
+  <div class="teams-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="teams-header">
+      <h2 class="section-title">{data.title}</h2>
+      <p class="section-subtitle">{data.subtitle}</p>
+    </div>
+
+    <div class="teams-icons-row">
+      {data.list.map((team, i) => (
+        <button class="team-icon-btn" data-team-id={team.id} aria-label={team.title}>
+          <div class="team-icon-wrap">
+            <svg class="team-icon-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              {teamIcons[i].paths.map((path) => (
+                <path d={path} />
+              ))}
+            </svg>
+          </div>
+          <span class="team-icon-label">{team.title}</span>
+        </button>
+      ))}
+    </div>
+
+    <div class="teams-grid" id="teamsGrid">
+      {data.list.map((team, i) => (
+        <article class="team-card" data-team-id={team.id}>
+          <div class="team-card-top"></div>
+          <div class="team-card-header">
+            <h3 class="team-card-title">{team.title}</h3>
+          </div>
+          <p class="team-card-desc">{team.description}</p>
+          <div class="team-card-focus">
+            <span class="team-focus-label">Enfoque:</span>
+            <span class="team-focus-text">{team.focus}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const buttons = document.querySelectorAll('.team-icon-btn');
+  const cards = document.querySelectorAll('.team-card');
+  const allIds = ['engineering', 'product', 'uxui', 'qa', 'devops', 'business'];
+
+  // Show first 3 by default
+  const defaultIds = ['engineering', 'product', 'uxui'];
+  defaultIds.forEach((id) => {
+    cards.forEach((c) => {
+      const el = c as HTMLElement;
+      if (el.dataset.teamId === id) {
+        el.classList.add('visible');
+      }
+    });
+  });
+
+  function getVisibleIds(): string[] {
+    const visible: string[] = [];
+    cards.forEach((c) => {
+      const el = c as HTMLElement;
+      if (el.classList.contains('visible') && el.dataset.teamId) {
+        visible.push(el.dataset.teamId);
+      }
+    });
+    return visible;
+  }
+
+  function getInactiveIds(): string[] {
+    return allIds.filter((id) => !getVisibleIds().includes(id));
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = (btn as HTMLElement).dataset.teamId;
+      if (!id) return;
+
+      let isVisible = false;
+      cards.forEach((c) => {
+        const el = c as HTMLElement;
+        if (el.dataset.teamId === id && el.classList.contains('visible')) {
+          isVisible = true;
+        }
+      });
+
+      if (isVisible) {
+        cards.forEach((c) => {
+          const el = c as HTMLElement;
+          if (el.dataset.teamId === id) {
+            el.classList.remove('visible');
+          }
+        });
+
+        const visible = getVisibleIds();
+        if (visible.length < 3) {
+          const inactive = getInactiveIds();
+          if (inactive.length > 0) {
+            const addId = inactive[0];
+            cards.forEach((c) => {
+              const el = c as HTMLElement;
+              if (el.dataset.teamId === addId) {
+                el.classList.add('visible');
+              }
+            });
+          }
+        }
+      } else {
+        const visible = getVisibleIds();
+        if (visible.length >= 3) {
+          const replaceId = visible[0];
+          cards.forEach((c) => {
+            const el = c as HTMLElement;
+            if (el.dataset.teamId === replaceId) {
+              el.classList.remove('visible');
+            }
+          });
+        }
+
+        cards.forEach((c) => {
+          const el = c as HTMLElement;
+          if (el.dataset.teamId === id) {
+            el.classList.add('visible');
+          }
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+  .teams-section {
+    background-color: #F8F9FB;
+    padding: 48px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .teams-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPtYxsyCL_ATuhZRsL6V6CaeV1-xM_UN_LeRTopGyCsg&s=10');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .teams-section .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .teams-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .teams-header .section-subtitle {
+    margin: 0 auto;
+  }
+
+  .teams-icons-row {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 48px;
+    background: linear-gradient(135deg, #EBF0FA 0%, #FDF0F0 100%);
+    border-radius: 16px;
+    padding: 6px;
+    box-shadow: 0 2px 12px rgba(11, 47, 125, 0.06);
+    width: 100%;
+    position: relative;
+  }
+
+  .teams-icons-row::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(90deg, #0B2F7D 0%, #2F80FF 50%, #E53935 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .team-icon-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 18px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    position: relative;
+    min-width: 0;
+  }
+
+  .team-icon-btn::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 16%;
+    height: 68%;
+    width: 1px;
+    background: #D8DEE8;
+  }
+
+  .team-icon-btn:last-child::after {
+    display: none;
+  }
+
+  .team-icon-btn:hover {
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 16px rgba(11, 47, 125, 0.06);
+  }
+
+  .team-icon-btn:hover .team-icon-svg {
+    color: #0B2F7D;
+    transform: scale(1.2);
+  }
+
+  .team-icon-wrap {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transition: all 300ms ease;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid #D8DEE8;
+  }
+
+  .team-icon-btn:hover .team-icon-wrap {
+    background: #FFFFFF;
+    border-color: #0B2F7D;
+    box-shadow: 0 0 12px rgba(11, 47, 125, 0.1);
+  }
+
+  .team-icon-svg {
+    color: #5A6A8A;
+    transition: all 300ms ease;
+    width: 28px;
+    height: 28px;
+    animation: iconPulse 3s ease-in-out infinite;
+  }
+
+  .team-icon-btn:nth-child(2) .team-icon-svg {
+    animation-delay: 0.5s;
+  }
+
+  .team-icon-btn:nth-child(3) .team-icon-svg {
+    animation-delay: 1s;
+  }
+
+  .team-icon-btn:nth-child(4) .team-icon-svg {
+    animation-delay: 1.5s;
+  }
+
+  .team-icon-btn:nth-child(5) .team-icon-svg {
+    animation-delay: 2s;
+  }
+
+  .team-icon-btn:nth-child(6) .team-icon-svg {
+    animation-delay: 2.5s;
+  }
+
+  @keyframes iconPulse {
+    0%, 100% {
+      opacity: 0.5;
+      color: #5A6A8A;
+    }
+    50% {
+      opacity: 1;
+      color: #0B2F7D;
+    }
+  }
+
+  .team-icon-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #5A6A8A;
+    white-space: nowrap;
+    transition: color 300ms ease;
+    letter-spacing: 0.3px;
+  }
+
+  .team-icon-btn:hover .team-icon-label {
+    color: #0B2F7D;
+  }
+
+  .teams-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .team-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E8ECF2;
+    border-radius: 14px;
+    padding: 36px 32px;
+    display: none;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .team-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0B2F7D 0%, #2F80FF 50%, #E53935 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .team-card.visible {
+    display: flex;
+    animation: cardIn 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .team-card.visible::before {
+    opacity: 1;
+  }
+
+  @keyframes cardIn {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    border-color: #D0D8E4;
+  }
+
+  .team-card-header {
+    margin-bottom: 16px;
+  }
+
+  .team-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: #08152E;
+    letter-spacing: -0.02em;
+  }
+
+  .team-card-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #5E6472;
+    margin-bottom: 24px;
+    flex: 1;
+  }
+
+  .team-card-focus {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 0 0;
+    border-top: 1px solid #E8ECF2;
+  }
+
+  .team-focus-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #E53935;
+  }
+
+  .team-focus-text {
+    font-size: 0.85rem;
+    color: #5E6472;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1024px) {
+    .teams-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .teams-icons-row {
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 6px;
+    }
+
+    .team-icon-btn {
+      flex: 0 0 calc(33.33% - 4px);
+      padding: 10px 8px;
+    }
+
+    .team-icon-btn::after {
+      display: none;
+    }
+
+    .team-icon-wrap {
+      width: 36px;
+      height: 36px;
+    }
+
+    .team-icon-label {
+      font-size: 0.6rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .teams-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

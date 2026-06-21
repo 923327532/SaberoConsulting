@@ -2,6 +2,16 @@
 import type { SupportedLocale } from '../../i18n/utils/types';
 import { LOCALES } from '../../i18n/utils/types';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCareersData } from '../../data/careers/index';
+import CareersHero from '../../components/sections/careers/CareersHero.astro';
+import WhySabero from '../../components/sections/careers/WhySabero.astro';
+import LifeAtSabero from '../../components/sections/careers/LifeAtSabero.astro';
+import TeamsGrid from '../../components/sections/careers/TeamsGrid.astro';
+import GrowthLearning from '../../components/sections/careers/GrowthLearning.astro';
+import InclusionCulture from '../../components/sections/careers/InclusionCulture.astro';
+import HiringProcess from '../../components/sections/careers/HiringProcess.astro';
+import OpenPositions from '../../components/sections/careers/OpenPositions.astro';
+import FutureTalent from '../../components/sections/careers/FutureTalent.astro';
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({
@@ -21,18 +31,17 @@ const meta: Record<string, { title: string; description: string }> = {
 
 const pageMeta = meta[locale as string] || meta.es;
 const path = `/${locale}/careers`;
+const data = getCareersData(locale as SupportedLocale);
 ---
 
 <BaseLayout title={pageMeta.title} description={pageMeta.description} locale={locale as SupportedLocale} path={path}>
-  <section class="page-header section">
-    <div class="container">
-      <h1>{locale === 'es' ? 'Careers' : locale === 'en' ? 'Careers' : locale === 'pt' ? 'Carreiras' : 'Carrieres'}</h1>
-      <p class="section-subtitle">{pageMeta.description}</p>
-    </div>
-  </section>
-  <section class="section">
-    <div class="container">
-      <p class="text-tertiary">{locale === 'es' ? 'No hay vacantes activas en este momento. Siguenos en LinkedIn para futuras oportunidades.' : locale === 'en' ? 'No active vacancies at this time. Follow us on LinkedIn for future opportunities.' : locale === 'pt' ? 'Nao ha vagas ativas no momento. Siga-nos no LinkedIn para futuras oportunidades.' : 'Pas d\'offres actives pour le moment. Suivez-nous sur LinkedIn pour les opportunites futures.'}</p>
-    </div>
-  </section>
+  <CareersHero data={data.hero} locale={locale} />
+  <WhySabero data={data.whySabero} />
+  <LifeAtSabero data={data.lifeAtSabero} />
+  <TeamsGrid data={data.teams} />
+  <GrowthLearning data={data.growth} />
+  <InclusionCulture data={data.inclusion} />
+  <HiringProcess data={data.process} />
+  <OpenPositions data={data.opportunities} locale={locale} />
+  <FutureTalent data={data.futureTalent} locale={locale} />
 </BaseLayout>

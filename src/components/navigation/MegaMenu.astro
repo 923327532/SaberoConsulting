@@ -28,6 +28,11 @@ const { section, isOpen, id, locale } = Astro.props;
         {column.text && (
           <p class="mega-column-text">{column.text}</p>
         )}
+        {column.cta && (
+          <a href={localizeNavHref(column.cta.href, locale)} class="mega-cta">
+            {column.cta.label} &rarr;
+          </a>
+        )}
         {column.items.length > 0 && (
           <ul class="mega-column-list">
             {column.items.map((item) => (
@@ -89,6 +94,26 @@ const { section, isOpen, id, locale } = Astro.props;
     color: var(--text-tertiary);
     line-height: 1.7;
     margin-bottom: 0;
+  }
+
+  .mega-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--space-4);
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--accent-color);
+    text-decoration: none;
+    border: 1px solid var(--accent-color);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+
+  .mega-cta:hover {
+    background-color: var(--accent-color);
+    color: #ffffff;
   }
 
   .mega-column-list {

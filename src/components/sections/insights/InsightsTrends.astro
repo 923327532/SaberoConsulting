@@ -1,0 +1,111 @@
+---
+import type { InsightTrend } from '../../../data/insights/types';
+
+interface Props {
+  trends: InsightTrend[];
+  title: string;
+}
+
+const { trends, title } = Astro.props;
+---
+
+<section class="trends-section section" aria-label={title}>
+  <div class="container">
+    <h2 class="section-title">{title}</h2>
+    <div class="trends-grid">
+      {trends.map((trend) => (
+        <article class="trend-card">
+          <h3 class="trend-title">{trend.title}</h3>
+          <p class="trend-summary">{trend.summary}</p>
+          <p class="trend-impact">{trend.impact}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .trends-section {
+    background-color: var(--color-white);
+    padding: var(--space-20) 0;
+  }
+
+  .trends-section .section-title {
+    margin-bottom: var(--space-10);
+  }
+
+  .trends-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .trend-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trend-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-deep-blue), var(--color-electric-blue));
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+  }
+
+  .trend-card:hover::before {
+    opacity: 1;
+  }
+
+  .trend-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .trend-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+
+  .trend-summary {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .trend-impact {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-electric-blue);
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  @media (max-width: 900px) {
+    .trends-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .trends-section {
+      padding: var(--space-12) 0;
+    }
+
+    .trends-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

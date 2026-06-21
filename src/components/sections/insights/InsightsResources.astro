@@ -1,0 +1,139 @@
+---
+import type { InsightResource } from '../../../data/insights/types';
+
+interface Props {
+  resources: InsightResource[];
+  title: string;
+}
+
+const { resources, title } = Astro.props;
+---
+
+<section class="resources-section section" aria-label={title}>
+  <div class="container">
+    <h2 class="section-title">{title}</h2>
+    <div class="resources-grid">
+      {resources.map((resource) => (
+        <article class="resource-card">
+          <div class="resource-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <h3 class="resource-title">{resource.title}</h3>
+          <p class="resource-summary">{resource.summary}</p>
+          <div class="resource-footer">
+            <span class="resource-format">{resource.format}</span>
+            <a href="#" class="resource-cta">{resource.cta} &rarr;</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .resources-section {
+    background-color: var(--color-white);
+    padding: var(--space-20) 0;
+  }
+
+  .resources-section .section-title {
+    margin-bottom: var(--space-10);
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .resource-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-base);
+  }
+
+  .resource-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-gray-200);
+  }
+
+  .resource-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 102, 255, 0.06);
+    border-radius: var(--radius-md);
+    color: var(--color-electric-blue);
+    margin-bottom: 16px;
+  }
+
+  .resource-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .resource-summary {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+
+  .resource-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .resource-format {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+  }
+
+  .resource-cta {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-electric-blue);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .resource-cta:hover {
+    color: var(--color-red);
+  }
+
+  @media (max-width: 900px) {
+    .resources-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .resources-section {
+      padding: var(--space-12) 0;
+    }
+
+    .resources-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -27,6 +27,7 @@ export interface NavItem {
 export interface MegaMenuColumn {
   title?: string;
   text?: string;
+  cta?: { label: string; href: string };
   items: NavItem[];
 }
 

@@ -1,0 +1,341 @@
+---
+import type { WhySabero as WhySaberoData } from '../../../data/careers/types';
+
+interface Props {
+  data: WhySaberoData;
+}
+
+const { data } = Astro.props;
+const tabs = data.tabs;
+---
+
+<section class="why-sabero" aria-label={data.title}>
+  <div class="container">
+    <div class="why-sabero-header">
+      <div class="why-sabero-led-wrap">
+        <div class="why-sabero-led-icons why-sabero-led-left">
+          <svg class="led-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/>
+          </svg>
+          <svg class="led-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+          <svg class="led-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+          </svg>
+        </div>
+        <h2 class="why-sabero-title">{data.title}</h2>
+        <div class="why-sabero-led-icons why-sabero-led-right">
+          <svg class="led-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+          <svg class="led-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/>
+          </svg>
+          <svg class="led-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          </svg>
+        </div>
+      </div>
+      <p class="why-sabero-subtitle">{data.subtitle}</p>
+    </div>
+
+    <div class="why-sabero-grid">
+      {tabs.map((tab, i) => (
+        <article class="why-card">
+          <div class="why-card-inner">
+            <div class="why-card-front">
+              <div class="why-card-image-wrap">
+                <img src={tab.image} alt={tab.title} loading="lazy" />
+              </div>
+              <h3 class="why-card-title">{tab.title}</h3>
+            </div>
+            <div class="why-card-back">
+              <p class="why-card-text">{tab.description}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-sabero {
+    padding: 80px 0 0;
+    background-color: #FFFFFF;
+  }
+
+  .why-sabero-header {
+    text-align: center;
+    margin-bottom: 72px;
+  }
+
+  .why-sabero-led-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    margin-bottom: 16px;
+  }
+
+  .why-sabero-led-icons {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .led-icon {
+    width: 48px;
+    height: 48px;
+    color: #0B2F7D;
+    filter: drop-shadow(0 0 6px rgba(11, 47, 125, 0.6)) drop-shadow(0 0 16px rgba(11, 47, 125, 0.3));
+    animation: ledPulse 4s ease-in-out infinite;
+  }
+
+  .why-sabero-led-icons .led-icon:nth-child(1) { animation-delay: 0s; }
+  .why-sabero-led-icons .led-icon:nth-child(2) { animation-delay: 0.15s; }
+  .why-sabero-led-icons .led-icon:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes ledPulse {
+    0%, 100% {
+      opacity: 0.4;
+      filter: drop-shadow(0 0 3px rgba(11, 47, 125, 0.3)) drop-shadow(0 0 8px rgba(11, 47, 125, 0.15));
+    }
+    10% {
+      opacity: 1;
+      filter: drop-shadow(0 0 8px rgba(11, 47, 125, 0.7)) drop-shadow(0 0 20px rgba(11, 47, 125, 0.4)) drop-shadow(0 0 32px rgba(11, 47, 125, 0.2));
+    }
+    20% {
+      opacity: 0.4;
+      filter: drop-shadow(0 0 3px rgba(11, 47, 125, 0.3)) drop-shadow(0 0 8px rgba(11, 47, 125, 0.15));
+    }
+    50% {
+      opacity: 0.4;
+      filter: drop-shadow(0 0 3px rgba(229, 57, 53, 0.3)) drop-shadow(0 0 8px rgba(229, 57, 53, 0.15));
+      color: #E53935;
+    }
+    60% {
+      opacity: 1;
+      filter: drop-shadow(0 0 8px rgba(229, 57, 53, 0.7)) drop-shadow(0 0 20px rgba(229, 57, 53, 0.4)) drop-shadow(0 0 32px rgba(229, 57, 53, 0.2));
+      color: #E53935;
+    }
+    70% {
+      opacity: 0.4;
+      filter: drop-shadow(0 0 3px rgba(229, 57, 53, 0.3)) drop-shadow(0 0 8px rgba(229, 57, 53, 0.15));
+      color: #E53935;
+    }
+    75% {
+      color: #0B2F7D;
+      filter: drop-shadow(0 0 3px rgba(11, 47, 125, 0.3)) drop-shadow(0 0 8px rgba(11, 47, 125, 0.15));
+    }
+  }
+
+  .why-sabero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    color: #0B2F7D;
+    animation: ledTextPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes ledTextPulse {
+    0%, 100% {
+      color: #0B2F7D;
+      text-shadow:
+        0 0 6px rgba(11, 47, 125, 0.3),
+        0 0 14px rgba(11, 47, 125, 0.15);
+    }
+    10% {
+      color: #0B2F7D;
+      text-shadow:
+        0 0 10px rgba(11, 47, 125, 0.7),
+        0 0 24px rgba(11, 47, 125, 0.4),
+        0 0 40px rgba(11, 47, 125, 0.2);
+    }
+    20% {
+      color: #0B2F7D;
+      text-shadow:
+        0 0 6px rgba(11, 47, 125, 0.3),
+        0 0 14px rgba(11, 47, 125, 0.15);
+    }
+    50% {
+      color: #E53935;
+      text-shadow:
+        0 0 6px rgba(229, 57, 53, 0.3),
+        0 0 14px rgba(229, 57, 53, 0.15);
+    }
+    60% {
+      color: #E53935;
+      text-shadow:
+        0 0 10px rgba(229, 57, 53, 0.7),
+        0 0 24px rgba(229, 57, 53, 0.4),
+        0 0 40px rgba(229, 57, 53, 0.2);
+    }
+    70% {
+      color: #E53935;
+      text-shadow:
+        0 0 6px rgba(229, 57, 53, 0.3),
+        0 0 14px rgba(229, 57, 53, 0.15);
+    }
+    75% {
+      color: #0B2F7D;
+      text-shadow:
+        0 0 6px rgba(11, 47, 125, 0.3),
+        0 0 14px rgba(11, 47, 125, 0.15);
+    }
+  }
+
+  .why-sabero-subtitle {
+    font-size: 1.1rem;
+    color: #5E6472;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .why-sabero-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    perspective: 1200px;
+  }
+
+  .why-card {
+    background: transparent;
+    border: none;
+    perspective: 1200px;
+    height: 380px;
+    cursor: pointer;
+  }
+
+  .why-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 600ms cubic-bezier(0.23, 1, 0.32, 1);
+    transform-style: preserve-3d;
+  }
+
+  .why-card:hover .why-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .why-card-front,
+  .why-card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .why-card-front {
+    background: #FFFFFF;
+    border: 1px solid #E8ECF2;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+    position: relative;
+    overflow: hidden;
+    gap: 20px;
+  }
+
+  .why-card-front::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0B2F7D 0%, #2F80FF 50%, #E53935 100%);
+    z-index: 1;
+  }
+
+  .why-card-back {
+    background: #FFFFFF;
+    border: 1px solid #E8ECF2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.03);
+    transform: rotateY(180deg);
+  }
+
+  .why-card-back::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0B2F7D 0%, #2F80FF 50%, #E53935 100%);
+    z-index: 1;
+  }
+
+  .why-card-image-wrap {
+    width: 100%;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .why-card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 400ms ease;
+  }
+
+  .why-card:hover .why-card-image-wrap img {
+    transform: scale(1.05);
+  }
+
+  .why-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #081C3A;
+    letter-spacing: -0.01em;
+  }
+
+  .why-card-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #5E6472;
+    margin: 0;
+    max-width: 280px;
+  }
+
+  @media (max-width: 1100px) {
+    .why-sabero-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .why-sabero {
+      padding: 80px 0;
+    }
+
+    .why-sabero-title {
+      font-size: 2rem;
+    }
+
+    .why-sabero-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .why-card {
+      height: 340px;
+    }
+
+    .why-card-image-wrap {
+      height: 180px;
+    }
+  }
+</style>

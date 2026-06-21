@@ -1,0 +1,33 @@
+---
+// Root careers route - serves Spanish version at /careers/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCareersData } from '../data/careers/index';
+import CareersHero from '../components/sections/careers/CareersHero.astro';
+import WhySabero from '../components/sections/careers/WhySabero.astro';
+import LifeAtSabero from '../components/sections/careers/LifeAtSabero.astro';
+import TeamsGrid from '../components/sections/careers/TeamsGrid.astro';
+import GrowthLearning from '../components/sections/careers/GrowthLearning.astro';
+import InclusionCulture from '../components/sections/careers/InclusionCulture.astro';
+import HiringProcess from '../components/sections/careers/HiringProcess.astro';
+import OpenPositions from '../components/sections/careers/OpenPositions.astro';
+import FutureTalent from '../components/sections/careers/FutureTalent.astro';
+
+const data = getCareersData('es');
+---
+
+<BaseLayout
+  title="Careers - SABERO Consulting"
+  description="Sumate a un equipo que construye productos digitales con foco en ingenieria, negocio y evolucion continua."
+  locale="es"
+  path="/careers"
+>
+  <CareersHero data={data.hero} locale="es" />
+  <WhySabero data={data.whySabero} />
+  <LifeAtSabero data={data.lifeAtSabero} />
+  <TeamsGrid data={data.teams} />
+  <GrowthLearning data={data.growth} />
+  <InclusionCulture data={data.inclusion} />
+  <HiringProcess data={data.process} />
+  <OpenPositions data={data.opportunities} locale="es" />
+  <FutureTalent data={data.futureTalent} locale="es" />
+</BaseLayout>

@@ -174,6 +174,7 @@ export const navEn: NavigationData = {
         {
           title: 'Careers',
           text: 'Join a team that builds digital products with a focus on engineering, business and continuous evolution.',
+          cta: { label: 'Explore careers', href: '/careers' },
           items: [],
         },
         {

@@ -1,0 +1,138 @@
+---
+import type { GrowthSection } from '../../../data/careers/types';
+
+interface Props {
+  data: GrowthSection;
+}
+
+const { data } = Astro.props;
+
+const images = [
+  '/images/careers/learning.jpg',
+  '/images/careers/challenges.jpg',
+  '/images/careers/impact.jpg',
+  '/images/careers/mentorship.jpg'
+];
+---
+
+<section class="growth-section section" aria-label={data.title}>
+  <div class="container">
+    <div class="growth-header">
+      <h2 class="section-title">{data.title}</h2>
+      <p class="section-subtitle">{data.subtitle}</p>
+    </div>
+
+    <div class="growth-grid">
+      {data.items.map((item, i) => (
+        <article class="growth-card">
+          <div class="growth-card-image">
+            <img
+              class="growth-img"
+              src={images[i]}
+              alt={item.title}
+              loading="lazy"
+              width="400"
+              height="300"
+            />
+          </div>
+          <div class="growth-card-body">
+            <h3 class="growth-card-title">{item.title}</h3>
+            <p class="growth-card-text">{item.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .growth-section {
+    background-color: var(--bg-primary);
+    padding: 80px 0 48px;
+  }
+
+  .growth-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .growth-header .section-subtitle {
+    margin: 0 auto;
+  }
+
+  .growth-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .growth-card {
+    background: #FFFFFF;
+    border: 1px solid #E8ECF2;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .growth-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .growth-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .growth-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .growth-card:hover .growth-img {
+    transform: scale(1.15);
+  }
+
+  .growth-card-body {
+    padding: 20px 20px 24px;
+  }
+
+  .growth-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #08152E;
+  }
+
+  .growth-card-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .growth-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .growth-section {
+      padding: 80px 0;
+    }
+
+    .growth-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .growth-card-image {
+      height: 180px;
+    }
+  }
+</style>

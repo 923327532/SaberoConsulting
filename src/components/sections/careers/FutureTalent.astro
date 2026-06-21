@@ -1,0 +1,141 @@
+---
+import type { FutureTalentSection } from '../../../data/careers/types';
+
+interface Props {
+  data: FutureTalentSection;
+  locale: string;
+}
+
+const { data, locale } = Astro.props;
+const contactHref = locale === 'es' ? '/contacto' : `/${locale}/contacto`;
+---
+
+<section class="future-section section" aria-label={data.title}>
+  <div class="container">
+    <div class="future-header">
+      <h2 class="future-title">
+        <span class="future-title-blue">{data.title.split(' ')[0]}</span>
+        <span class="future-title-red"> {data.title.slice(data.title.split(' ')[0].length)}</span>
+      </h2>
+      <p class="section-subtitle">{data.subtitle}</p>
+    </div>
+
+    <div class="future-grid">
+      {data.items.map((item) => (
+        <article class="future-card">
+          <div class="future-card-top"></div>
+          <h3 class="future-card-title">{item.title}</h3>
+          <p class="future-card-text">{item.description}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="future-cta">
+      <a href={contactHref} class="btn btn-primary btn-lg">{data.cta}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .future-section {
+    background-color: #F5F0EB;
+    padding: 80px 0;
+  }
+
+  .future-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .future-header .section-subtitle {
+    margin: 0 auto;
+  }
+
+  .future-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .future-title-blue {
+    color: #0B2F7D;
+  }
+
+  .future-title-red {
+    color: #E53935;
+  }
+
+  .future-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .future-card {
+    background: #FFFFFF;
+    border: 1px solid #E8ECF2;
+    border-radius: 14px;
+    padding: 36px 28px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .future-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0B2F7D 0%, #2F80FF 50%, #E53935 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .future-card:hover::before {
+    opacity: 1;
+  }
+
+  .future-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    border-color: #D0D8E4;
+  }
+
+  .future-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #08152E;
+  }
+
+  .future-card-text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #5E6472;
+    margin-bottom: 0;
+  }
+
+  .future-cta {
+    text-align: center;
+  }
+
+  .future-cta .btn-lg {
+    padding: 16px 36px;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .future-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .future-title {
+      font-size: 1.6rem;
+    }
+  }
+</style>

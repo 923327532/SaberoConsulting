@@ -1,0 +1,148 @@
+---
+import type { InsightsData } from '../../../data/insights/types';
+
+interface Props {
+  data: InsightsData['hero'];
+  locale: string;
+}
+
+const { data, locale } = Astro.props;
+---
+
+<section class="insights-hero section" aria-label="Insights hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-layout">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="text-white">Explora</span> <span class="text-red">ideas</span> <span class="text-blue">que</span> <span class="text-electric">te</span> <span class="text-white">ayuden</span> <span class="text-red">a</span> <span class="text-blue">tomar</span> <span class="text-electric">mejores</span> <span class="text-red">decisiones</span> <span class="text-white">de</span> <span class="text-blue">producto</span> <span class="text-electric">y</span> <span class="text-red">tecnologia</span>
+        </h1>
+        <p class="hero-subtitle">{data.subtitle}</p>
+        <div class="hero-actions">
+          <a href="#featured" class="btn btn-primary">{data.ctaPrimary}</a>
+          <a href="#featured" class="btn btn-outline hero-btn-outline">{data.ctaSecondary}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .insights-hero {
+    padding: 120px 0 100px;
+    position: relative;
+    overflow: hidden;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://blog.unegocios.uchile.cl/hubfs/Imported_Blog_Media/analitica.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 25, 47, 0.92) 0%,
+      rgba(10, 25, 47, 0.75) 50%,
+      rgba(10, 25, 47, 0.6) 100%
+    );
+    z-index: 1;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-layout {
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    flex: 1;
+    max-width: 680px;
+  }
+
+  .hero-title {
+    font-size: var(--text-5xl);
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+  }
+
+  .text-red {
+    color: var(--color-red);
+  }
+
+  .text-blue {
+    color: var(--color-deep-blue);
+  }
+
+  .text-electric {
+    color: var(--color-electric-blue);
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-lg);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .hero-btn-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-btn-outline:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-white);
+  }
+
+  @media (max-width: 768px) {
+    .insights-hero {
+      padding: 80px 0 60px;
+      min-height: auto;
+    }
+
+    .hero-title {
+      font-size: var(--text-3xl);
+    }
+
+    .hero-overlay {
+      background: linear-gradient(
+        135deg,
+        rgba(10, 25, 47, 0.95) 0%,
+        rgba(10, 25, 47, 0.85) 100%
+      );
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .hero-title {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>

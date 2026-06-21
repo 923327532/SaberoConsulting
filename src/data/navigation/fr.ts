@@ -174,6 +174,7 @@ export const navFr: NavigationData = {
         {
           title: 'Careers',
           text: 'Rejoignez une equipe qui construit des produits numeriques axes sur l\'ingenierie, le business et l\'evolution continue.',
+          cta: { label: 'Explorer careers', href: '/careers' },
           items: [],
         },
         {
