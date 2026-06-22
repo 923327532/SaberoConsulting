@@ -29,7 +29,7 @@ export const heroSlides: HeroSlidesData = {
       primaryCtaLabel: 'Conversemos',
       primaryCtaHref: '/contacto',
       secondaryCtaLabel: 'Nuestra oferta',
-      secondaryCtaHref: '/nuestra-oferta',
+      secondaryCtaHref: '/oferta',
     },
     {
       image: '/images/imagen1.png',
@@ -39,9 +39,9 @@ export const heroSlides: HeroSlidesData = {
       description:
         'Transformamos sistemas legacy en plataformas modernas, escalables y preparadas para el futuro digital.',
       primaryCtaLabel: 'Ver servicios',
-      primaryCtaHref: '/nuestra-oferta',
+      primaryCtaHref: '/oferta',
       secondaryCtaLabel: 'Casos de exito',
-      secondaryCtaHref: '/casos-e-impacto',
+      secondaryCtaHref: '/casos',
     },
     {
       image: '/images/imagen2.png',
@@ -89,7 +89,7 @@ export const heroSlides: HeroSlidesData = {
       primaryCtaLabel: "Let's talk",
       primaryCtaHref: '/contacto',
       secondaryCtaLabel: 'Our offer',
-      secondaryCtaHref: '/nuestra-oferta',
+      secondaryCtaHref: '/en/oferta',
     },
     {
       image: '/images/imagen1.png',
@@ -99,9 +99,9 @@ export const heroSlides: HeroSlidesData = {
       description:
         'We transform legacy systems into modern, scalable platforms ready for the digital future.',
       primaryCtaLabel: 'View services',
-      primaryCtaHref: '/nuestra-oferta',
+      primaryCtaHref: '/en/oferta',
       secondaryCtaLabel: 'Success stories',
-      secondaryCtaHref: '/casos-e-impacto',
+      secondaryCtaHref: '/en/casos',
     },
     {
       image: '/images/imagen2.png',
@@ -149,7 +149,7 @@ export const heroSlides: HeroSlidesData = {
       primaryCtaLabel: 'Vamos conversar',
       primaryCtaHref: '/contacto',
       secondaryCtaLabel: 'Nossa oferta',
-      secondaryCtaHref: '/nuestra-oferta',
+      secondaryCtaHref: '/pt/oferta',
     },
     {
       image: '/images/imagen1.png',
@@ -159,9 +159,9 @@ export const heroSlides: HeroSlidesData = {
       description:
         'Transformamos sistemas legados em plataformas modernas, escalaveis e prontas para o futuro digital.',
       primaryCtaLabel: 'Ver servicos',
-      primaryCtaHref: '/nuestra-oferta',
+      primaryCtaHref: '/pt/oferta',
       secondaryCtaLabel: 'Casos de sucesso',
-      secondaryCtaHref: '/casos-e-impacto',
+      secondaryCtaHref: '/pt/casos',
     },
     {
       image: '/images/imagen2.png',
@@ -209,7 +209,7 @@ export const heroSlides: HeroSlidesData = {
       primaryCtaLabel: 'Parlons-en',
       primaryCtaHref: '/contacto',
       secondaryCtaLabel: 'Notre offre',
-      secondaryCtaHref: '/nuestra-oferta',
+      secondaryCtaHref: '/fr/oferta',
     },
     {
       image: '/images/imagen1.png',
@@ -219,9 +219,9 @@ export const heroSlides: HeroSlidesData = {
       description:
         'Nous transformons les systemes heritage en plateformes modernes, evolutives et pretes pour l\'avenir numerique.',
       primaryCtaLabel: 'Voir nos services',
-      primaryCtaHref: '/nuestra-oferta',
+      primaryCtaHref: '/fr/oferta',
       secondaryCtaLabel: 'Cas clients',
-      secondaryCtaHref: '/casos-e-impacto',
+      secondaryCtaHref: '/fr/casos',
     },
     {
       image: '/images/imagen2.png',

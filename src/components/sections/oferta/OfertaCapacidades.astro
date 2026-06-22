@@ -4,21 +4,20 @@
 // Bloque 2: Capacidades estratégicas premium
 // Cada card: título, descripción, qué resuelve
 // ============================================
-import { ofertaContent } from '../../../data/home/oferta';
+import { getOfertaData } from '../../../data/oferta';
 
 interface Props {
   locale: string;
 }
 
 const { locale } = Astro.props;
-const content = ofertaContent[locale] || ofertaContent.es;
+const content = getOfertaData(locale as any);
 const { capacidades } = content;
 ---
 
 <section class="capacidades">
   <div class="container">
     <div class="capacidades-header">
-      <span class="capacidades-number">01</span>
       <h3 class="capacidades-title">{capacidades.title}</h3>
       <p class="capacidades-subtitle">{capacidades.subtitle}</p>
     </div>
@@ -26,9 +25,6 @@ const { capacidades } = content;
     <div class="capacidades-grid">
       {capacidades.items.map((item, i) => (
         <article class="cap-card" id={item.id}>
-          <div class="cap-card-num-wrap">
-            <span class="cap-card-num">0{i + 1}</span>
-          </div>
           <h4 class="cap-card-title">{item.title}</h4>
           <p class="cap-card-summary">{item.summary}</p>
           <div class="cap-card-resolves">
@@ -48,7 +44,7 @@ const { capacidades } = content;
 
 <style>
   .capacidades {
-    padding: 120px 0 140px;
+    padding: 60px 0 60px;
     background: #FFFFFF;
     position: relative;
   }
@@ -66,36 +62,24 @@ const { capacidades } = content;
   }
 
   .capacidades-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 56px;
+    text-align: center;
+    margin-bottom: 48px;
     padding-bottom: 24px;
     border-bottom: 1px solid #E8ECF2;
   }
 
-  .capacidades-number {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #2F80FF;
-    letter-spacing: 2px;
-    background: #F0F5FF;
-    padding: 4px 12px;
-    border-radius: 4px;
-  }
-
   .capacidades-title {
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 2.2rem;
+    font-weight: 800;
     color: #0A1628;
-    margin: 0;
-    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+    letter-spacing: -0.03em;
   }
 
   .capacidades-subtitle {
     font-size: 0.9rem;
     color: #5E6472;
-    margin: 0 0 0 auto;
+    margin: 0;
   }
 
   .capacidades-grid {
@@ -106,6 +90,8 @@ const { capacidades } = content;
 
   .cap-card {
     border: 1px solid #E8ECF2;
+    border-top: 4px solid #2F80FF;
+    border-bottom: 4px solid #E53935;
     border-radius: 16px;
     padding: 36px 32px;
     background: #FFFFFF;
@@ -115,23 +101,8 @@ const { capacidades } = content;
   }
 
   .cap-card:hover {
-    border-color: #C8D0DC;
     box-shadow: 0 8px 28px rgba(0,0,0,0.05);
     transform: translateY(-3px);
-  }
-
-  .cap-card-num-wrap {
-    margin-bottom: 20px;
-  }
-
-  .cap-card-num {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #2F80FF;
-    background: #F0F5FF;
-    padding: 3px 10px;
-    border-radius: 4px;
-    letter-spacing: 1px;
   }
 
   .cap-card-title {

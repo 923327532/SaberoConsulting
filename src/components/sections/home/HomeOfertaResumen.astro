@@ -3,14 +3,14 @@
 // SABERO Consulting - Home: Oferta Resumen
 // Fondo crema + texto bold centrado + 3 cards
 // ============================================
-import { ofertaContent } from '../../../data/home/oferta';
+import { getOfertaData } from '../../../data/oferta';
 
 interface Props {
   locale: string;
 }
 
 const { locale } = Astro.props;
-const content = ofertaContent[locale] || ofertaContent.es;
+const content = getOfertaData(locale as any);
 const { intro, capacidades } = content;
 ---
 

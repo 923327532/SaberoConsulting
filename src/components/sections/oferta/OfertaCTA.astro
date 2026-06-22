@@ -3,14 +3,14 @@
 // SABERO Consulting - Oferta CTA
 // Bloque 4: Cierre premium con gradiente
 // ============================================
-import { ofertaContent } from '../../../data/home/oferta';
+import { getOfertaData } from '../../../data/oferta';
 
 interface Props {
   locale: string;
 }
 
 const { locale } = Astro.props;
-const content = ofertaContent[locale] || ofertaContent.es;
+const content = getOfertaData(locale as any);
 const { cta } = content;
 ---
 
@@ -41,7 +41,7 @@ const { cta } = content;
 
 <style>
   .oferta-cta {
-    padding: 120px 0 140px;
+    padding: 60px 0 60px;
     background: #F8F9FB;
   }
 

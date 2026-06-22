@@ -1,61 +1,101 @@
----
+ ---
 // ============================================
 // SABERO Consulting - Servicios y Soluciones
-// Bloque 2: Servicios + Soluciones (2 cards)
+// Bloque 2: Servicios + Soluciones con imágenes
+// Servicios: imagen derecha, texto izquierda
+// Soluciones: imagen izquierda, texto derecha
 // ============================================
-import { ofertaContent } from '../../../data/home/oferta';
+import { getOfertaData } from '../../../data/oferta';
 
 interface Props {
   locale: string;
 }
 
 const { locale } = Astro.props;
-const content = ofertaContent[locale] || ofertaContent.es;
+const content = getOfertaData(locale as any);
 const { capacidades } = content;
 
 // Only first 2 items: Servicios, Soluciones
 const items = capacidades.items.slice(0, 2);
+
+const images = [
+  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80',
+  'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80',
+];
 ---
 
-<section class="oferta-servicios">
+<section class="servicios-section" id="servicios">
   <div class="container">
     <div class="servicios-header">
-      <span class="servicios-number">01</span>
-      <h3 class="servicios-title">Servicios y soluciones</h3>
-      <p class="servicios-subtitle">Qué hacemos</p>
+      <h3 class="servicios-title">
+        <span class="title-blue">Servicios</span>
+        <span class="title-sep">y</span>
+        <span class="title-red">soluciones</span>
+      </h3>
     </div>
 
-    <div class="servicios-grid">
-      {items.map((item, i) => (
-        <article class="serv-card" id={item.id}>
-          <div class="serv-card-num-wrap">
-            <span class="serv-card-num">0{i + 1}</span>
-          </div>
-          <h4 class="serv-card-title">{item.title}</h4>
-          <p class="serv-card-summary">{item.summary}</p>
-          <div class="serv-card-resolves">
-            <span class="serv-card-resolves-label">Qué resuelve</span>
-            <p class="serv-card-resolves-text">{item.resolves}</p>
-          </div>
-          <ul class="serv-card-list">
-            {item.items.map((sub) => (
-              <li class="serv-card-item">{sub}</li>
-            ))}
-          </ul>
-        </article>
-      ))}
+    <div class="servicios-list">
+      {items.map((item, i) => {
+        const isReversed = i === 1; // Soluciones: image left, text right
+        return (
+          <article class={`serv-block ${isReversed ? 'serv-block--reversed' : ''}`} id={item.id}>
+            {isReversed ? (
+              <>
+                <div class="serv-block-image-wrap">
+                  <img class="serv-block-image" src={images[i]} alt={item.title} loading="lazy" />
+                </div>
+                <div class="serv-block-text">
+                  <h4 class="serv-block-title">{item.title}</h4>
+                  <p class="serv-block-summary">{item.summary}</p>
+                  <div class="serv-block-resolves">
+                    <span class="serv-block-resolves-label">Qué resuelve</span>
+                    <p class="serv-block-resolves-text">{item.resolves}</p>
+                  </div>
+                  <ul class="serv-block-list">
+                    {item.items.map((sub) => (
+                      <li class="serv-block-item">{sub}</li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            ) : (
+              <>
+                <div class="serv-block-text">
+                  <h4 class="serv-block-title">{item.title}</h4>
+                  <p class="serv-block-summary">{item.summary}</p>
+                  <div class="serv-block-resolves">
+                    <span class="serv-block-resolves-label">Qué resuelve</span>
+                    <p class="serv-block-resolves-text">{item.resolves}</p>
+                  </div>
+                  <ul class="serv-block-list">
+                    {item.items.map((sub) => (
+                      <li class="serv-block-item">{sub}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="serv-block-image-wrap">
+                  <img class="serv-block-image" src={images[i]} alt={item.title} loading="lazy" />
+                </div>
+              </>
+            )}
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>
 
 <style>
-  .oferta-servicios {
-    padding: 120px 0 140px;
+  /* ============================================
+     Section
+     ============================================ */
+  .servicios-section {
+    padding: 60px 0 60px;
     background: #FFFFFF;
     position: relative;
   }
 
-  .oferta-servicios::after {
+  .servicios-section::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -67,147 +107,214 @@ const items = capacidades.items.slice(0, 2);
     background: linear-gradient(90deg, transparent, #D0D8E4, transparent);
   }
 
+  /* ============================================
+     Header with mixed colors
+     ============================================ */
   .servicios-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+    text-align: center;
     margin-bottom: 56px;
     padding-bottom: 24px;
     border-bottom: 1px solid #E8ECF2;
   }
 
-  .servicios-number {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #2F80FF;
-    letter-spacing: 2px;
-    background: #F0F5FF;
-    padding: 4px 12px;
-    border-radius: 4px;
-  }
-
   .servicios-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #0A1628;
+    font-size: 2.2rem;
+    font-weight: 800;
     margin: 0;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
-  .servicios-subtitle {
-    font-size: 0.9rem;
+  .title-blue {
+    color: #2F80FF;
+  }
+
+  .title-sep {
     color: #5E6472;
-    margin: 0 0 0 auto;
+    font-weight: 400;
+    font-size: 1.4rem;
   }
 
-  .servicios-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  .title-red {
+    color: #E53935;
+  }
+
+  /* ============================================
+     Service blocks
+     ============================================ */
+  .servicios-list {
+    display: flex;
+    flex-direction: column;
     gap: 32px;
   }
 
-  .serv-card {
+  .serv-block {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 32px;
+    align-items: center;
     border: 1px solid #E8ECF2;
     border-radius: 16px;
-    padding: 40px 36px;
+    padding: 28px;
     background: #FFFFFF;
     transition: all 350ms ease;
-    display: flex;
-    flex-direction: column;
   }
 
-  .serv-card:hover {
+  .serv-block:hover {
     border-color: #C8D0DC;
     box-shadow: 0 8px 28px rgba(0,0,0,0.05);
-    transform: translateY(-3px);
   }
 
-  .serv-card-num-wrap { margin-bottom: 20px; }
-
-  .serv-card-num {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #2F80FF;
-    background: #F0F5FF;
-    padding: 3px 10px;
-    border-radius: 4px;
-    letter-spacing: 1px;
+  /* Reversed: image left, text right */
+  .serv-block--reversed {
+    grid-template-columns: 0.8fr 1.2fr;
   }
 
-  .serv-card-title {
-    font-size: 1.3rem;
+  .serv-block--reversed .serv-block-text {
+    padding-left: 8px;
+  }
+
+  .serv-block--reversed .serv-block-image-wrap {
+    justify-self: start;
+  }
+
+  /* ============================================
+     Text side
+     ============================================ */
+  .serv-block-text {
+    display: flex;
+    flex-direction: column;
+    padding-right: 8px;
+  }
+
+  .serv-block-title {
+    font-size: 1.2rem;
     font-weight: 700;
     color: #0A1628;
-    margin: 0 0 14px;
+    margin: 0 0 10px;
     line-height: 1.3;
   }
 
-  .serv-card-summary {
-    font-size: 0.92rem;
-    line-height: 1.7;
+  .serv-block-summary {
+    font-size: 0.85rem;
+    line-height: 1.6;
     color: #5E6472;
-    margin: 0 0 20px;
-    flex: 1;
+    margin: 0 0 16px;
   }
 
-  .serv-card-resolves {
+  .serv-block-resolves {
     background: #F8F9FB;
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 20px;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
     border-left: 3px solid #2F80FF;
   }
 
-  .serv-card-resolves-label {
+  .serv-block-resolves-label {
     display: block;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: #2F80FF;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
-  .serv-card-resolves-text {
-    font-size: 0.82rem;
-    line-height: 1.6;
+  .serv-block-resolves-text {
+    font-size: 0.78rem;
+    line-height: 1.5;
     color: #3A4050;
     margin: 0;
   }
 
-  .serv-card-list {
+  .serv-block-list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
   }
 
-  .serv-card-item {
-    font-size: 0.85rem;
+  .serv-block-item {
+    font-size: 0.78rem;
     color: #3A4050;
-    padding-left: 16px;
+    padding-left: 14px;
     position: relative;
     line-height: 1.5;
   }
 
-  .serv-card-item::before {
+  .serv-block-item::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 8px;
-    width: 5px;
-    height: 5px;
+    top: 7px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
     background: #2F80FF;
     opacity: 0.4;
   }
 
+  /* ============================================
+     Image side
+     ============================================ */
+  .serv-block-image-wrap {
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    max-height: 220px;
+    background: #F0F5FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: end;
+    width: 100%;
+  }
+
+  .serv-block-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 500ms ease;
+  }
+
+  .serv-block:hover .serv-block-image {
+    transform: scale(1.05);
+  }
+
+  /* ============================================
+     Responsive
+     ============================================ */
+  @media (max-width: 768px) {
+    .serv-block {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .serv-block-image-wrap {
+      order: -1;
+      aspect-ratio: 16 / 9;
+    }
+
+    .servicios-title {
+      font-size: 1.4rem;
+    }
+
+    .serv-block-title {
+      font-size: 1.1rem;
+    }
+  }
+
   @media (max-width: 640px) {
-    .servicios-grid { grid-template-columns: 1fr; }
-    .servicios-title { font-size: 1.4rem; }
-    .servicios-subtitle { display: none; }
-    .serv-card { padding: 28px 24px; }
+    .servicios-section {
+      padding: 40px 0 40px;
+    }
   }
 </style>

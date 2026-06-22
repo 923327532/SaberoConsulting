@@ -1,7 +1,7 @@
 ---
 // ============================================
 // SABERO Consulting - Nuestra Oferta (Sección completa)
-// 6 bloques: Intro → Servicios → CapacidadesTec → Especialidades → CTA
+// 6 bloques: Intro → Especialidades → Servicios → CapacidadesTec → CTA
 // ============================================
 interface Props {
   locale: string;
@@ -10,14 +10,14 @@ interface Props {
 const { locale } = Astro.props;
 
 import OfertaIntro from './OfertaIntro.astro';
-import OfertaServicios from './OfertaServicios.astro';
-import OfertaCapacidadesTec from './OfertaCapacidadesTec.astro';
 import OfertaEspecialidades from './OfertaEspecialidades.astro';
+import OfertaServicios from './OfertaServicios.astro';
+import OfertaTechStack from './OfertaTechStack.astro';
 import OfertaCTA from './OfertaCTA.astro';
 ---
 
 <OfertaIntro locale={locale} />
-<OfertaServicios locale={locale} />
-<OfertaCapacidadesTec locale={locale} />
+<OfertaTechStack locale={locale} />
 <OfertaEspecialidades locale={locale} />
+<OfertaServicios locale={locale} />
 <OfertaCTA locale={locale} />

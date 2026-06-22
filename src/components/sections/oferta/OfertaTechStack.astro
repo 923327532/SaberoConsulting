@@ -1,0 +1,402 @@
+---
+// ============================================
+// SABERO Consulting - Tech Stack
+// Accordion grid premium con 12 categorías
+// Cada item con su logo real vía CDN
+// ============================================
+
+interface TechItem {
+  title: string;
+  icon: string;
+  description: string;
+  items: { name: string; logoUrl: string }[];
+}
+
+const si = (slug: string) =>
+  `https://cdn.jsdelivr.net/npm/simple-icons@13.20.0/icons/${slug}.svg`;
+
+const techCategories: TechItem[] = [
+  {
+    title: 'Lenguajes',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    description: 'Base técnica con la que construimos lógica, flujos y productos digitales.',
+    items: [
+      { name: 'Java', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+      { name: 'TypeScript', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+      { name: 'JavaScript', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+      { name: 'Dart', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg' },
+      { name: 'Python', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+      { name: 'SQL', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+    ],
+  },
+  {
+    title: 'Frontend',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`,
+    description: 'Tecnologías para experiencias web modernas, rápidas y responsivas.',
+    items: [
+      { name: 'React', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+      { name: 'Next.js', logoUrl: si('nextdotjs') },
+      { name: 'Astro', logoUrl: si('astro') },
+      { name: 'Tailwind CSS', logoUrl: si('tailwindcss') },
+      { name: 'HTML5', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+      { name: 'CSS3', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+    ],
+  },
+  {
+    title: 'Backend',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`,
+    description: 'Capacidades para servicios, APIs y lógica de negocio robusta.',
+    items: [
+      { name: 'Spring Boot', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
+      { name: 'Node.js', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+      { name: 'Express', logoUrl: si('express') },
+      { name: 'NestJS', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg' },
+      { name: 'REST APIs', logoUrl: si('openapiinitiative') },
+      { name: 'JWT', logoUrl: si('jsonwebtokens') },
+    ],
+  },
+  {
+    title: 'Mobile',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+    description: 'Desarrollo de experiencias móviles conectadas a plataformas y servicios.',
+    items: [
+      { name: 'Flutter', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
+      { name: 'Dart', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg' },
+      { name: 'UI responsive', logoUrl: si('flutter') },
+      { name: 'Consumo de APIs', logoUrl: si('openapiinitiative') },
+      { name: 'Publicación', logoUrl: si('googleplay') },
+      { name: 'Mantenimiento', logoUrl: si('sentry') },
+    ],
+  },
+  {
+    title: 'Bases de datos',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+    description: 'Tecnologías para persistencia, consulta y optimización de información.',
+    items: [
+      { name: 'PostgreSQL', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+      { name: 'MySQL', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+      { name: 'Firebase', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
+      { name: 'Supabase', logoUrl: si('supabase') },
+      { name: 'Redis', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
+      { name: 'Optimización', logoUrl: si('postgresql') },
+    ],
+  },
+  {
+    title: 'Cloud',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>`,
+    description: 'Infraestructura para desplegar y operar soluciones con estabilidad.',
+    items: [
+      { name: 'AWS', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg' },
+      { name: 'Microsoft Azure', logoUrl: si('microsoftazure') },
+      { name: 'Oracle Cloud', logoUrl: si('oracle') },
+      { name: 'Vercel', logoUrl: si('vercel') },
+      { name: 'Cloudflare', logoUrl: si('cloudflare') },
+      { name: 'Hosting architecture', logoUrl: si('googlecloud') },
+    ],
+  },
+  {
+    title: 'DevOps',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`,
+    description: 'Automatización de ambientes, despliegues y operación continua.',
+    items: [
+      { name: 'Docker', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+      { name: 'CI/CD', logoUrl: si('githubactions') },
+      { name: 'GitHub Actions', logoUrl: si('githubactions') },
+      { name: 'Pipelines', logoUrl: si('gitlab') },
+      { name: 'Containerización', logoUrl: si('docker') },
+      { name: 'Monitoreo', logoUrl: si('grafana') },
+    ],
+  },
+  {
+    title: 'Integraciones',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+    description: 'Conexión con servicios externos y plataformas del negocio.',
+    items: [
+      { name: 'Payment gateways', logoUrl: si('stripe') },
+      { name: 'APIs de terceros', logoUrl: si('postman') },
+      { name: 'WhatsApp integrations', logoUrl: si('whatsapp') },
+      { name: 'Maps APIs', logoUrl: si('googlemaps') },
+      { name: 'Webhooks', logoUrl: si('ngrok') },
+      { name: 'Email services', logoUrl: si('mailgun') },
+    ],
+  },
+  {
+    title: 'Autenticación y seguridad',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    description: 'Mecanismos para proteger accesos, sesiones y permisos.',
+    items: [
+      { name: 'JWT', logoUrl: si('jsonwebtokens') },
+      { name: 'OAuth', logoUrl: si('auth0') },
+      { name: 'Firebase Auth', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
+      { name: 'Roles y permisos', logoUrl: si('keycloak') },
+      { name: 'Session handling', logoUrl: si('openid') },
+      { name: 'Hardening básico', logoUrl: si('letsencrypt') },
+    ],
+  },
+  {
+    title: 'Pagos',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`,
+    description: 'Flujos orientados a cobros y transacciones digitales.',
+    items: [
+      { name: 'Checkout flows', logoUrl: si('stripe') },
+      { name: 'Payment integrations', logoUrl: si('paypal') },
+      { name: 'Estados de transacción', logoUrl: si('visa') },
+      { name: 'Suscripciones', logoUrl: si('stripe') },
+      { name: 'Facturación', logoUrl: si('quickbooks') },
+      { name: 'Notificaciones', logoUrl: si('twilio') },
+    ],
+  },
+  {
+    title: 'Analítica y reporting',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+    description: 'Capacidades para medir operación, producto y negocio.',
+    items: [
+      { name: 'Dashboards', logoUrl: si('grafana') },
+      { name: 'Reportes', logoUrl: si('powerbi') },
+      { name: 'KPIs', logoUrl: si('googleanalytics') },
+      { name: 'Visualización de datos', logoUrl: si('chartdotjs') },
+      { name: 'Métricas operativas', logoUrl: si('datadog') },
+      { name: 'Seguimiento de negocio', logoUrl: si('looker') },
+    ],
+  },
+  {
+    title: 'Arquitectura y escalabilidad',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
+    description: 'Criterios técnicos para crecer con rendimiento y mantenibilidad.',
+    items: [
+      { name: 'Arquitectura modular', logoUrl: si('hexlet') },
+      { name: 'APIs escalables', logoUrl: si('openapiinitiative') },
+      { name: 'Caching', logoUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg' },
+      { name: 'Pensamiento microservicios', logoUrl: si('kubernetes') },
+      { name: 'Performance optimization', logoUrl: si('lighthouse') },
+      { name: 'Evolución de plataforma', logoUrl: si('git') },
+    ],
+  },
+];
+---
+
+<section class="tech-stack-section" id="tech-stack">
+  <div class="tech-stack-container">
+    <h2 class="tech-stack-title">Tech stack</h2>
+    <div class="tech-stack-divider"></div>
+    <div class="tech-stack-grid">
+      {techCategories.map((cat) => (
+        <details class="tech-stack-block" name="tech-accordion">
+          <summary class="tech-stack-summary">
+            <span class="tech-stack-summary-inner">
+              <span class="tech-stack-icon" set:html={cat.icon}></span>
+              <span class="tech-stack-label">{cat.title}</span>
+            </span>
+            <span class="tech-stack-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </span>
+          </summary>
+          <div class="tech-stack-content">
+            <p class="tech-stack-desc">{cat.description}</p>
+            <ul class="tech-stack-list">
+              {cat.items.map((item) => (
+                <li class="tech-stack-item">
+                  {item.logoUrl && !item.logoUrl.startsWith('data:') ? (
+                    <img class="tech-stack-logo" src={item.logoUrl} alt={item.name} width="20" height="20" loading="lazy" onerror="this.style.display='none'" />
+                  ) : (
+                    <span class="tech-stack-logo-fallback">{item.name.charAt(0)}</span>
+                  )}
+                  <span>{item.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Accordion: solo un bloque abierto a la vez
+  document.addEventListener('click', (e) => {
+    if (!(e.target instanceof HTMLElement)) return;
+    const summary = e.target.closest('.tech-stack-summary');
+    if (!summary) return;
+
+    const details = /** @type {HTMLDetailsElement} */ (summary.closest('details'));
+    if (!details) return;
+
+    // Cerrar todos los demás
+    document.querySelectorAll('.tech-stack-block[open]').forEach((el) => {
+      if (el !== details) {
+        el.removeAttribute('open');
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .tech-stack-section {
+    padding: 5rem 0;
+    background: #ffffff;
+  }
+  .tech-stack-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .tech-stack-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 0.75rem;
+    color: #111827;
+    letter-spacing: -0.02em;
+  }
+  .tech-stack-divider {
+    width: 80px;
+    height: 4px;
+    margin: 0 auto 3rem;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #2F80FF, #0B2F7D, #E53935);
+  }
+  .tech-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .tech-stack-block {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fafafa;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHCWVGfsbCcenQoMbXtOgOcL6F5AFA46KiBA&s');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .tech-stack-block:hover {
+    border-color: #2F80FF;
+    box-shadow: 0 2px 12px rgba(47, 128, 255, 0.08);
+  }
+  .tech-stack-block[open] {
+    border-color: #2F80FF;
+    box-shadow: 0 4px 20px rgba(47, 128, 255, 0.12);
+    background: #ffffff;
+  }
+  .tech-stack-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    gap: 0.75rem;
+  }
+  .tech-stack-summary::-webkit-details-marker {
+    display: none;
+  }
+  .tech-stack-summary-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+  .tech-stack-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(47, 128, 255, 0.08);
+  }
+  .tech-stack-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tech-stack-arrow {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: #9ca3af;
+    transition: transform 0.3s ease;
+  }
+  .tech-stack-block[open] .tech-stack-arrow {
+    transform: rotate(180deg);
+    color: #2F80FF;
+  }
+  .tech-stack-content {
+    padding: 0 1.25rem 1.25rem;
+    animation: techFadeIn 0.25s ease;
+  }
+  @keyframes techFadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .tech-stack-desc {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin: 0 0 1rem;
+    line-height: 1.5;
+  }
+  .tech-stack-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .tech-stack-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #374151;
+    background: #f3f4f6;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .tech-stack-item:hover {
+    background: #e5e7eb;
+  }
+  .tech-stack-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .tech-stack-logo-fallback {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #2F80FF;
+    background: rgba(47, 128, 255, 0.1);
+    border-radius: 4px;
+  }
+  @media (max-width: 1024px) {
+    .tech-stack-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .tech-stack-section { padding: 3rem 0; }
+    .tech-stack-title { font-size: 1.75rem; }
+    .tech-stack-grid { grid-template-columns: 1fr; }
+    .tech-stack-list { grid-template-columns: 1fr; }
+  }
+</style>
