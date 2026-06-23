@@ -3,8 +3,8 @@ import type { ContactData } from '../../i18n/utils/types';
 export const contactPt: ContactData = {
   title: 'Vamos conversar sobre seu proximo projeto',
   subtitle: 'Conte-nos sobre sua iniciativa e responderemos em menos de 24 horas. Sem compromisso, sem spam.',
-  email: 'saberoconsulting@gmail.com',
-  whatsapp: '+51 925 988 211',
+  email: import.meta.env?.PUBLIC_CONTACT_EMAIL || 'saberoconsulting@gmail.com',
+  whatsapp: import.meta.env?.PUBLIC_WHATSAPP ? `+${import.meta.env.PUBLIC_WHATSAPP}` : '+51925988211',
   responseTime: 'Resposta em ate 24h',
   categoriesTitle: 'Sobre o que gostaria de conversar?',
   categories: [

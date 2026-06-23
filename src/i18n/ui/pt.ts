@@ -4,7 +4,7 @@ export const uiPt = {
   'header.search': 'Buscar',
   'footer.brand.description': 'Fabrica de software que projeta, desenvolve e evolui plataformas digitais para empresas com visao de crescimento na America e Europa.',
   'footer.contact.title': 'Contato',
-  'footer.contact.email': 'saberoconsulting@gmail.com',
+  'footer.contact.email': import.meta.env?.PUBLIC_CONTACT_EMAIL || 'saberoconsulting@gmail.com',
   'footer.contact.location': 'Lima, Peru',
   'footer.contact.whatsapp': 'WhatsApp',
   'footer.contact.form': 'Formulario de contato',

@@ -16,6 +16,16 @@ interface Props {
 const { locale } = Astro.props;
 const content = getIndustriesData(locale);
 const { sectors } = content;
+
+const isEs = locale === 'es';
+
+const ui: Record<string, { ctaTitle: string; ctaText: string; ctaPrimary: string; ctaSecondary: string }> = {
+  es: { ctaTitle: 'Construyamos algo grande juntos', ctaText: 'Conversa con nuestro equipo y descubre cómo podemos impulsar tu próximo proyecto.', ctaPrimary: 'Conversemos', ctaSecondary: 'Ver capacidades' },
+  en: { ctaTitle: "Let's build something great together", ctaText: 'Talk to our team and discover how we can power your next project.', ctaPrimary: "Let's talk", ctaSecondary: 'View capabilities' },
+  pt: { ctaTitle: 'Vamos construir algo grande juntos', ctaText: 'Converse com nossa equipe e descubra como podemos impulsionar seu próximo projeto.', ctaPrimary: 'Vamos conversar', ctaSecondary: 'Ver capacidades' },
+  fr: { ctaTitle: 'Construisons quelque chose de grand ensemble', ctaText: 'Parlez à notre équipe et découvrez comment nous pouvons propulser votre prochain projet.', ctaPrimary: 'Parlons-en', ctaSecondary: 'Voir nos capacités' },
+};
+const labels = ui[locale as string] || ui.es;
 ---
 
 <section class="industries-section" aria-label={content.title}>
@@ -24,85 +34,26 @@ const { sectors } = content;
   <PropTech sector={sectors[0]} index={0} isLast={false} />
 
   <!-- ============================================
-       Soluciones por industria - Cards en fila
+       Soluciones por industria - Carrusel automático
        ============================================ -->
   <section class="solutions-cards-section" id="soluciones-industria">
     <div class="container">
-      <div class="solutions-cards-row">
-        <!-- Plataformas inmobiliarias -->
-        <article class="solution-card" id="inmobiliarias">
-          <div class="solution-card-accent"></div>
-          <div class="solution-card-body">
-            <span class="solution-card-number">01</span>
-            <h3 class="solution-card-title">Plataformas inmobiliarias</h3>
-            <p class="solution-card-text">
-              Desarrollamos plataformas que conectan propiedades, compradores, vendedores y operaciones en una experiencia fluida. Desde portales de búsqueda hasta sistemas de gestión de activos, la tecnología es el nuevo pilar del negocio inmobiliario.
-            </p>
-            <a href={sectors[0] ? `#${sectors[0].id}` : '#proptech'} class="solution-card-link">
-              Ver detalle del sector &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Procesamiento de pagos -->
-        <article class="solution-card" id="pagos">
-          <div class="solution-card-accent"></div>
-          <div class="solution-card-body">
-            <span class="solution-card-number">02</span>
-            <h3 class="solution-card-title">Procesamiento de pagos</h3>
-            <p class="solution-card-text">
-              Procesamos pagos, gestionamos wallets, integramos pasarelas y mantenemos la confianza del usuario con soluciones seguras, trazables y escalables para el ecosistema financiero digital.
-            </p>
-            <a href={sectors[1] ? `#${sectors[1].id}` : '#fintech'} class="solution-card-link">
-              Ver detalle del sector &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Portales B2B y B2C -->
-        <article class="solution-card" id="portales">
-          <div class="solution-card-accent"></div>
-          <div class="solution-card-body">
-            <span class="solution-card-number">03</span>
-            <h3 class="solution-card-title">Portales B2B y B2C</h3>
-            <p class="solution-card-text">
-              Creamos portales multiusuario que conectan oferta, demanda y operación en un solo ecosistema digital. Orquestamos roles, transacciones y experiencia de usuario a escala.
-            </p>
-            <a href={sectors[2] ? `#${sectors[2].id}` : '#marketplaces'} class="solution-card-link">
-              Ver detalle del sector &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Gestión operativa y dashboards -->
-        <article class="solution-card" id="gestion">
-          <div class="solution-card-accent"></div>
-          <div class="solution-card-body">
-            <span class="solution-card-number">04</span>
-            <h3 class="solution-card-title">Gestión operativa y dashboards</h3>
-            <p class="solution-card-text">
-              Implementamos sistemas de gestión operativa con dashboards de control en tiempo real, automatización de procesos y visibilidad total de métricas y resultados.
-            </p>
-            <a href={sectors[4] ? `#${sectors[4].id}` : '#logistica'} class="solution-card-link">
-              Ver detalle del sector &rarr;
-            </a>
-          </div>
-        </article>
-
-        <!-- Automatización de procesos -->
-        <article class="solution-card" id="automatizacion">
-          <div class="solution-card-accent"></div>
-          <div class="solution-card-body">
-            <span class="solution-card-number">05</span>
-            <h3 class="solution-card-title">Automatización de procesos</h3>
-            <p class="solution-card-text">
-              Automatizamos procesos repetitivos y flujos de trabajo internos para eliminar silos de información, reducir costos operativos y escalar operaciones sin fricción.
-            </p>
-            <a href={sectors[5] ? `#${sectors[5].id}` : '#internas'} class="solution-card-link">
-              Ver detalle del sector &rarr;
-            </a>
-          </div>
-        </article>
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="industries-carousel-track">
+          {sectors.slice(1).map((sector, i) => (
+            <article class="solution-card" id={sector.id}>
+              <div class="solution-card-accent"></div>
+              <div class="solution-card-body">
+                <span class="solution-card-number">{String(i + 2).padStart(2, '0')}</span>
+                <h3 class="solution-card-title">{sector.title}</h3>
+                <p class="solution-card-text">{sector.context}</p>
+                <a href={`#${sector.id}`} class="solution-card-link">
+                  {locale === 'es' ? 'Ver detalle del sector' : locale === 'en' ? 'View sector details' : locale === 'pt' ? 'Ver detalhes do setor' : 'Voir les détails du secteur'} &rarr;
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -114,21 +65,101 @@ const { sectors } = content;
        ============================================ -->
   <section class="industries-cta-final">
     <div class="industries-cta-final-bg">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9l4RyZEgtZ6elPe8CzAFFDTlmEpCBN7fU9a0Q0oob1A&s=10" alt="" class="industries-cta-final-img" loading="lazy" />
+      <img src="/images/industries-cta-bg.jpg" alt="" class="industries-cta-final-img" loading="lazy" />
     </div>
     <div class="industries-cta-final-overlay"></div>
     <div class="container">
       <div class="industries-cta-final-content">
-        <h2 class="industries-cta-final-title">Construyamos algo grande juntos</h2>
-        <p class="industries-cta-final-text">Conversa con nuestro equipo y descubre cómo podemos impulsar tu próximo proyecto.</p>
+        <h2 class="industries-cta-final-title">{labels.ctaTitle}</h2>
+        <p class="industries-cta-final-text">{labels.ctaText}</p>
         <div class="industries-cta-final-buttons">
-          <a href="/contacto/" class="industries-cta-final-btn industries-cta-final-btn-primary">Conversemos</a>
-          <a href="/contacto/" class="industries-cta-final-btn industries-cta-final-btn-secondary">Ver capacidades</a>
+          <a href={isEs ? '/contacto' : `/${locale}/contacto`} class="industries-cta-final-btn industries-cta-final-btn-primary">{labels.ctaPrimary}</a>
+          <a href={isEs ? '/#oferta' : `/${locale}/#oferta`} class="industries-cta-final-btn industries-cta-final-btn-secondary">{labels.ctaSecondary}</a>
         </div>
       </div>
     </div>
   </section>
 </section>
+
+<script>
+  (function() {
+    const track = document.getElementById('industries-carousel-track');
+    if (!track) return;
+
+    const cards = track.querySelectorAll('.solution-card');
+    const totalCards = cards.length;
+    if (totalCards === 0) return;
+
+    let currentIndex = 0;
+    let cardsPerView = getCardsPerView();
+    let autoScrollInterval;
+
+    function getCardsPerView() {
+      const w = window.innerWidth;
+      if (w >= 1200) return 5;
+      if (w >= 768) return 3;
+      if (w >= 480) return 2;
+      return 1;
+    }
+
+    function getMaxIndex() {
+      return Math.max(0, totalCards - cardsPerView);
+    }
+
+    function update() {
+      const cardWidth = cards[0].offsetWidth + 16;
+      const maxIndex = getMaxIndex();
+      if (currentIndex > maxIndex) currentIndex = maxIndex;
+      track.style.transform = 'translateX(-' + (currentIndex * cardWidth) + 'px)';
+    }
+
+    function next() {
+      const maxIndex = getMaxIndex();
+      currentIndex = (currentIndex >= maxIndex) ? 0 : currentIndex + 1;
+      update();
+    }
+
+    function startAutoScroll() {
+      stopAutoScroll();
+      autoScrollInterval = setInterval(next, 4000);
+    }
+
+    function stopAutoScroll() {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+      }
+    }
+
+    function onResize() {
+      const newCardsPerView = getCardsPerView();
+      if (newCardsPerView !== cardsPerView) {
+        cardsPerView = newCardsPerView;
+        if (currentIndex > getMaxIndex()) currentIndex = 0;
+        update();
+      } else {
+        update();
+      }
+    }
+
+    // Pause on hover/touch
+    track.addEventListener('mouseenter', stopAutoScroll);
+    track.addEventListener('mouseleave', startAutoScroll);
+    track.addEventListener('touchstart', stopAutoScroll, { passive: true });
+    track.addEventListener('touchend', startAutoScroll);
+
+    // Init
+    update();
+    startAutoScroll();
+
+    // Debounced resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(onResize, 150);
+    });
+  })();
+</script>
 
 <style>
   .solutions-cards-section {
@@ -136,10 +167,15 @@ const { sectors } = content;
     background: #FFFFFF;
   }
 
-  .solutions-cards-row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+  .carousel-wrapper {
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
     gap: 16px;
+    transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
   }
 
   .solution-card {
@@ -152,6 +188,8 @@ const { sectors } = content;
     display: flex;
     flex-direction: column;
     scroll-margin-top: 100px;
+    flex: 0 0 calc((100% - 64px) / 5);
+    min-width: 0;
   }
 
   .solution-card:hover {
@@ -223,20 +261,20 @@ const { sectors } = content;
   }
 
   @media (max-width: 1200px) {
-    .solutions-cards-row {
-      grid-template-columns: repeat(3, 1fr);
+    .solution-card {
+      flex: 0 0 calc((100% - 32px) / 3);
     }
   }
 
   @media (max-width: 768px) {
-    .solutions-cards-row {
-      grid-template-columns: repeat(2, 1fr);
+    .solution-card {
+      flex: 0 0 calc((100% - 16px) / 2);
     }
   }
 
   @media (max-width: 480px) {
-    .solutions-cards-row {
-      grid-template-columns: 1fr;
+    .solution-card {
+      flex: 0 0 100%;
     }
   }
 </style>

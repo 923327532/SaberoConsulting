@@ -10,7 +10,7 @@ export const industriesEn: IndustriesData = {
     {
       id: 'proptech',
       title: 'PropTech',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThnTc0LOGLBEGG9Qqeq0ZXmA2RYDQ7tM6apQ&s',
+      image: '/images/industries/proptech.jpg',
       context: 'The digital real estate market demands platforms that connect properties, buyers, sellers and operations in a seamless experience. From search portals to asset management systems, technology is the new pillar of the real estate business.',
       challenges: [
         'Listing management, maps and advanced search filters',
@@ -36,7 +36,7 @@ export const industriesEn: IndustriesData = {
     {
       id: 'fintech',
       title: 'Fintech & payments',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3oaozrARK532Rwl_r1078JFO6-A_ajGwIlQ&s',
+      image: '/images/industries/fintech.jpg',
       context: 'The digital financial ecosystem requires secure, traceable and scalable solutions. Processing payments, managing wallets, integrating gateways and maintaining user trust are constant challenges that define financial service quality.',
       challenges: [
         'Security, compliance and transaction traceability',
@@ -62,7 +62,7 @@ export const industriesEn: IndustriesData = {
     {
       id: 'marketplaces',
       title: 'Marketplaces & platforms',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM1NGRBNwEeY1qmEhZNH-mxq7MZ7GYcAwhRg&s',
+      image: '/images/industries/marketplaces.jpg',
       context: 'Multi-user platforms connect supply, demand and operations in a single digital ecosystem. From B2B marketplaces to service platforms, the key is orchestrating roles, transactions and user experience at scale.',
       challenges: [
         'Multi-profile user onboarding and management',
@@ -88,7 +88,7 @@ export const industriesEn: IndustriesData = {
     {
       id: 'edtech',
       title: 'Education & EdTech',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQE9lw4PW2Qwwnusw3hGKFGclM5229j4K2_Q&s',
+      image: '/images/industries/edtech.jpg',
       context: 'Digital education has gone from being a complement to being the core of the learning experience. Institutions need platforms that integrate content, academic management, student tracking and effective learning experiences.',
       challenges: [
         'Access and user experience in educational environments',
@@ -114,7 +114,7 @@ export const industriesEn: IndustriesData = {
     {
       id: 'logistica',
       title: 'Logistics & operations',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxA40Gtz5h0HkpD6otEEv2_S-QgnHR-44Bt1nkdl2aXQ&s=10',
+      image: '/images/industries/logistica.jpg',
       context: 'Modern logistics demands real-time visibility, coordination between actors and operational efficiency. Companies need systems that integrate tracking, fleet management, warehouses and processes to operate without friction.',
       challenges: [
         'Real-time traceability and operational visibility',
@@ -140,7 +140,7 @@ export const industriesEn: IndustriesData = {
     {
       id: 'internas',
       title: 'Enterprise internal solutions',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmWGDEjdKTIK7EwwL1NvnT8D6-BVN_qfIwMQ&s',
+      image: '/images/industries/internas.jpg',
       context: 'Internal digitalization is one of the greatest efficiency generators in organizations. Disconnected systems, manual processes and low operational visibility hinder business growth and response capacity.',
       challenges: [
         'Manual processes consuming time and resources',
@@ -166,7 +166,7 @@ export const industriesEn: IndustriesData = {
     {
       id: 'ai-automation',
       title: 'AI & Intelligent Automation',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ79K6aexp4BMUTjA58pUh_fG7ZRD2DqLIZw&s',
+      image: '/images/industries/ai-automation.jpg',
       context: 'Artificial intelligence is transforming how companies operate, make decisions and scale. Our software factory integrates AI capabilities to automate processes, extract value from data and enable intelligent products that evolve with the business.',
       challenges: [
         'Automation of repetitive processes with high operational volume',

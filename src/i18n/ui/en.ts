@@ -4,7 +4,7 @@ export const uiEn = {
   'header.search': 'Search',
   'footer.brand.description': 'Software factory that designs, develops and evolves digital platforms for companies with growth ambitions in America and Europe.',
   'footer.contact.title': 'Contact',
-  'footer.contact.email': 'saberoconsulting@gmail.com',
+  'footer.contact.email': import.meta.env?.PUBLIC_CONTACT_EMAIL || 'saberoconsulting@gmail.com',
   'footer.contact.location': 'Lima, Peru',
   'footer.contact.whatsapp': 'WhatsApp',
   'footer.contact.form': 'Contact form',

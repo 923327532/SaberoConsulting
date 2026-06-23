@@ -4,8 +4,8 @@ export const contactEs: ContactData = {
   title: 'Conversemos sobre tu proximo proyecto',
   subtitle:
     'Cuentanos sobre tu iniciativa y te responderemos en menos de 24 horas. Sin compromisos, sin spam.',
-  email: 'saberoconsulting@gmail.com',
-  whatsapp: '+51925988211',
+  email: import.meta.env?.PUBLIC_CONTACT_EMAIL || 'saberoconsulting@gmail.com',
+  whatsapp: import.meta.env?.PUBLIC_WHATSAPP ? `+${import.meta.env.PUBLIC_WHATSAPP}` : '+51925988211',
   responseTime: 'Respuesta en menos de 24h',
   categoriesTitle: 'Sobre que te gustaria conversar?',
   categories: [

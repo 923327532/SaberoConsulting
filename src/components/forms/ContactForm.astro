@@ -44,7 +44,7 @@ const { data, locale } = Astro.props;
         <div class="contact-form-led" aria-hidden="true"></div>
         <div class="contact-form-accent" aria-hidden="true"></div>
 
-        <form class="contact-form" action="https://formsubmit.co/saberoconsulting@gmail.com" method="POST" data-form>
+        <form class="contact-form" action={`https://formsubmit.co/${import.meta.env?.PUBLIC_CONTACT_EMAIL || 'saberoconsulting@gmail.com'}`} method="POST" data-form>
           <input type="hidden" name="_subject" value="Nuevo contacto SABERO Consulting" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="true" />

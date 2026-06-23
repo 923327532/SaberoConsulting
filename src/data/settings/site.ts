@@ -13,11 +13,9 @@ import type { SiteSettings } from '../../i18n/utils/types';
  */
 
 function getSiteUrl(): string {
-  // Astro expone las variables PUBLIC_ en import.meta.env
   if (typeof import.meta !== 'undefined' && import.meta.env?.PUBLIC_SITE_URL) {
     return import.meta.env.PUBLIC_SITE_URL;
   }
-  // Fallback para desarrollo
   return 'http://localhost:4321';
 }
 

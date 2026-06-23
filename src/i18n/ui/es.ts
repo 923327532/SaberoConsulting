@@ -4,7 +4,7 @@ export const uiEs = {
   'header.search': 'Buscar',
   'footer.brand.description': 'Software factory que disena, desarrolla y evoluciona plataformas digitales para empresas con vision de crecimiento en America y Europa.',
   'footer.contact.title': 'Contacto',
-  'footer.contact.email': 'saberoconsulting@gmail.com',
+  'footer.contact.email': import.meta.env?.PUBLIC_CONTACT_EMAIL || 'saberoconsulting@gmail.com',
   'footer.contact.location': 'Lima, Peru',
   'footer.contact.whatsapp': 'WhatsApp',
   'footer.contact.form': 'Formulario de contacto',

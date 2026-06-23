@@ -10,7 +10,7 @@ export const industriesEs: IndustriesData = {
     {
       id: 'proptech',
       title: 'PropTech',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThnTc0LOGLBEGG9Qqeq0ZXmA2RYDQ7tM6apQ&s',
+      image: '/images/industries/proptech.jpg',
       context: 'El mercado inmobiliario digital exige plataformas que conecten propiedades, compradores, vendedores y operaciones en una experiencia fluida. Desde portales de búsqueda hasta sistemas de gestión de activos, la tecnología es el nuevo pilar del negocio inmobiliario.',
       challenges: [
         'Gestión de listings, mapas y filtros de búsqueda avanzada',
@@ -36,7 +36,7 @@ export const industriesEs: IndustriesData = {
     {
       id: 'fintech',
       title: 'Fintech y pagos',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3oaozrARK532Rwl_r1078JFO6-A_ajGwIlQ&s',
+      image: '/images/industries/fintech.jpg',
       context: 'El ecosistema financiero digital requiere soluciones seguras, trazables y escalables. Procesar pagos, gestionar wallets, integrar pasarelas y mantener la confianza del usuario son desafíos constantes que definen la calidad del servicio financiero.',
       challenges: [
         'Seguridad, cumplimiento y trazabilidad de transacciones',
@@ -62,7 +62,7 @@ export const industriesEs: IndustriesData = {
     {
       id: 'marketplaces',
       title: 'Marketplaces y plataformas',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM1NGRBNwEeY1qmEhZNH-mxq7MZ7GYcAwhRg&s',
+      image: '/images/industries/marketplaces.jpg',
       context: 'Las plataformas multiusuario conectan oferta, demanda y operación en un solo ecosistema digital. Desde marketplaces B2B hasta plataformas de servicios, la clave está en orquestar roles, transacciones y experiencia de usuario a escala.',
       challenges: [
         'Onboarding y gestión de múltiples perfiles de usuario',
@@ -88,7 +88,7 @@ export const industriesEs: IndustriesData = {
     {
       id: 'edtech',
       title: 'Educación y EdTech',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQE9lw4PW2Qwwnusw3hGKFGclM5229j4K2_Q&s',
+      image: '/images/industries/edtech.jpg',
       context: 'La educación digital ha pasado de ser complemento a ser eje central de la experiencia formativa. Las instituciones necesitan plataformas que integren contenido, gestión académica, seguimiento de estudiantes y experiencias de aprendizaje efectivas.',
       challenges: [
         'Acceso y experiencia de usuario en entornos educativos',
@@ -114,7 +114,7 @@ export const industriesEs: IndustriesData = {
     {
       id: 'logistica',
       title: 'Logística y operaciones',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxA40Gtz5h0HkpD6otEEv2_S-QgnHR-44Bt1nkdl2aXQ&s=10',
+      image: '/images/industries/logistica.jpg',
       context: 'La logística moderna exige visibilidad en tiempo real, coordinación entre actores y eficiencia operativa. Las empresas necesitan sistemas que integren tracking, gestión de flotas, almacenes y procesos para operar sin fricción.',
       challenges: [
         'Trazabilidad y visibilidad en tiempo real de operaciones',
@@ -140,7 +140,7 @@ export const industriesEs: IndustriesData = {
     {
       id: 'internas',
       title: 'Soluciones internas empresariales',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmWGDEjdKTIK7EwwL1NvnT8D6-BVN_qfIwMQ&s',
+      image: '/images/industries/internas.jpg',
       context: 'La digitalización interna es uno de los mayores generadores de eficiencia en las organizaciones. Sistemas desconectados, procesos manuales y poca visibilidad operativa frenan la capacidad de crecimiento y respuesta del negocio.',
       challenges: [
         'Procesos manuales que consumen tiempo y recursos',
@@ -166,7 +166,7 @@ export const industriesEs: IndustriesData = {
     {
       id: 'ai-automation',
       title: 'AI y Automatización Inteligente',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ79K6aexp4BMUTjA58pUh_fG7ZRD2DqLIZw&s',
+      image: '/images/industries/ai-automation.jpg',
       context: 'La inteligencia artificial está transformando la forma en que las empresas operan, toman decisiones y escalan. Nuestra factoría de software integra capacidades de IA para automatizar procesos, extraer valor de datos y habilitar productos inteligentes que evolucionan con el negocio.',
       challenges: [
         'Automatización de procesos repetitivos con alto volumen operativo',

@@ -4,7 +4,7 @@ export const uiFr = {
   'header.search': 'Rechercher',
   'footer.brand.description': 'Fabrique de logiciels qui concoit, developpe et fait evoluer des plateformes numeriques pour les entreprises ayant une vision de croissance en Amerique et en Europe.',
   'footer.contact.title': 'Contact',
-  'footer.contact.email': 'saberoconsulting@gmail.com',
+  'footer.contact.email': import.meta.env?.PUBLIC_CONTACT_EMAIL || 'saberoconsulting@gmail.com',
   'footer.contact.location': 'Lima, Perou',
   'footer.contact.whatsapp': 'WhatsApp',
   'footer.contact.form': 'Formulaire de contact',

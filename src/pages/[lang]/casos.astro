@@ -2,6 +2,7 @@
 import type { SupportedLocale } from '../../i18n/utils/types';
 import { LOCALES } from '../../i18n/utils/types';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCasosData } from '../../data/casos/index';
 
 export function getStaticPaths() {
   return LOCALES.map((locale) => ({
@@ -12,65 +13,31 @@ export function getStaticPaths() {
 
 const { locale } = Astro.props;
 
-const content: Record<string, { title: string; description: string; tagline: string; cases: { title: string; industry: string; desc: string; impact: string; image: string; tags: string[] }[] }> = {
+const data = getCasosData(locale as SupportedLocale);
+
+const meta: Record<string, { title: string; description: string }> = {
   es: {
     title: 'Casos e impacto',
     description: 'Conoce como transformamos retos de negocio en productos, plataformas y operaciones digitales medibles.',
-    tagline: 'Resultados que hablan por si solos',
-    cases: [
-      { title: 'Marketplace inmobiliario', industry: 'PropTech', desc: 'Plataforma multi-vendedor con matching inteligente, booking y gestión de activos para el mercado latinoamericano.', impact: '+240% leads calificados', image: '/images/imagen.png', tags: ['Marketplace', 'Matching', 'Booking'] },
-      { title: 'Plataforma freelancer-empresa', industry: 'Marketplace', desc: 'Ecosistema digital conectando talento independiente con empresas en toda la region.', impact: '+15K usuarios activos', image: '/images/imagen1.png', tags: ['Plataforma', 'B2B', 'Ecosistema'] },
-      { title: 'Solucion de pagos e integraciones', industry: 'Fintech', desc: 'Sistema modular de procesamiento de pagos con integraciones a multiples pasarelas.', impact: '99.9% uptime', image: '/images/imagen2.png', tags: ['Pagos', 'Integracion', 'Fintech'] },
-      { title: 'Plataforma social de matching', industry: 'Marketplace', desc: 'Red de interaccion con sistema de matching por perfiles, intereses y geolocalizacion.', impact: '+50K matches/mes', image: '/images/imagen3.png', tags: ['Social', 'Matching', 'Red'] },
-      { title: 'Sistemas internos y automatizacion', industry: 'Enterprise', desc: 'Suite de herramientas internas para gestion operativa, reporting y automatizacion de procesos.', impact: '70% menos tareas manuales', image: '/images/imagen4.png', tags: ['Automation', 'Internal', 'ERP'] },
-      { title: 'MVP y evolucion continua', industry: 'Product', desc: 'Acompanamos productos desde idea zero hasta escala, con ciclos agiles y validacion continua.', impact: '3x velocidad de entrega', image: '/images/saberologo.png', tags: ['MVP', 'Agile', 'Scale'] },
-    ],
   },
   en: {
     title: 'Cases & Impact',
     description: 'See how we transform business challenges into measurable digital products, platforms and operations.',
-    tagline: 'Results that speak for themselves',
-    cases: [
-      { title: 'Real Estate Marketplace', industry: 'PropTech', desc: 'Multi-vendor platform with smart matching, booking and asset management for the Latin American market.', impact: '+240% qualified leads', image: '/images/imagen.png', tags: ['Marketplace', 'Matching', 'Booking'] },
-      { title: 'Freelancer-Company Platform', industry: 'Marketplace', desc: 'Digital ecosystem connecting independent talent with companies across the region.', impact: '+15K active users', image: '/images/imagen1.png', tags: ['Platform', 'B2B', 'Ecosystem'] },
-      { title: 'Payment Solution & Integrations', industry: 'Fintech', desc: 'Modular payment processing system with multiple gateway integrations.', impact: '99.9% uptime', image: '/images/imagen2.png', tags: ['Payments', 'Integration', 'Fintech'] },
-      { title: 'Social Matching Platform', industry: 'Marketplace', desc: 'Interaction network with profile, interest and geolocation-based matching.', impact: '+50K matches/month', image: '/images/imagen3.png', tags: ['Social', 'Matching', 'Network'] },
-      { title: 'Internal Systems & Automation', industry: 'Enterprise', desc: 'Suite of internal tools for operational management, reporting and process automation.', impact: '70% fewer manual tasks', image: '/images/imagen4.png', tags: ['Automation', 'Internal', 'ERP'] },
-      { title: 'MVP & Continuous Evolution', industry: 'Product', desc: 'We accompany products from zero idea to scale, with agile cycles and continuous validation.', impact: '3x delivery speed', image: '/images/saberologo.png', tags: ['MVP', 'Agile', 'Scale'] },
-    ],
   },
   pt: {
     title: 'Casos e impacto',
     description: 'Veja como transformamos desafios de negocios em produtos, plataformas e operacoes digitais viaveis.',
-    tagline: 'Resultados que falam por si',
-    cases: [
-      { title: 'Marketplace imobiliario', industry: 'PropTech', desc: 'Plataforma multi-vendedor com matching inteligente, booking e gestao de ativos.', impact: '+240% leads qualificados', image: '/images/imagen.png', tags: ['Marketplace', 'Matching', 'Booking'] },
-      { title: 'Plataforma freelancer-empresa', industry: 'Marketplace', desc: 'Ecosystema digital conectando talento independente com empresas.', impact: '+15K usuarios ativos', image: '/images/imagen1.png', tags: ['Plataforma', 'B2B', 'Ecossistema'] },
-      { title: 'Solucao de pagamentos', industry: 'Fintech', desc: 'Sistema modular de processamento de pagamentos com multiplas integracoes.', impact: '99.9% uptime', image: '/images/imagen2.png', tags: ['Pagamentos', 'Integracao', 'Fintech'] },
-      { title: 'Plataforma social de matching', industry: 'Marketplace', desc: 'Rede de interacao com matching por perfis, interesses e geolocalizacao.', impact: '+50K matches/mes', image: '/images/imagen3.png', tags: ['Social', 'Matching', 'Rede'] },
-      { title: 'Sistemas internos e automacao', industry: 'Enterprise', desc: 'Suite de ferramentas internas para gestao operacional e automacao.', impact: '70% menos tarefas manuais', image: '/images/imagen4.png', tags: ['Automacao', 'Internal', 'ERP'] },
-      { title: 'MVP e evolucao continua', industry: 'Product', desc: 'Acompanhamos produtos da ideia a escala com ciclos ageis.', impact: '3x velocidade de entrega', image: '/images/saberologo.png', tags: ['MVP', 'Agil', 'Scale'] },
-    ],
   },
   fr: {
     title: 'Cas et impact',
     description: 'Decouvrez comment nous transformons les defis commerciaux en produits, plateformes et operations numeriques mesurables.',
-    tagline: 'Des resultats qui parlent deux-memes',
-    cases: [
-      { title: 'Marketplace immobilier', industry: 'PropTech', desc: 'Plateforme multi-vendeur avec matching intelligent, booking et gestion d\'actifs.', impact: '+240% leads qualifies', image: '/images/imagen.png', tags: ['Marketplace', 'Matching', 'Booking'] },
-      { title: 'Plateforme freelancer-entreprise', industry: 'Marketplace', desc: 'Ecosysteme numerique connectant talents independants et entreprises.', impact: '+15K utilisateurs actifs', image: '/images/imagen1.png', tags: ['Plateforme', 'B2B', 'Ecosysteme'] },
-      { title: 'Solution de paiements', industry: 'Fintech', desc: 'Systeme modulaire de traitement des paiements avec multiples integrations.', impact: '99.9% disponibilite', image: '/images/imagen2.png', tags: ['Paiements', 'Integration', 'Fintech'] },
-      { title: 'Plateforme sociale de matching', industry: 'Marketplace', desc: 'Reseau d\'interaction avec matching par profils et geolocalisation.', impact: '+50K matches/mois', image: '/images/imagen3.png', tags: ['Social', 'Matching', 'Reseau'] },
-      { title: 'Systemes internes et automatisation', industry: 'Enterprise', desc: 'Suite d\'outils internes pour la gestion operationnelle et l\'automatisation.', impact: '70% moins de taches manuelles', image: '/images/imagen4.png', tags: ['Automatisation', 'Interne', 'ERP'] },
-      { title: 'MVP et evolution continue', industry: 'Product', desc: 'Nous accompagnons les produits de l\'idee a l\'echelle avec des cycles agiles.', impact: '3x vitesse de livraison', image: '/images/saberologo.png', tags: ['MVP', 'Agile', 'Echelle'] },
-    ],
   },
 };
 
-const pageMeta = (content[locale as string] || content.es);
-const data = pageMeta.cases;
+const pageMeta = (meta[locale as string] || meta.es);
 const path = '/casos';
 const isEs = locale === 'es';
+
 const langText: Record<string, { all: string; filter: string; cta: string }> = {
   es: { all: 'Todas las industrias', filter: 'Filtrar por', cta: 'Conversemos sobre tu proyecto' },
   en: { all: 'All industries', filter: 'Filter by', cta: 'Let\'s talk about your project' },
@@ -79,7 +46,7 @@ const langText: Record<string, { all: string; filter: string; cta: string }> = {
 };
 const ui = langText[locale as string] || langText.es;
 
-const industries = [...new Set(data.map((c) => c.industry))];
+const industries = [...new Set(data.destacados.map((c) => c.industria))];
 ---
 
 <BaseLayout title={`${pageMeta.title}`} description={pageMeta.description} locale={locale as SupportedLocale} path={path}>
@@ -94,12 +61,9 @@ const industries = [...new Set(data.map((c) => c.industry))];
     </div>
     <div class="casos-scanlines" aria-hidden="true"></div>
     <div class="casos-orbs" aria-hidden="true">
-      <div class="casos-orb casos-orb-1"><span>+240%</span></div>
-      <div class="casos-orb casos-orb-2"><span>99.9%</span></div>
-      <div class="casos-orb casos-orb-3"><span>+50K</span></div>
-      <div class="casos-orb casos-orb-4"><span>3x</span></div>
-      <div class="casos-orb casos-orb-5"><span>+15K</span></div>
-      <div class="casos-orb casos-orb-6"><span>70%</span></div>
+      {data.destacados.slice(0, 6).map((c, i) => (
+        <div class={`casos-orb casos-orb-${i + 1}`}><span>{c.impacto}</span></div>
+      ))}
     </div>
     <div class="container">
       <div class="casos-hero-content">
@@ -118,7 +82,7 @@ const industries = [...new Set(data.map((c) => c.industry))];
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8h14M8 1l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <span class="casos-hero-counter">
-            <span class="casos-hero-counter-num">{data.length}</span>
+            <span class="casos-hero-counter-num">{data.destacados.length}</span>
             <span class="casos-hero-counter-label">{locale === 'es' ? 'proyectos entregados' : locale === 'en' ? 'projects delivered' : locale === 'pt' ? 'projetos entregues' : 'projets livrés'}</span>
           </span>
         </div>
@@ -129,18 +93,18 @@ const industries = [...new Set(data.map((c) => c.industry))];
   <section class="casos-grid-section" id="casos">
     <div class="container">
       <div class="casos-grid">
-        {data.map((c) => (
+        {data.destacados.map((c) => (
           <article class="caso-card">
-            <div class="caso-card-image" style={`background-image: url(${c.image})`}>
+            <div class="caso-card-image" style={`background-image: url(${c.imagen})`}>
               <div class="caso-card-overlay"></div>
-              <div class="caso-card-industry">{c.industry}</div>
+              <div class="caso-card-industry">{c.industria}</div>
             </div>
             <div class="caso-card-body">
-              <h3 class="caso-card-title">{c.title}</h3>
-              <p class="caso-card-desc">{c.desc}</p>
+              <h3 class="caso-card-title">{c.nombre}</h3>
+              <p class="caso-card-desc">{c.solucion}</p>
               <div class="caso-card-impact">
                 <span class="caso-impact-label">{locale === 'es' ? 'Impacto' : locale === 'en' ? 'Impact' : locale === 'pt' ? 'Impacto' : 'Impact'}</span>
-                <span class="caso-impact-value">{c.impact}</span>
+                <span class="caso-impact-value">{c.impacto}</span>
               </div>
               <div class="caso-card-tags">
                 {c.tags.map((tag) => <span class="caso-tag">{tag}</span>)}
