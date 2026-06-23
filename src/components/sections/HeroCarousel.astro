@@ -1,7 +1,21 @@
 ---
+import { Image } from 'astro:assets';
 import type { SupportedLocale } from '../../i18n/utils/types';
 import { heroSlides, type HeroSlide } from '../../data/home/hero-slides';
 import { localizeNavHref } from '../../i18n/routes/map';
+import heroImg from '../../assets/images/imagen.png';
+import heroImg1 from '../../assets/images/imagen1.png';
+import heroImg2 from '../../assets/images/imagen2.png';
+import heroImg3 from '../../assets/images/imagen3.png';
+import heroImg4 from '../../assets/images/imagen4.png';
+
+const heroImages: Record<string, ImageMetadata> = {
+  '/images/imagen.png': heroImg,
+  '/images/imagen1.png': heroImg1,
+  '/images/imagen2.png': heroImg2,
+  '/images/imagen3.png': heroImg3,
+  '/images/imagen4.png': heroImg4,
+};
 
 interface Props {
   locale: SupportedLocale;
@@ -15,47 +29,54 @@ const slidesCount = slides.length;
 <section class="hero-carousel" aria-label="Hero carousel" data-carousel>
   <div class="carousel-viewport">
     <div class="carousel-track" data-track>
-      {slides.map((slide, index) => (
-        <article
-          class="carousel-slide"
-          data-slide={index}
-          aria-roledescription="slide"
-          aria-label={`Slide ${index + 1} of ${slidesCount}`}
-          aria-hidden={index !== 0}
-        >
-          <img
-            src={slide.image}
-            alt={slide.alt}
-            class="carousel-image"
-            loading={index === 0 ? 'eager' : 'lazy'}
-            decoding="async"
-          />
-          <div class="carousel-overlay" aria-hidden="true"></div>
-          <div class="carousel-content">
-            <div class="carousel-text">
-              {slide.eyebrow && <span class="carousel-eyebrow">{slide.eyebrow}</span>}
-              <h1 class="carousel-title">{slide.title}</h1>
-              <p class="carousel-description">{slide.description}</p>
-              <div class="carousel-actions">
-                <a
-                  href={localizeNavHref(slide.primaryCtaHref, locale)}
-                  class="btn btn-primary carousel-cta"
-                >
-                  {slide.primaryCtaLabel}
-                </a>
-                {slide.secondaryCtaLabel && slide.secondaryCtaHref && (
+      {slides.map((slide, index) => {
+        const imgSrc = heroImages[slide.image];
+        return (
+          <article
+            class="carousel-slide"
+            data-slide={index}
+            aria-roledescription="slide"
+            aria-label={`Slide ${index + 1} of ${slidesCount}`}
+            aria-hidden={index !== 0}
+          >
+            <Image
+              src={imgSrc || slide.image}
+              alt={slide.alt}
+              class="carousel-image"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              width={1920}
+              height={900}
+              format="webp"
+              fetchpriority={index === 0 ? 'high' : 'auto'}
+            />
+            <div class="carousel-overlay" aria-hidden="true"></div>
+            <div class="carousel-content">
+              <div class="carousel-text">
+                {slide.eyebrow && <span class="carousel-eyebrow">{slide.eyebrow}</span>}
+                <h1 class="carousel-title">{slide.title}</h1>
+                <p class="carousel-description">{slide.description}</p>
+                <div class="carousel-actions">
                   <a
-                    href={localizeNavHref(slide.secondaryCtaHref, locale)}
-                    class="btn btn-outline carousel-cta-secondary"
+                    href={localizeNavHref(slide.primaryCtaHref, locale)}
+                    class="btn btn-primary carousel-cta"
                   >
-                    {slide.secondaryCtaLabel}
+                    {slide.primaryCtaLabel}
                   </a>
-                )}
+                  {slide.secondaryCtaLabel && slide.secondaryCtaHref && (
+                    <a
+                      href={localizeNavHref(slide.secondaryCtaHref, locale)}
+                      class="btn btn-outline carousel-cta-secondary"
+                    >
+                      {slide.secondaryCtaLabel}
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        </article>
-      ))}
+          </article>
+        );
+      })}
     </div>
   </div>
 
@@ -87,62 +108,60 @@ const slidesCount = slides.length;
 </section>
 
 <script>
+  // @ts-nocheck
   (function () {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const AUTOPLAY_INTERVAL = 3000;
     const TRANSITION_DURATION = 600;
 
-    const carousel = document.querySelector('[data-carousel]') as HTMLElement | null;
+    const carousel = document.querySelector('[data-carousel]');
     if (!carousel) return;
 
-    const track = carousel.querySelector('[data-track]') as HTMLElement | null;
+    const track = carousel.querySelector('[data-track]');
     if (!track) return;
 
-    const slides = Array.from(carousel.querySelectorAll('[data-slide]')) as HTMLElement[];
-    const dots = Array.from(carousel.querySelectorAll('[data-dot]')) as HTMLButtonElement[];
-    const prevBtn = carousel.querySelector('[data-prev]') as HTMLButtonElement | null;
-    const nextBtn = carousel.querySelector('[data-next]') as HTMLButtonElement | null;
+    const slides = Array.from(carousel.querySelectorAll('[data-slide]'));
+    const dots = Array.from(carousel.querySelectorAll('[data-dot]'));
+    const prevBtn = carousel.querySelector('[data-prev]');
+    const nextBtn = carousel.querySelector('[data-next]');
 
     const totalSlides = slides.length;
     if (totalSlides < 2) return;
 
     let currentIndex = 0;
-    let autoplayTimer: ReturnType<typeof setInterval> | null = null;
+    let autoplayTimer = null;
     let isTransitioning = false;
 
-    function goToSlide(index: number) {
+    function goToSlide(index) {
       if (isTransitioning) return;
       if (index === currentIndex) return;
 
       isTransitioning = true;
 
-      // Update track position
-      track!.style.transform = `translateX(-${index * 100}%)`;
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
 
-      // Update slide aria
-      slides.forEach((slide, i) => {
+      slides.forEach(function (slide, i) {
         slide.setAttribute('aria-hidden', i !== index ? 'true' : 'false');
       });
 
-      // Update dots
-      dots.forEach((dot, i) => {
+      dots.forEach(function (dot, i) {
         dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
       });
 
       currentIndex = index;
 
-      setTimeout(() => {
+      setTimeout(function () {
         isTransitioning = false;
       }, TRANSITION_DURATION);
     }
 
     function nextSlide() {
-      const next = (currentIndex + 1) % totalSlides;
+      var next = (currentIndex + 1) % totalSlides;
       goToSlide(next);
     }
 
     function prevSlide() {
-      const prev = (currentIndex - 1 + totalSlides) % totalSlides;
+      var prev = (currentIndex - 1 + totalSlides) % totalSlides;
       goToSlide(prev);
     }
 
@@ -164,31 +183,29 @@ const slidesCount = slides.length;
       startAutoplay();
     }
 
-    // Event listeners
     if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
+      nextBtn.addEventListener('click', function () {
         nextSlide();
         resetAutoplay();
       });
     }
 
     if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
+      prevBtn.addEventListener('click', function () {
         prevSlide();
         resetAutoplay();
       });
     }
 
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        const index = parseInt(dot.getAttribute('data-dot') || '0', 10);
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        var index = parseInt(dot.getAttribute('data-dot') || '0', 10);
         goToSlide(index);
         resetAutoplay();
       });
     });
 
-    // Keyboard navigation
-    carousel.addEventListener('keydown', (e: KeyboardEvent) => {
+    carousel.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft') {
         prevSlide();
         resetAutoplay();
@@ -198,23 +215,21 @@ const slidesCount = slides.length;
       }
     });
 
-    // Pause on hover/focus
     carousel.addEventListener('mouseenter', stopAutoplay);
     carousel.addEventListener('mouseleave', startAutoplay);
     carousel.addEventListener('focusin', stopAutoplay);
     carousel.addEventListener('focusout', startAutoplay);
 
-    // Touch support
-    let touchStartX = 0;
-    let touchEndX = 0;
+    var touchStartX = 0;
+    var touchEndX = 0;
 
-    carousel.addEventListener('touchstart', (e: TouchEvent) => {
+    carousel.addEventListener('touchstart', function (e) {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
 
-    carousel.addEventListener('touchend', (e: TouchEvent) => {
+    carousel.addEventListener('touchend', function (e) {
       touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
+      var diff = touchStartX - touchEndX;
       if (Math.abs(diff) > 50) {
         if (diff > 0) {
           nextSlide();
@@ -225,7 +240,6 @@ const slidesCount = slides.length;
       }
     }, { passive: true });
 
-    // Start
     startAutoplay();
   })();
 </script>

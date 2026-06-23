@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { SupportedLocale } from '../../i18n/utils/types';
 import { getNavigation } from '../../data/navigation/index';
 import { siteSettings } from '../../data/settings/site';
@@ -8,6 +9,7 @@ import LanguageSwitcher from '../navigation/LanguageSwitcher.astro';
 import MegaMenu from '../navigation/MegaMenu.astro';
 import MobileMenu from '../navigation/MobileMenu.astro';
 import SearchBar from '../navigation/SearchBar.astro';
+import logoSrc from '../../assets/images/saberologo.png';
 
 interface Props {
   currentLocale: SupportedLocale;
