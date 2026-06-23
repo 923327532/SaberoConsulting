@@ -3,6 +3,37 @@
 // SABERO Consulting - Hero Principal
 // "Queremos que seas nuestro próximo éxito"
 // ============================================
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'es' } = Astro.props;
+
+const content: Record<string, { title: string; text: string; cta: string }> = {
+  es: {
+    title: 'Queremos que seas nuestro próximo éxito',
+    text: 'Cada proyecto que emprendemos es una oportunidad para transformar una visión en resultados reales. Si tu empresa busca un socio tecnológico que entienda tus retos y los convierta en soluciones medibles, este es el momento. Únete a las organizaciones que ya confían en SABERO y sé parte de nuestra próxima historia de impacto.',
+    cta: 'Quiero ser el próximo éxito',
+  },
+  en: {
+    title: 'We want you to be our next success',
+    text: 'Every project we undertake is an opportunity to transform a vision into real results. If your company is looking for a technology partner that understands your challenges and turns them into measurable solutions, now is the time. Join the organizations that already trust SABERO and be part of our next impact story.',
+    cta: 'I want to be the next success',
+  },
+  pt: {
+    title: 'Queremos que você seja nosso próximo sucesso',
+    text: 'Cada projeto que realizamos é uma oportunidade de transformar uma visão em resultados reais. Se sua empresa busca um parceiro de tecnologia que entenda seus desafios e os converta em soluções mensuráveis, este é o momento. Junte-se às organizações que já confiam na SABERO e faça parte da nossa próxima história de impacto.',
+    cta: 'Quero ser o próximo sucesso',
+  },
+  fr: {
+    title: 'Nous voulons que vous soyez notre prochain succès',
+    text: "Chaque projet que nous entreprenons est une opportunité de transformer une vision en résultats réels. Si votre entreprise cherche un partenaire technologique qui comprend vos défis et les transforme en solutions mesurables, c'est le moment. Rejoignez les organisations qui font déjà confiance à SABERO et faites partie de notre prochaine histoire d'impact.",
+    cta: 'Je veux être le prochain succès',
+  },
+};
+
+const c = content[locale] || content.es;
 ---
 
 <section class="casos-hero-principal">
@@ -12,10 +43,10 @@
   <div class="casos-hero-principal-overlay"></div>
   <div class="container">
     <div class="casos-hero-principal-content">
-      <h1 class="casos-hero-principal-title">Queremos que seas nuestro próximo éxito</h1>
-      <p class="casos-hero-principal-text">Cada proyecto que emprendemos es una oportunidad para transformar una visión en resultados reales. Si tu empresa busca un socio tecnológico que entienda tus retos y los convierta en soluciones medibles, este es el momento. Únete a las organizaciones que ya confían en SABERO y sé parte de nuestra próxima historia de impacto.</p>
-      <a href="/contacto/" class="casos-hero-principal-btn">
-        Quiero ser el próximo éxito
+      <h1 class="casos-hero-principal-title">{c.title}</h1>
+      <p class="casos-hero-principal-text">{c.text}</p>
+      <a href={locale === 'es' ? '/contacto/' : `/${locale}/contacto/`} class="casos-hero-principal-btn">
+        {c.cta}
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M1 8h14M8 1l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>

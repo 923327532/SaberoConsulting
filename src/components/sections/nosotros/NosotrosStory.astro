@@ -2,42 +2,154 @@
 // ============================================
 // SABERO Consulting - Nosotros Story (Timeline)
 // ============================================
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'es' } = Astro.props;
+
 const defaultStoryImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80';
 
-const milestones = [
-  {
-    year: '2018',
-    title: 'Fundación',
-    desc: 'Nacimos en Lima con la convicción de que el talento latinoamericano puede competir al más alto nivel global.',
-    image: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=900&q=80',
+const content: Record<string, { tag: string; title: string; launchLabel: string; milestones: { year: string; title: string; desc: string; image: string; icon?: string }[] }> = {
+  es: {
+    tag: 'Nuestra historia',
+    title: 'De Lima para el mundo',
+    launchLabel: 'Descubrir historia',
+    milestones: [
+      {
+        year: '2018',
+        title: 'Fundación',
+        desc: 'Nacimos en Lima con la convicción de que el talento latinoamericano puede competir al más alto nivel global.',
+        image: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=900&q=80',
+      },
+      {
+        year: '2020',
+        title: 'Crecimiento',
+        desc: 'Proyectos más complejos, clientes en toda América. Plataformas que procesan pagos, conectan personas y automatizan operaciones.',
+        image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80',
+        icon: 'cloud',
+      },
+      {
+        year: '2022',
+        title: 'Expansión global',
+        desc: 'Llegamos a Europa, consolidando presencia en 3 continentes. Cada proyecto es una relación de largo plazo.',
+        image: 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80',
+      },
+      {
+        year: '2024',
+        title: 'Presente',
+        desc: '+40 profesionales, +30 proyectos, 3 continentes. Seguimos creciendo con la misma convicción.',
+        image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80',
+      },
+    ],
   },
-  {
-    year: '2020',
-    title: 'Crecimiento',
-    desc: 'Proyectos más complejos, clientes en toda América. Plataformas que procesan pagos, conectan personas y automatizan operaciones.',
-    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80',
-    icon: 'cloud',
+  en: {
+    tag: 'Our story',
+    title: 'From Lima to the world',
+    launchLabel: 'Discover story',
+    milestones: [
+      {
+        year: '2018',
+        title: 'Foundation',
+        desc: 'We were born in Lima with the conviction that Latin American talent can compete at the highest global level.',
+        image: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=900&q=80',
+      },
+      {
+        year: '2020',
+        title: 'Growth',
+        desc: 'More complex projects, clients across the Americas. Platforms that process payments, connect people and automate operations.',
+        image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80',
+        icon: 'cloud',
+      },
+      {
+        year: '2022',
+        title: 'Global expansion',
+        desc: 'We reached Europe, consolidating presence in 3 continents. Each project is a long-term relationship.',
+        image: 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80',
+      },
+      {
+        year: '2024',
+        title: 'Present',
+        desc: '+40 professionals, +30 projects, 3 continents. We keep growing with the same conviction.',
+        image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80',
+      },
+    ],
   },
-  {
-    year: '2022',
-    title: 'Expansión global',
-    desc: 'Llegamos a Europa, consolidando presencia en 3 continentes. Cada proyecto es una relación de largo plazo.',
-    image: 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80',
+  pt: {
+    tag: 'Nossa história',
+    title: 'De Lima para o mundo',
+    launchLabel: 'Descobrir história',
+    milestones: [
+      {
+        year: '2018',
+        title: 'Fundação',
+        desc: 'Nascemos em Lima com a convicção de que o talento latino-americano pode competir no mais alto nível global.',
+        image: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=900&q=80',
+      },
+      {
+        year: '2020',
+        title: 'Crescimento',
+        desc: 'Projetos mais complexos, clientes em toda a América. Plataformas que processam pagamentos, conectam pessoas e automatizam operações.',
+        image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80',
+        icon: 'cloud',
+      },
+      {
+        year: '2022',
+        title: 'Expansão global',
+        desc: 'Chegamos à Europa, consolidando presença em 3 continentes. Cada projeto é uma relação de longo prazo.',
+        image: 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80',
+      },
+      {
+        year: '2024',
+        title: 'Presente',
+        desc: '+40 profissionais, +30 projetos, 3 continentes. Continuamos crescendo com a mesma convicção.',
+        image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80',
+      },
+    ],
   },
-  {
-    year: '2024',
-    title: 'Presente',
-    desc: '+40 profesionales, +30 proyectos, 3 continentes. Seguimos creciendo con la misma convicción.',
-    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80',
+  fr: {
+    tag: 'Notre histoire',
+    title: 'De Lima au monde',
+    launchLabel: 'Découvrir histoire',
+    milestones: [
+      {
+        year: '2018',
+        title: 'Fondation',
+        desc: 'Nous sommes nés à Lima avec la conviction que le talent latino-américain peut rivaliser au plus haut niveau mondial.',
+        image: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=900&q=80',
+      },
+      {
+        year: '2020',
+        title: 'Croissance',
+        desc: 'Des projets plus complexes, des clients dans toute l\'Amérique. Des plateformes qui traitent les paiements, connectent les personnes et automatisent les opérations.',
+        image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80',
+        icon: 'cloud',
+      },
+      {
+        year: '2022',
+        title: 'Expansion mondiale',
+        desc: 'Nous avons atteint l\'Europe, consolidant notre présence sur 3 continents. Chaque projet est une relation à long terme.',
+        image: 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80',
+      },
+      {
+        year: '2024',
+        title: 'Présent',
+        desc: '+40 professionnels, +30 projets, 3 continents. Nous continuons de grandir avec la même conviction.',
+        image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80',
+      },
+    ],
   },
-];
+};
+
+const c = content[locale] || content.es;
 ---
 
 <section class="ns-story" id="historia" data-reveal>
   <div class="container">
     <div class="ns-story-header">
-      <div class="ns-story-tag">Nuestra historia</div>
-      <h2 class="ns-story-title">De Lima para el mundo</h2>
+      <div class="ns-story-tag">{c.tag}</div>
+      <h2 class="ns-story-title">{c.title}</h2>
     </div>
     <div class="ns-story-body">
       <div class="ns-story-gear-panel">
@@ -46,10 +158,10 @@ const milestones = [
           <div class="ns-story-gear-axis"></div>
           <div class="ns-story-gear-core">SABERO</div>
           <div class="ns-story-gear-launch">
-            <button type="button" aria-label="Descubrir historia">Descubrir historia</button>
+            <button type="button" aria-label={c.launchLabel}>{c.launchLabel}</button>
           </div>
 
-          {milestones.map((step, i) => (
+          {c.milestones.map((step, i) => (
             <button type="button" class={`ns-story-gear-step ${i === 0 ? 'is-active' : ''}`} data-step={i} aria-label={step.title}>
               <span>{i + 1}</span>
               <small>{step.title}</small>
@@ -59,7 +171,7 @@ const milestones = [
       </div>
 
       <div class="ns-story-content">
-        {milestones.map((step, i) => (
+        {c.milestones.map((step, i) => (
           <article class={`ns-story-step ${i === 0 ? 'is-active' : ''}`} data-step={i}>
             <div class="ns-story-step-card">
               <div class="ns-story-step-meta">
@@ -95,11 +207,10 @@ const milestones = [
       const gear = section.querySelector('.ns-story-gear');
       const launch = section.querySelector('.ns-story-gear-launch');
       let currentIndex = 0;
-      let ticking = false;
 
       const revealStory = () => {
         section.classList.add('has-revealed');
-        if (launch) launch.style.opacity = '0';
+        if (launch) (launch).style.opacity = '0';
       };
 
       const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -124,13 +235,13 @@ const milestones = [
         });
 
         if (gear) {
-          gear.style.setProperty('--gear-rotation', `${nextIndex * 90}deg`);
+          (gear).style.setProperty('--gear-rotation', `${nextIndex * 90}deg`);
         }
       };
 
       buttons.forEach((button) => {
         button.addEventListener('click', () => {
-          const index = Number(button.dataset.step);
+          const index = Number((button).dataset.step);
           setActiveStep(index);
         });
       });
@@ -142,7 +253,7 @@ const milestones = [
 
 <style>
   .ns-story {
-    padding: 60px 0;
+    padding: 40px 0;
     background: var(--color-white);
     position: relative;
   }
@@ -445,6 +556,24 @@ const milestones = [
     height: 320px;
     object-fit: cover;
     display: block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ns-story-gear {
+      transition: none;
+    }
+    .ns-story-gear-step {
+      transition: none;
+    }
+    .ns-story-step {
+      transition: none;
+    }
+    .ns-story .ns-story-gear-launch button {
+      transition: none;
+    }
+    .ns-story .ns-story-gear-launch button:hover {
+      transform: none;
+    }
   }
 
   @media (max-width: 900px) {

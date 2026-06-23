@@ -36,8 +36,8 @@ function getLocalizedHref(locale: SupportedLocale): string {
 {
   variant === 'desktop' ? (
     <nav class="lang-switcher" aria-label="Language selector">
-      <button class="lang-current" aria-haspopup="true" aria-expanded="false" data-lang-toggle>
-        <img src={FLAGS[currentLocale]} alt="" class="lang-current-flag" width="22" height="16" loading="eager" decoding="async" />
+      <button class="lang-current" aria-haspopup="true" aria-expanded="false" data-lang-toggle aria-label={currentLocale === 'es' ? 'Español' : currentLocale === 'en' ? 'English' : currentLocale === 'fr' ? 'Français' : 'Português'}>
+        <img src={FLAGS[currentLocale]} alt={currentLocale === 'es' ? 'Español' : currentLocale === 'en' ? 'English' : currentLocale === 'fr' ? 'Français' : 'Português'} class="lang-current-flag" width="22" height="16" loading="eager" decoding="async" />
         <svg width="8" height="5" viewBox="0 0 8 5" fill="none" aria-hidden="true">
           <path d="M1 1l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -49,8 +49,9 @@ function getLocalizedHref(locale: SupportedLocale): string {
             hreflang={locale}
             class={`lang-option ${locale === currentLocale ? 'active' : ''}`}
             aria-current={locale === currentLocale ? 'true' : undefined}
+            aria-label={locale === 'es' ? 'Español' : locale === 'en' ? 'English' : locale === 'fr' ? 'Français' : 'Português'}
           >
-            <img src={FLAGS[locale]} alt="" class="lang-option-flag" width="22" height="16" loading="lazy" decoding="async" />
+            <img src={FLAGS[locale]} alt={locale === 'es' ? 'Español' : locale === 'en' ? 'English' : locale === 'fr' ? 'Français' : 'Português'} class="lang-option-flag" width="22" height="16" loading="lazy" decoding="async" />
           </a>
         ))}
       </div>
@@ -65,8 +66,9 @@ function getLocalizedHref(locale: SupportedLocale): string {
             hreflang={locale}
             class={`lang-mobile-option ${locale === currentLocale ? 'active' : ''}`}
             aria-current={locale === currentLocale ? 'true' : undefined}
+            aria-label={locale === 'es' ? 'Español' : locale === 'en' ? 'English' : locale === 'fr' ? 'Français' : 'Português'}
           >
-            <img src={FLAGS[locale]} alt="" class="lang-mobile-flag" width="22" height="16" loading="lazy" decoding="async" />
+            <img src={FLAGS[locale]} alt={locale === 'es' ? 'Español' : locale === 'en' ? 'English' : locale === 'fr' ? 'Français' : 'Português'} class="lang-mobile-flag" width="22" height="16" loading="lazy" decoding="async" />
           </a>
         ))}
       </div>

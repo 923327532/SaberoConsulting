@@ -2,15 +2,48 @@
 // ============================================
 // SABERO Consulting - Nosotros Mission & Vision
 // ============================================
-const mision = 'Convertir el talento latinoamericano en el motor de innovación digital global. Diseñamos, desarrollamos y evolucionamos plataformas que resuelven problemas reales de negocio, con la misma calidad, compromiso y excelencia que cualquier hub tecnológico del mundo.';
-const vision = 'Ser el partner de referencia para empresas que buscan escalar sus productos digitales desde América hacia el mundo, reconociendo que el talento y la cercanía cultural son ventajas competitivas invencibles.';
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'es' } = Astro.props;
+
+const content: Record<string, { tag: string; title: string; mission: string; vision: string }> = {
+  es: {
+    tag: 'Nuestra esencia',
+    title: 'Misión y Visión',
+    mission: 'Construir productos digitales que transformen industrias, combinando ingeniería de clase mundial con el talento y la creatividad de Latinoamérica.',
+    vision: 'Ser el partner tecnológico de referencia para organizaciones que buscan crecer con tecnología robusta, escalable y centrada en el usuario.',
+  },
+  en: {
+    tag: 'Our essence',
+    title: 'Mission & Vision',
+    mission: 'Build digital products that transform industries, combining world-class engineering with the talent and creativity of Latin America.',
+    vision: 'To be the reference technology partner for organizations seeking to grow with robust, scalable and user-centered technology.',
+  },
+  pt: {
+    tag: 'Nossa essência',
+    title: 'Missão e Visão',
+    mission: 'Construir produtos digitais que transformem indústrias, combinando engenharia de classe mundial com o talento e a criatividade da América Latina.',
+    vision: 'Ser o parceiro tecnológico de referência para organizações que buscam crescer com tecnologia robusta, escalável e centrada no usuário.',
+  },
+  fr: {
+    tag: 'Notre essence',
+    title: 'Mission & Vision',
+    mission: 'Construire des produits numériques qui transforment les industries, en combinant une ingénierie de classe mondiale avec le talent et la créativité de l\'Amérique latine.',
+    vision: 'Être le partenaire technologique de référence pour les organisations qui cherchent à se développer avec une technologie robuste, évolutive et centrée sur l\'utilisateur.',
+  },
+};
+
+const c = content[locale] || content.es;
 ---
 
 <section class="ns-mv" id="mision-vision" data-reveal>
   <div class="container">
     <div class="ns-mv-header">
-      <div class="ns-mv-tag">Nuestro propósito</div>
-      <h2 class="ns-mv-title">Misión y visión</h2>
+      <div class="ns-mv-tag">{c.tag}</div>
+      <h2 class="ns-mv-title">{c.title}</h2>
     </div>
     <div class="ns-mv-grid">
       <div class="ns-mv-card">
@@ -18,9 +51,9 @@ const vision = 'Ser el partner de referencia para empresas que buscan escalar su
         <div class="ns-mv-body">
           <h3 class="ns-mv-cardtitle">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            Misión
+            {locale === 'es' ? 'Misión' : locale === 'en' ? 'Mission' : locale === 'pt' ? 'Missão' : 'Mission'}
           </h3>
-          <p>{mision}</p>
+          <p>{c.mission}</p>
         </div>
       </div>
       <div class="ns-mv-card">
@@ -28,9 +61,9 @@ const vision = 'Ser el partner de referencia para empresas que buscan escalar su
         <div class="ns-mv-body">
           <h3 class="ns-mv-cardtitle">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            Visión
+            {locale === 'es' ? 'Visión' : locale === 'en' ? 'Vision' : locale === 'pt' ? 'Visão' : 'Vision'}
           </h3>
-          <p>{vision}</p>
+          <p>{c.vision}</p>
         </div>
       </div>
     </div>
@@ -43,19 +76,12 @@ const vision = 'Ser el partner de referencia para empresas que buscan escalar su
     background: var(--color-off-white);
     position: relative;
   }
-  .ns-mv::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-electric-blue), transparent);
-  }
+
   .ns-mv-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 36px;
   }
+
   .ns-mv-tag {
     display: inline-block;
     font-size: var(--text-xs);
@@ -68,6 +94,7 @@ const vision = 'Ser el partner de referencia para empresas que buscan escalar su
     border-radius: var(--radius-full);
     margin-bottom: 12px;
   }
+
   .ns-mv-title {
     font-size: clamp(1.8rem, 3vw, 2.8rem);
     font-weight: 800;
@@ -75,69 +102,64 @@ const vision = 'Ser el partner de referencia para empresas que buscan escalar su
     letter-spacing: -0.02em;
     margin: 0;
   }
+
   .ns-mv-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 28px;
+    gap: 24px;
   }
+
   .ns-mv-card {
-    display: flex;
+    position: relative;
     background: var(--color-white);
     border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
-    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    border: 1.5px solid transparent;
-    background-clip: padding-box;
-    position: relative;
+    box-shadow: 0 20px 40px rgba(16, 52, 102, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .ns-mv-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1.5px;
-    background: linear-gradient(135deg, #E62325, #1D5BF1);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
+
   .ns-mv-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    box-shadow: 0 30px 60px rgba(16, 52, 102, 0.1);
   }
+
   .ns-mv-accent {
-    width: 6px;
-    flex-shrink: 0;
-    background: linear-gradient(180deg, #E62325, #1D5BF1);
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-electric-blue), var(--color-accent-blue));
   }
+
   .ns-mv-body {
-    padding: 40px 36px;
-    flex: 1;
+    padding: 32px;
   }
+
   .ns-mv-cardtitle {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: var(--text-xl);
-    font-weight: 800;
+    font-size: 1.3rem;
+    font-weight: 700;
     color: var(--color-deep-blue);
     margin: 0 0 16px;
   }
+
   .ns-mv-cardtitle svg {
     color: var(--color-electric-blue);
     flex-shrink: 0;
   }
-  .ns-mv-card p {
-    font-size: var(--text-sm);
-    line-height: 1.9;
-    color: var(--color-gray-500);
+
+  .ns-mv-body p {
     margin: 0;
+    line-height: 1.8;
+    color: var(--color-gray-600);
   }
-  @media (max-width: 768px) {
-    .ns-mv { padding: 64px 0; }
-    .ns-mv-grid { grid-template-columns: 1fr; gap: 20px; }
-    .ns-mv-body { padding: 32px 28px; }
+
+  @media (max-width: 700px) {
+    .ns-mv-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ns-mv-body {
+      padding: 24px;
+    }
   }
 </style>

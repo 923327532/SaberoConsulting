@@ -133,7 +133,7 @@ const content = {
           data-index={i}
         >
           <div class="cloud-card-image-wrap">
-            <img src={feature.img} alt={feature.title} class="cloud-card-img" loading="lazy" />
+            <img src={feature.img} alt={feature.title} class="cloud-card-img" loading="lazy" width="400" height="180" />
           </div>
           <div class="cloud-card-body">
             <h3 class="cloud-feature-title">{feature.title}</h3>
@@ -320,6 +320,12 @@ const content = {
   @keyframes cloudAccentMove {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cloud-feature-card::before {
+      animation: none;
+    }
   }
 
   .cloud-feature-card:hover {

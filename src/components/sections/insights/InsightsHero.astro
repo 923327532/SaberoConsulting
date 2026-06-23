@@ -15,9 +15,7 @@ const { data, locale } = Astro.props;
   <div class="container">
     <div class="hero-layout">
       <div class="hero-content">
-        <h1 class="hero-title">
-          <span class="text-white">Explora</span> <span class="text-red">ideas</span> <span class="text-blue">que</span> <span class="text-electric">te</span> <span class="text-white">ayuden</span> <span class="text-red">a</span> <span class="text-blue">tomar</span> <span class="text-electric">mejores</span> <span class="text-red">decisiones</span> <span class="text-white">de</span> <span class="text-blue">producto</span> <span class="text-electric">y</span> <span class="text-red">tecnologia</span>
-        </h1>
+        <h1 class="hero-title">{data.title}</h1>
         <p class="hero-subtitle">{data.subtitle}</p>
         <div class="hero-actions">
           <a href="#featured" class="btn btn-primary">{data.ctaPrimary}</a>

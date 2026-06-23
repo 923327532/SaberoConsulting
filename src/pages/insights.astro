@@ -1,5 +1,5 @@
 ---
-// Root insights route - serves Spanish version at /insights/
+// Root insights route - redirects to Spanish version
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { insightsData } from '../data/insights';
 import InsightsHero from '../components/sections/insights/InsightsHero.astro';
@@ -14,6 +14,8 @@ const sections = [
   { id: 'cases', label: 'Casos comentados', type: 'case' },
   { id: 'resources', label: 'Recursos descargables', type: 'resource' },
 ];
+
+const labels = { problem: 'Problema', approach: 'Enfoque', lesson: 'Aprendizaje', recommendation: 'Recomendacion' };
 
 const articles = data.articles;
 const guides = data.featured.filter((i) => i.type === 'guide');
@@ -102,19 +104,19 @@ const resources = data.resources;
                 <h3 class="case-title">{c.title}</h3>
                 <div class="case-details">
                   <div class="case-block">
-                    <span class="case-label">Problema</span>
+                    <span class="case-label">{labels.problem}</span>
                     <p class="case-text">{c.problem}</p>
                   </div>
                   <div class="case-block">
-                    <span class="case-label">Enfoque</span>
+                    <span class="case-label">{labels.approach}</span>
                     <p class="case-text">{c.approach}</p>
                   </div>
                   <div class="case-block">
-                    <span class="case-label">Aprendizaje</span>
+                    <span class="case-label">{labels.lesson}</span>
                     <p class="case-text">{c.lesson}</p>
                   </div>
                   <div class="case-block">
-                    <span class="case-label">Recomendacion</span>
+                    <span class="case-label">{labels.recommendation}</span>
                     <p class="case-text case-recommendation">{c.recommendation}</p>
                   </div>
                 </div>
@@ -239,7 +241,6 @@ const resources = data.resources;
     display: block;
   }
 
-  /* Articles & Guides grid */
   .articles-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -335,7 +336,6 @@ const resources = data.resources;
     color: var(--color-red);
   }
 
-  /* Trends grid */
   .trends-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -395,7 +395,6 @@ const resources = data.resources;
     border-top: 1px solid var(--border-color);
   }
 
-  /* Cases list */
   .cases-list {
     display: flex;
     flex-direction: column;
@@ -477,7 +476,6 @@ const resources = data.resources;
     font-weight: 500;
   }
 
-  /* Resources grid */
   .resources-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

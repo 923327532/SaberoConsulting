@@ -29,7 +29,9 @@ const visibleSectors = sectors.filter(s => s.image);
       <button
         class="home-industries-tab"
         data-index={i}
+        role="tab"
         aria-selected={i === 0}
+        aria-label={sector.title}
       >
         {sector.title}
       </button>
@@ -75,7 +77,13 @@ const visibleSectors = sectors.filter(s => s.image);
         t.setAttribute('aria-selected', i === index ? 'true' : 'false');
       });
       cards.forEach(function(c, i) {
-        c.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+        var isActive = i === index;
+        c.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        // Prevent focus on hidden cards
+        var focusables = c.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+        focusables.forEach(function(el) {
+          el.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
       });
     }
 
@@ -128,6 +136,7 @@ const visibleSectors = sectors.filter(s => s.image);
     letter-spacing: -0.03em;
     margin: 0;
     flex-shrink: 0;
+    color: #0B2F7D;
     background: linear-gradient(135deg, #2F80FF 0%, #E53E3E 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

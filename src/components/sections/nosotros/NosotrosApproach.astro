@@ -2,26 +2,71 @@
 // ============================================
 // SABERO Consulting - Nosotros Approach
 // ============================================
-const approach = [
-  'Descubrimiento y estrategia: entendemos el negocio, el usuario y el contexto antes de escribir una línea de código.',
-  'Arquitectura y diseño: definimos la columna vertebral técnica del producto para que sea escalable, mantenible y segura.',
-  'Desarrollo ágil: trabajamos en ciclos cortos con equipos integrados, transparencia total y entregas continuas.',
-  'Evolución y mejora continua: medimos, aprendemos y evolucionamos el producto con cada iteración.',
-];
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'es' } = Astro.props;
+
+const content: Record<string, { tag: string; title: string; steps: string[] }> = {
+  es: {
+    tag: 'Nuestro enfoque',
+    title: 'Cómo construimos',
+    steps: [
+      'Descubrimiento y estrategia: Entendemos tu industria, tu negocio y tus usuarios para definir el alcance, la hoja de ruta y las métricas de éxito.',
+      'Arquitectura y diseño: Definimos la arquitectura técnica, el diseño de producto y la experiencia de usuario, asegurando escalabilidad y usabilidad.',
+      'Construcción ágil: Desarrollamos en ciclos iterativos con integración continua, desplegando valor de forma incremental y con total transparencia.',
+      'Evolución continua: Monitoreamos, optimizamos y escalamos tu producto, acompañándote en cada etapa del crecimiento.',
+    ],
+  },
+  en: {
+    tag: 'Our approach',
+    title: 'How we build',
+    steps: [
+      'Discovery and strategy: We understand your industry, your business and your users to define the scope, roadmap and success metrics.',
+      'Architecture and design: We define the technical architecture, product design and user experience, ensuring scalability and usability.',
+      'Agile construction: We develop in iterative cycles with continuous integration, deploying value incrementally with full transparency.',
+      'Continuous evolution: We monitor, optimize and scale your product, accompanying you at every stage of growth.',
+    ],
+  },
+  pt: {
+    tag: 'Nossa abordagem',
+    title: 'Como construímos',
+    steps: [
+      'Descoberta e estratégia: Entendemos sua indústria, seu negócio e seus usuários para definir o escopo, o roteiro e as métricas de sucesso.',
+      'Arquitetura e design: Definimos a arquitetura técnica, o design do produto e a experiência do usuário, garantindo escalabilidade e usabilidade.',
+      'Construção ágil: Desenvolvemos em ciclos iterativos com integração contínua, entregando valor de forma incremental e com total transparência.',
+      'Evolução contínua: Monitoramos, otimizamos e escalamos seu produto, acompanhando você em cada etapa do crescimento.',
+    ],
+  },
+  fr: {
+    tag: 'Notre approche',
+    title: 'Comment nous construisons',
+    steps: [
+      'Découverte et stratégie : Nous comprenons votre secteur, votre entreprise et vos utilisateurs pour définir la portée, la feuille de route et les indicateurs de succès.',
+      'Architecture et conception : Nous définissons l\'architecture technique, la conception du produit et l\'expérience utilisateur, garantissant évolutivité et convivialité.',
+      'Construction agile : Nous développons en cycles itératifs avec intégration continue, déployant de la valeur de manière incrémentale et en toute transparence.',
+      'Évolution continue : Nous surveillons, optimisons et faisons évoluer votre produit, en vous accompagnant à chaque étape de la croissance.',
+    ],
+  },
+};
+
+const c = content[locale] || content.es;
 ---
 
 <section class="ns-app" id="enfoque" data-reveal>
   <div class="container">
     <div class="ns-app-header">
-      <div class="ns-app-tag">Nuestra metodología</div>
-      <h2 class="ns-app-title">Cómo trabajamos</h2>
+      <div class="ns-app-tag">{c.tag}</div>
+      <h2 class="ns-app-title">{c.title}</h2>
     </div>
     <div class="ns-app-steps">
-      {approach.map((step, i) => (
+      {c.steps.map((step, i) => (
         <div class="ns-app-step" data-idx={i + 1}>
           <div class="ns-app-step-top">
             <div class="ns-app-circle">{i + 1}</div>
-            {i < approach.length - 1 && <div class="ns-app-connector"></div>}
+            <div class="ns-app-line"></div>
           </div>
           <p class="ns-app-text">{step}</p>
         </div>
@@ -36,19 +81,12 @@ const approach = [
     background: var(--color-white);
     position: relative;
   }
-  .ns-app::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-electric-blue-light), transparent);
-  }
+
   .ns-app-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 36px;
   }
+
   .ns-app-tag {
     display: inline-block;
     font-size: var(--text-xs);
@@ -61,140 +99,78 @@ const approach = [
     border-radius: var(--radius-full);
     margin-bottom: 12px;
   }
+
   .ns-app-title {
     font-size: clamp(1.8rem, 3vw, 2.8rem);
     font-weight: 800;
     color: var(--color-deep-blue);
     letter-spacing: -0.02em;
+    margin: 0;
   }
+
   .ns-app-steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    counter-reset: step;
+    gap: 24px;
   }
+
   .ns-app-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: default;
+    position: relative;
   }
+
   .ns-app-step-top {
     display: flex;
     align-items: center;
-    width: 100%;
-    margin-bottom: 28px;
+    gap: 0;
+    margin-bottom: 20px;
   }
+
   .ns-app-circle {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
+    background: var(--color-electric-blue);
+    color: var(--color-white);
+    font-weight: 800;
+    font-size: 1.1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--text-xl);
-    font-weight: 800;
-    color: var(--color-gray-300);
-    background: var(--color-gray-50);
-    border: 2px solid var(--color-gray-100);
     flex-shrink: 0;
-    transition: all var(--transition-base);
-    position: relative;
-    z-index: 1;
+    box-shadow: 0 8px 16px rgba(33, 105, 255, 0.18);
   }
-  .ns-app-connector {
+
+  .ns-app-line {
     flex: 1;
-    height: 3px;
-    background: var(--color-gray-100);
-    transition: background var(--transition-base);
-    margin: 0 -1px;
-    position: relative;
-    z-index: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-electric-blue), var(--color-accent-blue));
+    opacity: 0.3;
   }
+
+  .ns-app-step:last-child .ns-app-line {
+    display: none;
+  }
+
   .ns-app-text {
-    font-size: var(--text-sm);
-    color: var(--color-gray-400);
-    line-height: 1.7;
     margin: 0;
-    max-width: 240px;
-    text-align: center;
-    transition: color var(--transition-base);
+    line-height: 1.7;
+    color: var(--color-gray-600);
+    font-size: 0.95rem;
   }
-  .ns-app-steps:has(.ns-app-step:nth-child(1):hover) .ns-app-step:nth-child(1) .ns-app-circle {
-    color: var(--color-white);
-    background: var(--color-electric-blue);
-    border-color: var(--color-electric-blue);
-    box-shadow: 0 0 0 6px var(--color-electric-blue-light);
-  }
-  .ns-app-steps:has(.ns-app-step:nth-child(1):hover) .ns-app-step:nth-child(1) .ns-app-text {
-    color: var(--color-gray-700);
-  }
-  .ns-app-steps:has(.ns-app-step:nth-child(2):hover) .ns-app-step:nth-child(1) .ns-app-circle,
-  .ns-app-steps:has(.ns-app-step:nth-child(2):hover) .ns-app-step:nth-child(2) .ns-app-circle {
-    color: var(--color-white);
-    background: var(--color-electric-blue);
-    border-color: var(--color-electric-blue);
-    box-shadow: 0 0 0 6px var(--color-electric-blue-light);
-  }
-  .ns-app-steps:has(.ns-app-step:nth-child(2):hover) .ns-app-step:nth-child(1) .ns-app-connector {
-    background: var(--color-electric-blue);
-  }
-  .ns-app-steps:has(.ns-app-step:nth-child(2):hover) .ns-app-step:nth-child(1) .ns-app-text,
-  .ns-app-steps:has(.ns-app-step:nth-child(2):hover) .ns-app-step:nth-child(2) .ns-app-text {
-    color: var(--color-gray-700);
-  }
-  .ns-app-steps:has(.ns-app-step:nth-child(3):hover) .ns-app-step:nth-child(1) .ns-app-circle,
-  .ns-app-steps:has(.ns-app-step:nth-child(3):hover) .ns-app-step:nth-child(2) .ns-app-circle,
-  .ns-app-steps:has(.ns-app-step:nth-child(3):hover) .ns-app-step:nth-child(3) .ns-app-circle {
-    color: var(--color-white);
-    background: var(--color-electric-blue);
-    border-color: var(--color-electric-blue);
-    box-shadow: 0 0 0 6px var(--color-electric-blue-light);
-  }
-  .ns-app-steps:has(.ns-app-step:nth-child(3):hover) .ns-app-step:nth-child(1) .ns-app-connector,
-  .ns-app-steps:has(.ns-app-step:nth-child(3):hover) .ns-app-step:nth-child(2) .ns-app-connector {
-    background: var(--color-electric-blue);
-  }
-  .ns-app-steps:has(.ns-app-step:nth-child(3):hover) .ns-app-step:nth-child(1) .ns-app-text,
-  .ns-app-steps:has(.ns-app-step:nth-child(3):hover) .ns-app-step:nth-child(2) .ns-app-text,
-  .ns-app-steps:has(.ns-app-step:nth-child(3):hover) .ns-app-step:nth-child(3) .ns-app-text {
-    color: var(--color-gray-700);
-  }
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(1) .ns-app-circle,
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(2) .ns-app-circle,
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(3) .ns-app-circle,
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(4) .ns-app-circle {
-    color: var(--color-white);
-    background: var(--color-electric-blue);
-    border-color: var(--color-electric-blue);
-    box-shadow: 0 0 0 6px var(--color-electric-blue-light);
-  }
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(1) .ns-app-connector,
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(2) .ns-app-connector,
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(3) .ns-app-connector {
-    background: var(--color-electric-blue);
-  }
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(1) .ns-app-text,
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(2) .ns-app-text,
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(3) .ns-app-text,
-  .ns-app-steps:has(.ns-app-step:nth-child(4):hover) .ns-app-step:nth-child(4) .ns-app-text {
-    color: var(--color-gray-700);
-  }
+
   @media (max-width: 900px) {
     .ns-app-steps {
       grid-template-columns: repeat(2, 1fr);
-      gap: 32px 0;
     }
-    .ns-app-step:nth-child(2) .ns-app-connector { display: none; }
   }
-  @media (max-width: 640px) {
-    .ns-app { padding: 64px 0; }
+
+  @media (max-width: 600px) {
     .ns-app-steps {
       grid-template-columns: 1fr;
-      gap: 28px;
     }
-    .ns-app-connector { display: none; }
-    .ns-app-step-top { justify-content: center; }
-    .ns-app-text { max-width: 100%; }
+
+    .ns-app-step-top {
+      margin-bottom: 12px;
+    }
   }
 </style>

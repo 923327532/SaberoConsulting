@@ -3,14 +3,41 @@
 // SABERO Consulting - Sección de título
 // "Disfrutamos trabajar contigo"
 // ============================================
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = 'es' } = Astro.props;
+
+const content: Record<string, { title: string; sub: string }> = {
+  es: {
+    title: 'Disfrutamos trabajar contigo',
+    sub: 'Cada industria tiene procesos, métricas y retos distintos. SABERO adapta producto, arquitectura y experiencia según ese contexto.',
+  },
+  en: {
+    title: 'We enjoy working with you',
+    sub: 'Each industry has different processes, metrics and challenges. SABERO adapts product, architecture and experience according to that context.',
+  },
+  pt: {
+    title: 'Gostamos de trabalhar com você',
+    sub: 'Cada indústria tem processos, métricas e desafios diferentes. A SABERO adapta produto, arquitetura e experiência de acordo com esse contexto.',
+  },
+  fr: {
+    title: 'Nous aimons travailler avec vous',
+    sub: 'Chaque secteur a des processus, des métriques et des défis différents. SABERO adapte le produit, l\'architecture et l\'expérience en fonction de ce contexte.',
+  },
+};
+
+const c = content[locale] || content.es;
 ---
 
 <section class="casos-titulo-section">
   <div class="container">
     <div class="casos-titulo-content">
       <div class="casos-titulo-accent"></div>
-      <h2 class="casos-titulo-title">Disfrutamos trabajar contigo</h2>
-      <p class="casos-titulo-sub">Cada industria tiene procesos, métricas y retos distintos. SABERO adapta producto, arquitectura y experiencia según ese contexto.</p>
+      <h2 class="casos-titulo-title">{c.title}</h2>
+      <p class="casos-titulo-sub">{c.sub}</p>
     </div>
   </div>
 </section>

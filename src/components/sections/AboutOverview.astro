@@ -251,6 +251,18 @@ const content = {
     transform: scale(1.04);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .about-image {
+      transition: none;
+    }
+    .about-image-frame:hover .about-image {
+      transform: none;
+    }
+    .about-value {
+      transition: none;
+    }
+  }
+
   .about-image-overlay {
     position: absolute;
     inset: 0;

@@ -56,12 +56,12 @@ const { data, locale } = Astro.props;
             <div class="form-row">
               <div class="form-field">
                 <label for="name" class="form-label">{data.form.name}</label>
-                <input type="text" id="name" name="nombre" required class="form-input" placeholder={`Ej: Carlos`} />
+                <input type="text" id="name" name="nombre" required class="form-input" placeholder={`Ej: Carlos`} autocomplete="given-name" />
                 <span class="form-line"></span>
               </div>
               <div class="form-field">
                 <label for="lastName" class="form-label">{data.form.lastName}</label>
-                <input type="text" id="lastName" name="apellido" required class="form-input" placeholder={`Ej: García`} />
+                <input type="text" id="lastName" name="apellido" required class="form-input" placeholder={`Ej: García`} autocomplete="family-name" />
                 <span class="form-line"></span>
               </div>
             </div>
@@ -69,12 +69,12 @@ const { data, locale } = Astro.props;
             <div class="form-row">
               <div class="form-field">
                 <label for="email" class="form-label">{data.form.email}</label>
-                <input type="email" id="email" name="email" required class="form-input" placeholder={`ej: carlos@empresa.com`} />
+                <input type="email" id="email" name="email" required class="form-input" placeholder={`ej: carlos@empresa.com`} autocomplete="email" />
                 <span class="form-line"></span>
               </div>
               <div class="form-field">
                 <label for="company" class="form-label">{data.form.company}</label>
-                <input type="text" id="company" name="empresa" class="form-input" placeholder={`Ej: Mi Empresa S.A.C.`} />
+                <input type="text" id="company" name="empresa" class="form-input" placeholder={`Ej: Mi Empresa S.A.C.`} autocomplete="organization" />
                 <span class="form-line"></span>
               </div>
             </div>
@@ -82,12 +82,12 @@ const { data, locale } = Astro.props;
             <div class="form-row">
               <div class="form-field">
                 <label for="country" class="form-label">{data.form.country}</label>
-                <input type="text" id="country" name="pais" class="form-input" placeholder={`Ej: Perú`} />
+                <input type="text" id="country" name="pais" class="form-input" placeholder={`Ej: Perú`} autocomplete="country-name" />
                 <span class="form-line"></span>
               </div>
               <div class="form-field">
                 <label for="position" class="form-label">{data.form.position}</label>
-                <input type="text" id="position" name="cargo" class="form-input" placeholder={`Ej: CEO`} />
+                <input type="text" id="position" name="cargo" class="form-input" placeholder={`Ej: CEO`} autocomplete="organization-title" />
                 <span class="form-line"></span>
               </div>
             </div>
@@ -123,7 +123,7 @@ const { data, locale } = Astro.props;
 
             <div class="form-field">
               <label for="whatsapp" class="form-label">{data.form.whatsapp}</label>
-              <input type="tel" id="whatsapp" name="whatsapp" class="form-input" placeholder={`+51 999 888 777`} />
+              <input type="tel" id="whatsapp" name="whatsapp" class="form-input" placeholder={`+51 999 888 777`} autocomplete="tel" />
               <span class="form-line"></span>
             </div>
 
@@ -221,6 +221,7 @@ const { data, locale } = Astro.props;
   .contact-title {
     font-size: clamp(2rem, 4vw, 3.2rem);
     font-weight: 800;
+    color: #0B2F7D;
     background: linear-gradient(135deg, #E62325, #1D5BF1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -248,32 +249,10 @@ const { data, locale } = Astro.props;
   }
 
   .contact-header-email {
-    font-size: 0.9rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #E62325, #1D5BF1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-decoration: none;
-  }
-
-  .contact-header-email:hover {
-    opacity: 0.8;
-  }
-
-  .contact-header-response {
-    font-size: 0.75rem;
-    background: linear-gradient(135deg, #E62325, #1D5BF1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 600;
-  }
-
-  .contact-header-email {
     display: block;
     font-size: 0.9rem;
     font-weight: 700;
+    color: #0B2F7D;
     background: linear-gradient(135deg, #E62325, #1D5BF1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -288,6 +267,7 @@ const { data, locale } = Astro.props;
 
   .contact-header-response {
     font-size: 0.75rem;
+    color: #0B2F7D;
     background: linear-gradient(135deg, #E62325, #1D5BF1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -402,6 +382,16 @@ const { data, locale } = Astro.props;
     0% { left: -100%; }
     50% { left: 100%; }
     100% { left: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-form-accent {
+      animation: none;
+    }
+    .contact-form-led {
+      animation: none;
+      display: none;
+    }
   }
 
   /* ===== FORM ===== */
