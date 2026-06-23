@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEOLanding from '../components/sections/seo/SEOLanding.astro';
+
+const path = '/inteligencia-artificial';
+const title = 'Inteligencia Artificial | SABERO Consulting - IA para Empresas';
+const description = 'Implementamos soluciones de inteligencia artificial para empresas: machine learning, NLP, visión computacional, chatbots y automatización inteligente. Potencia tu negocio con IA.';
+---
+
+<BaseLayout {title} {description} locale="es" {path}>
+  <SEOLanding
+    locale="es"
+    title="Soluciones de Inteligencia Artificial"
+    subtitle="Potencia tu negocio con IA de clase mundial"
+    description="En SABERO Consulting desarrollamos e implementamos soluciones de inteligencia artificial que transforman empresas. Desde machine learning y procesamiento de lenguaje natural hasta visión computacional y chatbots inteligentes. Nuestro equipo de data scientists e ingenieros de IA crea modelos personalizados que se integran con tus sistemas existentes y generan valor real de negocio."
+    keywords={[
+      "inteligencia artificial",
+      "IA para empresas",
+      "machine learning",
+      "procesamiento de lenguaje natural",
+      "visión computacional",
+      "chatbots inteligentes",
+      "los mejores en IA",
+      "servicios de inteligencia artificial",
+      "IA Perú",
+      "deep learning"
+    ]}
+    features={[
+      {
+        icon: '<path d="M12 2a10 10 0 0 1 10 10c0 5-4 8-10 8S2 17 2 12 7 2 12 2z"/><path d="M12 6v6l4 2"/>',
+        title: "Machine Learning",
+        description: "Modelos predictivos, sistemas de recomendación, detección de anomalías y clustering. Entrenamos modelos con tus datos para generar insights accionables."
+      },
+      {
+        icon: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+        title: "NLP y Chatbots",
+        description: "Asistentes virtuales inteligentes, análisis de sentimiento, clasificación de textos y extracción de información. Procesamos lenguaje natural en español, inglés y portugués."
+      },
+      {
+        icon: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+        title: "Visión Computacional",
+        description: "Reconocimiento de imágenes, detección de objetos, OCR inteligente y análisis de video. Automatizamos procesos que dependen de información visual."
+      },
+      {
+        icon: '<path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>',
+        title: "IA para Datos",
+        description: "Análisis predictivo, forecasting, segmentación de clientes y optimización de precios. Convertimos datos en decisiones de negocio."
+      },
+      {
+        icon: '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
+        title: "Automatización con IA",
+        description: "Combinamos RPA con IA para automatizar procesos cognitivos. Extracción de datos de documentos, clasificación automática y procesamiento inteligente."
+      },
+      {
+        icon: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/>',
+        title: "Integración API",
+        description: "Desplegamos modelos como APIs escalables en cloud. Integración con tus sistemas existentes: CRM, ERP, plataformas web y mobile."
+      }
+    ]}
+    ctaText="Implementa IA en tu empresa"
+    ctaHref="/contacto"
+  />
+</BaseLayout>

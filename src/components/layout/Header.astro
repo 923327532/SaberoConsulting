@@ -7,6 +7,7 @@ import { localizeNavHref } from '../../i18n/routes/map';
 import LanguageSwitcher from '../navigation/LanguageSwitcher.astro';
 import MegaMenu from '../navigation/MegaMenu.astro';
 import MobileMenu from '../navigation/MobileMenu.astro';
+import SearchBar from '../navigation/SearchBar.astro';
 
 interface Props {
   currentLocale: SupportedLocale;
@@ -20,12 +21,12 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
 
 <header class="site-header" role="banner">
   <div class="header-container">
-    <!-- Logo - extrema izquierda -->
+    <!-- Logo -->
     <a href={currentLocale === 'es' ? '/' : `/${currentLocale}/`} class="header-logo" aria-label={siteSettings.name}>
-      <img src="/images/saberologo.png" alt={siteSettings.name} class="header-logo-img" width="280" height="78" />
+      <img src="/images/saberologo.png" alt={siteSettings.name} class="header-logo-img" width="320" height="89" loading="eager" decoding="async" />
     </a>
 
-    <!-- Navigation - centro -->
+    <!-- Navigation Desktop -->
     <nav class="header-nav" aria-label="Main navigation">
       <ul class="nav-list" role="list">
         {navigation.main.map((item, index) => {
@@ -52,8 +53,9 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
       </ul>
     </nav>
 
-    <!-- Actions - derecha -->
+    <!-- Actions -->
     <div class="header-actions">
+      <SearchBar currentLocale={currentLocale} />
       <LanguageSwitcher currentLocale={currentLocale} path={path} variant="desktop" />
       <a href={localizeNavHref('/contacto', currentLocale)} class="header-cta-btn">
         {t(currentLocale, 'header.cta')}
@@ -75,6 +77,7 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
 </header>
 
 <script>
+  // Mega menus
   let activeMega: string | null = null;
 
   document.querySelectorAll('.nav-item[data-mega]').forEach((item) => {
@@ -120,20 +123,9 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     });
   });
 
-  // Mobile menu toggle
-  const toggleBtn = document.querySelector('[data-toggle-mobile]');
-  const mobileMenu = document.querySelector('.mobile-menu');
+  // Header hide/show on scroll
   const headerElement = document.querySelector('.site-header');
   let lastScrollPosition = window.scrollY;
-
-  toggleBtn?.addEventListener('click', () => {
-    if (mobileMenu) {
-      const isOpen = mobileMenu.classList.toggle('open');
-      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    }
-  });
-
   const updateHeaderVisibility = () => {
     const currentScroll = window.scrollY;
     if (!headerElement) return;
@@ -172,10 +164,13 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
 
 <style>
   /* ============================================
-     SABERO Consulting - Header Premium
-     Fondo blanco, logo grande, boton gradient pill
-     Inspirado en referencia corporativa moderna
+     SABERO Consulting - Header
      ============================================ */
+
+  :root {
+    --header-height: 80px;
+    --header-height-mobile: 64px;
+  }
 
   .site-header {
     position: fixed;
@@ -201,11 +196,11 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
   .header-container {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-6);
+    width: 100%;
     height: 100%;
+    padding: 0 24px;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
   /* ---- Logo ---- */
@@ -214,33 +209,33 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     align-items: center;
     text-decoration: none;
     flex-shrink: 0;
-    margin-right: auto;
+    margin-right: 32px;
   }
 
   .header-logo-img {
     display: block;
-    height: 64px;
+    height: 56px;
     width: auto;
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
     will-change: transform;
   }
 
   .header-logo:hover .header-logo-img {
-    transform: scale(1.1);
+    transform: scale(1.08);
     filter: drop-shadow(0 0 10px rgba(0, 102, 255, 0.25));
   }
 
-  /* ---- Navigation - centro ---- */
+  /* ---- Navigation ---- */
   .header-nav {
     display: flex;
     align-items: center;
-    padding: 0 var(--space-8);
+    flex: 1;
   }
 
   .nav-list {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: 4px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -254,13 +249,13 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     position: relative;
     display: inline-flex;
     align-items: center;
-    padding: var(--space-2) var(--space-3);
-    font-size: 1rem;
+    padding: 8px 14px;
+    font-size: 0.95rem;
     font-weight: 600;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: #1a1a2e;
     text-decoration: none;
-    border-radius: var(--radius-md);
+    border-radius: 8px;
     transition: color 0.2s ease;
     white-space: nowrap;
     letter-spacing: 0.1px;
@@ -281,7 +276,7 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
 
   .nav-link:hover::after,
   .nav-link:focus-visible::after {
-    width: calc(100% - var(--space-6));
+    width: calc(100% - 28px);
   }
 
   .nav-link:hover,
@@ -293,12 +288,12 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
   .header-actions {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: 12px;
     flex-shrink: 0;
     margin-left: auto;
   }
 
-  /* ---- CTA Button - Gradient Pill ---- */
+  /* ---- CTA Button ---- */
   .header-cta-btn {
     display: inline-flex;
     align-items: center;
@@ -360,10 +355,9 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
 
   /* ---- Responsive ---- */
 
-  /* Tablet landscape */
   @media (max-width: 1200px) {
     .nav-link {
-      padding: var(--space-2) var(--space-2);
+      padding: 8px 10px;
       font-size: 0.85rem;
     }
 
@@ -371,16 +365,23 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
       padding: 7px 18px;
       font-size: 0.8rem;
     }
+
+    .header-logo-img {
+      height: 48px;
+    }
   }
 
-  /* Tablet */
   @media (max-width: 1024px) {
     .site-header {
       height: var(--header-height-mobile);
     }
 
+    .header-container {
+      padding: 0 16px;
+    }
+
     .header-logo-img {
-      height: 38px;
+      height: 40px;
     }
 
     .header-nav {
@@ -397,10 +398,13 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     }
   }
 
-  /* Mobile */
   @media (max-width: 480px) {
     .header-logo-img {
-      height: 32px;
+      height: 34px;
+    }
+
+    .header-container {
+      padding: 0 12px;
     }
   }
 </style>

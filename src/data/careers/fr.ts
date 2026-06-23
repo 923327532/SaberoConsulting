@@ -21,7 +21,7 @@ export const careersFr: CareersData = {
         title: 'Un travail qui compte',
         description:
           'Vous participez a des produits et solutions reels pour des entreprises en Amerique et en Europe. Chaque ligne de code a un impact direct.',
-        image: '/images/careers/impact-team.jpg',
+        image: '/images/careers/impact.jpg',
       },
       {
         id: 'developpement',
@@ -30,7 +30,7 @@ export const careersFr: CareersData = {
         title: 'Apprentissage continu',
         description:
           'Nous prenons votre croissance au serieux. Defis progressifs, mentorat interne, ressources de formation et technologies modernes.',
-        image: '/images/careers/development-team.jpg',
+        image: '/images/careers/learning.jpg',
       },
       {
         id: 'collaboration',
@@ -39,7 +39,7 @@ export const careersFr: CareersData = {
         title: 'Des equipes qui comptent',
         description:
           'Nous travaillons en equipes multidisciplinaires, proches et orientees qualite. Pas de silos ni de hierarchies qui freinent.',
-        image: '/images/careers/collab-team.jpg',
+        image: '/images/careers/challenges.jpg',
       },
       {
         id: 'progres',
@@ -48,7 +48,7 @@ export const careersFr: CareersData = {
         title: 'Carriere avec horizon',
         description:
           'Nous concevons des parcours de croissance avec une reelle autonomie. Des vos premiers mois, vous avez de l\'espace pour proposer et evoluer.',
-        image: '/images/careers/progress-team.jpg',
+        image: '/images/careers/mentorship.jpg',
       },
     ],
   },

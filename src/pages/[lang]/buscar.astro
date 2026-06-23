@@ -1,0 +1,56 @@
+---
+import type { SupportedLocale } from '../../i18n/utils/types';
+import { LOCALES } from '../../i18n/utils/types';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SearchResults from '../../components/sections/search/SearchResults.astro';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({
+    params: { lang: locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props;
+const query = Astro.url.searchParams.get('q') || '';
+
+const meta: Record<string, { title: string; description: string }> = {
+  es: {
+    title: query
+      ? `Resultados de búsqueda: ${query} - SABERO Consulting`
+      : 'Buscar - SABERO Consulting',
+    description: 'Encuentra rápidamente secciones, servicios e información en SABERO Consulting. Busca entre nuestras áreas de expertise: desarrollo de producto, arquitectura tecnológica, consultoría digital y más.',
+  },
+  en: {
+    title: query
+      ? `Search results: ${query} - SABERO Consulting`
+      : 'Search - SABERO Consulting',
+    description: 'Quickly find sections, services and information at SABERO Consulting. Search across our areas of expertise: product development, technology architecture, digital consulting and more.',
+  },
+  pt: {
+    title: query
+      ? `Resultados da pesquisa: ${query} - SABERO Consulting`
+      : 'Pesquisar - SABERO Consulting',
+    description: 'Encontre rapidamente seções, serviços e informações na SABERO Consulting. Pesquise em nossas áreas de especialização: desenvolvimento de produto, arquitetura tecnológica, consultoria digital e mais.',
+  },
+  fr: {
+    title: query
+      ? `Résultats de recherche: ${query} - SABERO Consulting`
+      : 'Rechercher - SABERO Consulting',
+    description: 'Trouvez rapidement des sections, services et informations chez SABERO Consulting. Recherchez dans nos domaines d\'expertise: développement de produit, architecture technologique, conseil numérique et plus.',
+  },
+};
+
+const pageMeta = meta[locale as string] || meta.es;
+const path = `/${locale}/buscar`;
+
+---
+
+<BaseLayout
+  title={pageMeta.title}
+  description={pageMeta.description}
+  locale={locale as SupportedLocale}
+  path={path}
+>
+  <SearchResults locale={locale as string} query={query} />
+</BaseLayout>

@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEOLanding from '../components/sections/seo/SEOLanding.astro';
+
+const path = '/automatizaciones';
+const title = 'Automatización de Procesos | SABERO Consulting - RPA e IA';
+const description = 'Automatizamos procesos empresariales con RPA, IA y software a medida. Reducimos costos hasta 70%, eliminamos errores y liberamos a tu equipo para tareas de alto valor.';
+---
+
+<BaseLayout {title} {description} locale="es" {path}>
+  <SEOLanding
+    locale="es"
+    title="Automatización de Procesos Empresariales"
+    subtitle="Transforma tu operación con automatización inteligente"
+    description="En SABERO Consulting diseñamos e implementamos soluciones de automatización de procesos que transforman tu operación. Usamos RPA (Robotic Process Automation), inteligencia artificial, y desarrollo de software a medida para eliminar tareas repetitivas, reducir errores y acelerar tus flujos de trabajo. Nuestras automatizaciones se integran con tus sistemas existentes y escalan con tu negocio."
+    keywords={[
+      "automatización de procesos",
+      "RPA",
+      "automatización empresarial",
+      "automatización inteligente",
+      "robotic process automation",
+      "automatización de procesos Perú",
+      "optimización de procesos",
+      "transformación digital",
+      "automatización con IA"
+    ]}
+    features={[
+      {
+        icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
+        title: "RPA (Robotic Process Automation)",
+        description: "Automatizamos tareas repetitivas en sistemas legacy, ERP, CRM y hojas de cálculo. Reducción de hasta 70% en tiempo de procesamiento."
+      },
+      {
+        icon: '<path d="M12 2a10 10 0 0 1 10 10c0 5-4 8-10 8S2 17 2 12 7 2 12 2z"/><path d="M12 6v6l4 2"/>',
+        title: "Automatización con IA",
+        description: "Combinamos machine learning y procesamiento de lenguaje natural para automatizar tareas cognitivas: clasificación de documentos, extracción de datos, atención al cliente."
+      },
+      {
+        icon: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/>',
+        title: "Integración de Sistemas",
+        description: "Conectamos tus sistemas empresariales (SAP, Oracle, Salesforce, etc.) con APIs y middleware para crear flujos de trabajo automatizados end-to-end."
+      },
+      {
+        icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>',
+        title: "Workflow Automation",
+        description: "Diseñamos flujos de aprobación, notificaciones, asignaciones y escalamientos automatizados. Visibilidad total del estado de cada proceso."
+      },
+      {
+        icon: '<path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>',
+        title: "Dashboards de Procesos",
+        description: "Monitorea en tiempo real el rendimiento de tus automatizaciones. KPIs, alertas y reportes automáticos para medir el ROI."
+      },
+      {
+        icon: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+        title: "Seguridad y Compliance",
+        description: "Automatizaciones con auditoría completa, cumplimiento regulatorio (GDPR, SOX) y seguridad de datos desde el diseño."
+      }
+    ]}
+    ctaText="Automatiza tu empresa"
+    ctaHref="/contacto"
+  />
+</BaseLayout>

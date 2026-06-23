@@ -1,0 +1,191 @@
+---
+// ============================================
+// SABERO Consulting - Nosotros Values
+// ============================================
+const values = [
+  { title: 'Excelencia técnica', desc: 'Seleccionamos la tecnología correcta para cada problema, sin modas ni sobreingeniería. Código limpio, arquitectura sólida, decisiones con criterio.' },
+  { title: 'Diseño orientado a negocio', desc: 'Cada decisión técnica responde a un objetivo de negocio medible. No construimos por construir: construimos para generar impacto real.' },
+  { title: 'Relaciones de largo plazo', desc: 'Buscamos ser partners, no proveedores. Construimos relaciones que evolucionan con el tiempo, basadas en confianza y resultados.' },
+  { title: 'Cercanía cultural', desc: 'Nuestra ubicación en Perú nos da ventaja de costo, talento y zona horaria. Operamos para América y Europa con comprensión cultural única.' },
+];
+---
+
+<section class="ns-vals" id="valores" data-reveal>
+  <div class="container">
+    <div class="ns-vals-header">
+      <div class="ns-vals-tag">Nuestra cultura</div>
+      <h2 class="ns-vals-title">Valores que nos definen</h2>
+      <p class="ns-vals-sub">Cuatro pilares que guían cada decisión, cada línea de código y cada relación con nuestros clientes.</p>
+    </div>
+    <div class="ns-vals-grid">
+      {values.map((v, i) => (
+        <article class="ns-val">
+          <span class="ns-val-number">{String(i + 1).padStart(2, '0')}</span>
+          <div class="ns-val-bar"></div>
+          <div class="ns-val-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              {i === 0 && <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></>}
+              {i === 1 && <><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></>}
+              {i === 2 && <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>}
+              {i === 3 && <><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></>}
+            </svg>
+          </div>
+          <div class="ns-val-body">
+            <h3 class="ns-val-title">{v.title}</h3>
+            <p class="ns-val-desc">{v.desc}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ns-vals {
+    padding: 60px 0;
+    background: var(--color-white);
+    position: relative;
+    overflow: hidden;
+  }
+  .ns-vals::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-electric-blue), transparent);
+  }
+  .ns-vals-header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+  }
+  .ns-vals-tag {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-electric-blue);
+    background: var(--color-electric-blue-light);
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: 12px;
+  }
+  .ns-vals-title {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 800;
+    color: var(--color-deep-blue);
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+  }
+  .ns-vals-sub {
+    font-size: var(--text-base);
+    color: var(--color-gray-400);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .ns-vals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .ns-val {
+    position: relative;
+    padding: 32px 32px 32px 28px;
+    background: var(--color-white);
+    border-radius: 20px;
+    border: 1px solid var(--color-gray-100);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    cursor: default;
+    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .ns-val:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-electric-blue-light);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  }
+  .ns-val-number {
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-gray-50);
+    pointer-events: none;
+    user-select: none;
+    font-family: var(--font-primary);
+    letter-spacing: -0.06em;
+  }
+  .ns-val-bar {
+    width: 4px;
+    align-self: stretch;
+    flex-shrink: 0;
+    border-radius: 2px;
+    opacity: 0.6;
+    transition: opacity 0.45s ease;
+  }
+  .ns-val:nth-child(1) .ns-val-bar { background: var(--color-electric-blue); }
+  .ns-val:nth-child(2) .ns-val-bar { background: var(--color-red); }
+  .ns-val:nth-child(3) .ns-val-bar { background: var(--color-deep-blue); }
+  .ns-val:nth-child(4) .ns-val-bar { background: var(--color-electric-blue); }
+  .ns-val:hover .ns-val-bar { opacity: 1; }
+  .ns-val-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ns-val:nth-child(1) .ns-val-icon { color: var(--color-electric-blue); background: var(--color-electric-blue-light); }
+  .ns-val:nth-child(2) .ns-val-icon { color: var(--color-red); background: rgba(230,57,70,0.08); }
+  .ns-val:nth-child(3) .ns-val-icon { color: var(--color-deep-blue); background: var(--color-gray-50); }
+  .ns-val:nth-child(4) .ns-val-icon { color: var(--color-electric-blue); background: var(--color-electric-blue-light); }
+  .ns-val:hover .ns-val-icon {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 0 30px rgba(0,102,255,0.12);
+  }
+  .ns-val:nth-child(2):hover .ns-val-icon {
+    box-shadow: 0 0 30px rgba(230,57,70,0.15);
+  }
+  .ns-val-body {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0;
+  }
+  .ns-val-title {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--color-deep-blue);
+    margin-bottom: 8px;
+  }
+  .ns-val-desc {
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+    line-height: 1.75;
+    margin: 0;
+  }
+  @media (max-width: 768px) {
+    .ns-vals { padding: 64px 0; }
+    .ns-vals-grid { grid-template-columns: 1fr; gap: 18px; }
+    .ns-val { padding: 24px 24px 24px 20px; gap: 16px; }
+    .ns-val-number { font-size: 4rem; top: -4px; right: 8px; }
+    .ns-val-icon { width: 42px; height: 42px; border-radius: 12px; }
+    .ns-vals-sub { font-size: var(--text-sm); }
+  }
+</style>

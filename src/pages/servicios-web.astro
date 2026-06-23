@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEOLanding from '../components/sections/seo/SEOLanding.astro';
+
+const path = '/servicios-web';
+const title = 'Servicios Web y Mobile | SABERO Consulting - Desarrollo Web Perú';
+const description = 'Creamos servicios web y aplicaciones mobile de alto impacto. Desarrollo de plataformas web, apps nativas, PWAs, APIs y microservicios. Expertos en React, Next.js, Flutter, Node.js.';
+---
+
+<BaseLayout {title} {description} locale="es" {path}>
+  <SEOLanding
+    locale="es"
+    title="Servicios Web y Mobile de Alto Impacto"
+    subtitle="Creamos experiencias digitales que impulsan tu negocio"
+    description="En SABERO Consulting diseñamos y desarrollamos servicios web y aplicaciones mobile que combinan tecnología de punta con experiencia de usuario excepcional. Desde plataformas web complejas y PWAs hasta apps nativas en iOS y Android. Nuestro equipo domina las tecnologías más modernas: React, Next.js, Node.js, Flutter, Swift, Kotlin, y las mejores prácticas de arquitectura, performance y SEO."
+    keywords={[
+      "servicios web",
+      "desarrollo web",
+      "aplicaciones mobile",
+      "desarrollo de apps",
+      "los mejores en servicios web",
+      "compañías en web mobile",
+      "desarrollo web Perú",
+      "aplicaciones web progresivas",
+      "PWA",
+      "desarrollo de plataformas web",
+      "React",
+      "Next.js",
+      "Flutter"
+    ]}
+    features={[
+      {
+        icon: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+        title: "Plataformas Web",
+        description: "Desarrollamos plataformas web complejas con React, Next.js, Vue.js y Angular. Performance optimizada, SEO nativo y experiencia de usuario excepcional."
+      },
+      {
+        icon: '<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>',
+        title: "Apps Nativas y Multiplataforma",
+        description: "Apps nativas iOS (Swift) y Android (Kotlin), o multiplataforma con Flutter y React Native. La mejor experiencia en cada dispositivo."
+      },
+      {
+        icon: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+        title: "Progressive Web Apps",
+        description: "PWAs que funcionan offline, se instalan en el home screen y ofrecen experiencia nativa. Menor costo de desarrollo, mayor alcance."
+      },
+      {
+        icon: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/>',
+        title: "APIs y Microservicios",
+        description: "APIs RESTful y GraphQL escalables con Node.js, Python y Go. Arquitectura de microservicios para sistemas robustos y mantenibles."
+      },
+      {
+        icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+        title: "Cloud & DevOps",
+        description: "Despliegue en AWS, GCP y Azure. CI/CD, contenedores Docker, Kubernetes, monitoreo y escalado automático."
+      },
+      {
+        icon: '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',
+        title: "UX/UI Design",
+        description: "Diseñamos interfaces intuitivas y atractivas. Investigación de usuarios, prototipado, testing de usabilidad y diseño system."
+      }
+    ]}
+    ctaText="Construye tu plataforma"
+    ctaHref="/contacto"
+  />
+</BaseLayout>

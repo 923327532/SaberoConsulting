@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEOLanding from '../components/sections/seo/SEOLanding.astro';
+
+const path = '/fabrica-de-software';
+const title = 'Fábrica de Software | SABERO Consulting - Desarrollo de Software en Perú';
+const description = 'Somos una fábrica de software en Perú con estándares globales. Desarrollamos productos digitales, automatizaciones y soluciones IA para empresas. Equipo senior, metodología ágil, entregas rápidas.';
+---
+
+<BaseLayout {title} {description} locale="es" {path}>
+  <SEOLanding
+    locale="es"
+    title="Fábrica de Software de Clase Mundial"
+    subtitle="Desarrollamos el futuro digital de tu empresa"
+    description="En SABERO Consulting operamos como una fábrica de software moderna con talento senior en Perú. Creamos productos digitales, automatizaciones inteligentes, plataformas web y mobile, y soluciones con inteligencia artificial. Nuestro equipo combina experiencia en arquitectura tecnológica, desarrollo ágil y diseño de experiencia para entregar software que impulsa resultados reales de negocio."
+    keywords={[
+      "fábrica de software",
+      "desarrollo de software Perú",
+      "mejores fábricas de software",
+      "desarrollo de aplicaciones web",
+      "desarrollo mobile",
+      "automatización de procesos",
+      "inteligencia artificial",
+      "empresa de software Perú",
+      "desarrollo de producto digital"
+    ]}
+    features={[
+      {
+        icon: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+        title: "Fábrica de Software Ágil",
+        description: "Equipos senior multidisciplinarios listos para escalar tu producto. Metodología ágil, entregas iterativas y calidad garantizada con code reviews y testing automatizado."
+      },
+      {
+        icon: '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
+        title: "Automatización Inteligente",
+        description: "Automatizamos procesos empresariales con IA y RPA. Reducimos costos operativos, eliminamos errores manuales y aceleramos tu time-to-market."
+      },
+      {
+        icon: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+        title: "Web & Mobile Apps",
+        description: "Creamos aplicaciones web progresivas, plataformas B2B/B2C y apps nativas. Tecnologías modernas: React, Next.js, Node.js, Flutter, Swift, Kotlin."
+      },
+      {
+        icon: '<path d="M12 2a10 10 0 0 1 10 10c0 5-4 8-10 8S2 17 2 12 7 2 12 2z"/><path d="M12 6v6l4 2"/>',
+        title: "Inteligencia Artificial",
+        description: "Integramos machine learning, procesamiento de lenguaje natural y visión computacional en tus productos. Potenciamos decisiones con datos."
+      },
+      {
+        icon: '<path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>',
+        title: "Dashboards & Analytics",
+        description: "Desarrollamos paneles de control interactivos, reportes automatizados y sistemas de business intelligence para que tomes decisiones informadas."
+      },
+      {
+        icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+        title: "Arquitectura Escalable",
+        description: "Diseñamos arquitecturas cloud-native en AWS, GCP y Azure. Microservicios, serverless, alta disponibilidad y seguridad desde el diseño."
+      }
+    ]}
+    ctaText="Cotiza tu proyecto"
+    ctaHref="/contacto"
+  />
+</BaseLayout>

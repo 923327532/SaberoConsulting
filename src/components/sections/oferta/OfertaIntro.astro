@@ -34,8 +34,8 @@ const { intro } = content;
 
 <style>
   .oferta-intro {
-    padding: 140px 0 120px;
-    min-height: 600px;
+    padding: 150px 0 120px;
+    min-height: auto;
     background: 
       url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdk7Z3x-6KZSUbGnQVd87Pxo_FUvjd4m3yZA&s') center / cover no-repeat;
     position: relative;
@@ -59,12 +59,12 @@ const { intro } = content;
   .oferta-intro-grid {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
-    gap: 80px;
+    gap: 40px;
     align-items: start;
   }
 
   .oferta-title {
-    font-size: 3.8rem;
+    font-size: 2.8rem;
     font-weight: 800;
     color: #FFFFFF;
     line-height: 1.05;
@@ -81,24 +81,24 @@ const { intro } = content;
   }
 
   .oferta-description {
-    font-size: 1.35rem;
+    font-size: 1.15rem;
     font-weight: 500;
     color: #FFFFFF;
     line-height: 1.65;
-    margin: 0 0 28px;
+    margin: 0 0 20px;
     max-width: 620px;
   }
 
   .oferta-divider {
-    width: 56px;
+    width: 40px;
     height: 3px;
     background: linear-gradient(90deg, #4FC3F7, #81D4FA);
     border-radius: 2px;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
 
   .oferta-microcopy {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.8;
     color: rgba(255,255,255,0.7);
     margin: 0;
@@ -108,15 +108,15 @@ const { intro } = content;
 
   @media (max-width: 1024px) {
     .oferta-intro { padding: 60px 0 40px; }
-    .oferta-intro-grid { grid-template-columns: 1fr; gap: 32px; }
-    .oferta-title { font-size: 3rem; }
-    .oferta-description { font-size: 1.15rem; }
+    .oferta-intro-grid { grid-template-columns: 1fr; gap: 24px; }
+    .oferta-title { font-size: 2.4rem; }
+    .oferta-description { font-size: 1.05rem; }
   }
 
   @media (max-width: 640px) {
     .oferta-intro { padding: 72px 0 40px; }
-    .oferta-title { font-size: 2.4rem; }
-    .oferta-description { font-size: 1rem; }
-    .oferta-microcopy { font-size: 0.9rem; }
+    .oferta-title { font-size: 2rem; }
+    .oferta-description { font-size: 0.95rem; }
+    .oferta-microcopy { font-size: 0.85rem; }
   }
 </style>

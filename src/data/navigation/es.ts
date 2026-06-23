@@ -86,11 +86,11 @@ export const navEs: NavigationData = {
         {
           title: 'Explorar',
           items: [
-            { label: 'Casos destacados', href: '/casos' },
-            { label: 'Resultados por industria', href: '/casos#industrias' },
-            { label: 'Plataformas construidas', href: '/casos#plataformas' },
-            { label: 'Historias de producto', href: '/casos#historias' },
-            { label: 'Transformacion digital aplicada', href: '/casos#transformacion' },
+            { label: 'Casos destacados', href: '/casos/' },
+            { label: 'Resultados por industria', href: '/casos/#industrias' },
+            { label: 'Plataformas construidas', href: '/casos/#plataformas' },
+            { label: 'Historias de producto', href: '/casos/#historias' },
+            { label: 'Transformacion digital aplicada', href: '/casos/#transformacion' },
           ],
         },
         {

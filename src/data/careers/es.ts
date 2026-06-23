@@ -21,7 +21,7 @@ export const careersEs: CareersData = {
         title: 'Trabajo que trasciende',
         description:
           'Participas en productos y soluciones reales para negocios en America y Europa. Cada linea de codigo, cada decision de diseno y cada integracion tiene impacto directo en el negocio de nuestros clientes.',
-        image: 'https://blog.desdelinux.net/wp-content/uploads/2019/01/aplicaciones-software-libre-abierto-blog-desdelinux-830x553.jpg',
+        image: '/images/careers/impact.jpg',
       },
       {
         id: 'desarrollo',
@@ -30,7 +30,7 @@ export const careersEs: CareersData = {
         title: 'Aprendizaje continuo',
         description:
           'Nos tomamos en serio tu crecimiento. Accedes a retos progresivos, mentoria interna, recursos de formacion y exposicion a tecnologias actuales. Creces porque el equipo crece contigo.',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKGxNwXL9rlQLfZf3DgMdqNuSzZ5fRId-G149odS13ug&s=10',
+        image: '/images/careers/learning.jpg',
       },
       {
         id: 'colaboracion',
@@ -39,7 +39,7 @@ export const careersEs: CareersData = {
         title: 'Equipos que suman',
         description:
           'Trabajamos en equipos multidisciplinarios, cercanos y orientados a calidad. No hay silos ni jerarquias que frenen. La mejor idea gana, venga de donde venga.',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLWhFNqA_JVfTfnVNQGAUvBzOUosiqxZcft3uzwtSXDw&s=10',
+        image: '/images/careers/challenges.jpg',
       },
       {
         id: 'progreso',
@@ -48,7 +48,7 @@ export const careersEs: CareersData = {
         title: 'Carrera con horizonte',
         description:
           'Disenamos rutas de crecimiento profesional con ownership real. Desde tus primeros meses, tienes espacio para proponer, liderar y evolucionar tu rol.',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoy6zCbWoTEbd9MOiZIu_PLdES3myW93JMG8k118opcw&s=10',
+        image: '/images/careers/mentorship.jpg',
       },
     ],
   },

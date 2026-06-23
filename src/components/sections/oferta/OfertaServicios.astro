@@ -37,8 +37,9 @@ const images = [
     <div class="servicios-list">
       {items.map((item, i) => {
         const isReversed = i === 1; // Soluciones: image left, text right
+        const blockId = item.id === 'soluciones' ? 'soluciones' : item.id;
         return (
-          <article class={`serv-block ${isReversed ? 'serv-block--reversed' : ''}`} id={item.id}>
+          <article class={`serv-block ${isReversed ? 'serv-block--reversed' : ''}`} id={blockId}>
             {isReversed ? (
               <>
                 <div class="serv-block-image-wrap">

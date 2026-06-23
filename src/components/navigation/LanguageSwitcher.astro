@@ -11,6 +11,13 @@ interface Props {
 
 const { currentLocale, path, variant = 'desktop' } = Astro.props;
 
+const FLAGS: Record<string, string> = {
+  es: '/images/flags/es.svg',
+  en: '/images/flags/gb.svg',
+  fr: '/images/flags/fr.svg',
+  pt: '/images/flags/br.svg',
+};
+
 function getLocalizedHref(locale: SupportedLocale): string {
   const segments = path.split('/').filter(Boolean);
   if (LOCALES.includes(segments[0] as SupportedLocale)) {
@@ -30,7 +37,7 @@ function getLocalizedHref(locale: SupportedLocale): string {
   variant === 'desktop' ? (
     <nav class="lang-switcher" aria-label="Language selector">
       <button class="lang-current" aria-haspopup="true" aria-expanded="false" data-lang-toggle>
-        <span class="lang-current-code">{LOCALE_SHORT[currentLocale]}</span>
+        <img src={FLAGS[currentLocale]} alt="" class="lang-current-flag" width="22" height="16" loading="eager" decoding="async" />
         <svg width="8" height="5" viewBox="0 0 8 5" fill="none" aria-hidden="true">
           <path d="M1 1l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -43,8 +50,7 @@ function getLocalizedHref(locale: SupportedLocale): string {
             class={`lang-option ${locale === currentLocale ? 'active' : ''}`}
             aria-current={locale === currentLocale ? 'true' : undefined}
           >
-            <span class="lang-option-code">{LOCALE_SHORT[locale]}</span>
-            <span class="lang-option-name">{LOCALE_LABELS[locale]}</span>
+            <img src={FLAGS[locale]} alt="" class="lang-option-flag" width="22" height="16" loading="lazy" decoding="async" />
           </a>
         ))}
       </div>
@@ -60,8 +66,7 @@ function getLocalizedHref(locale: SupportedLocale): string {
             class={`lang-mobile-option ${locale === currentLocale ? 'active' : ''}`}
             aria-current={locale === currentLocale ? 'true' : undefined}
           >
-            <span class="lang-mobile-code">{LOCALE_SHORT[locale]}</span>
-            <span class="lang-mobile-name">{LOCALE_LABELS[locale]}</span>
+            <img src={FLAGS[locale]} alt="" class="lang-mobile-flag" width="22" height="16" loading="lazy" decoding="async" />
           </a>
         ))}
       </div>
@@ -140,16 +145,29 @@ function getLocalizedHref(locale: SupportedLocale): string {
     border-radius: 2px;
   }
 
-  .lang-current-code {
-    font-size: var(--text-xs);
-    font-weight: 600;
+  .lang-current-flag {
+    display: block;
+    width: 22px;
+    height: 16px;
+    border-radius: 2px;
+    object-fit: cover;
+  }
+
+  .lang-option-flag,
+  .lang-mobile-flag {
+    display: block;
+    width: 22px;
+    height: 16px;
+    border-radius: 2px;
+    object-fit: cover;
+    flex-shrink: 0;
   }
 
   .lang-dropdown {
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    min-width: 140px;
+    min-width: 48px;
     background-color: var(--color-white);
     border: 1px solid var(--color-gray-100);
     border-radius: var(--radius-md);
@@ -171,8 +189,8 @@ function getLocalizedHref(locale: SupportedLocale): string {
   .lang-option {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-2) var(--space-3);
+    justify-content: center;
+    padding: var(--space-2) var(--space-2);
     text-decoration: none;
     transition: background-color var(--transition-fast);
   }
@@ -183,24 +201,6 @@ function getLocalizedHref(locale: SupportedLocale): string {
 
   .lang-option.active {
     background-color: var(--color-gray-50);
-  }
-
-  .lang-option-code {
-    font-size: var(--text-xs);
-    font-weight: 700;
-    color: var(--accent-color);
-    min-width: 24px;
-    text-transform: uppercase;
-  }
-
-  .lang-option-name {
-    font-size: var(--text-sm);
-    color: var(--color-gray-500);
-  }
-
-  .lang-option.active .lang-option-name {
-    color: var(--color-deep-blue);
-    font-weight: 500;
   }
 
   /* ---- Mobile variant ---- */
@@ -221,15 +221,15 @@ function getLocalizedHref(locale: SupportedLocale): string {
 
   .lang-mobile-options {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--space-2);
   }
 
   .lang-mobile-option {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-3);
+    justify-content: center;
+    padding: var(--space-3) var(--space-2);
     text-decoration: none;
     background-color: var(--color-gray-50);
     border: 1px solid var(--color-gray-100);
@@ -244,23 +244,5 @@ function getLocalizedHref(locale: SupportedLocale): string {
   .lang-mobile-option.active {
     border-color: var(--accent-color);
     background-color: rgba(0, 102, 255, 0.05);
-  }
-
-  .lang-mobile-code {
-    font-size: var(--text-sm);
-    font-weight: 700;
-    color: var(--accent-color);
-    min-width: 24px;
-    text-transform: uppercase;
-  }
-
-  .lang-mobile-name {
-    font-size: var(--text-sm);
-    color: var(--color-gray-500);
-  }
-
-  .lang-mobile-option.active .lang-mobile-name {
-    color: var(--color-deep-blue);
-    font-weight: 500;
   }
 </style>

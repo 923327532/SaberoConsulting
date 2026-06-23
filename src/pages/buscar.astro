@@ -1,0 +1,17 @@
+---
+// Root route - Spanish default locale
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchResults from '../components/sections/search/SearchResults.astro';
+
+const path = '/buscar';
+const query = Astro.url.searchParams.get('q') || '';
+
+const title = query
+  ? `Resultados de búsqueda: ${query} - SABERO Consulting`
+  : 'Buscar - SABERO Consulting';
+const description = 'Encuentra rápidamente secciones, servicios e información en SABERO Consulting. Busca entre nuestras áreas de expertise: desarrollo de producto, arquitectura tecnológica, consultoría digital y más.';
+---
+
+<BaseLayout {title} {description} locale="es" {path}>
+  <SearchResults locale="es" query={query} />
+</BaseLayout>

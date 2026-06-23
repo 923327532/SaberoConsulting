@@ -1,0 +1,334 @@
+---
+interface Feature {
+  icon: string; // SVG path content
+  title: string;
+  description: string;
+}
+
+interface Props {
+  locale: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  keywords: string[];
+  features: Feature[];
+  ctaText: string;
+  ctaHref: string;
+}
+
+const { locale, title, subtitle, description, keywords, features, ctaText, ctaHref } = Astro.props;
+---
+
+<div class="seo-landing">
+  <!-- Hero Section -->
+  <section class="seo-hero">
+    <div class="seo-hero-bg"></div>
+    <div class="seo-hero-content">
+      <div class="seo-hero-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        <span>SABERO Consulting</span>
+      </div>
+      <h1 class="seo-hero-title">{title}</h1>
+      <p class="seo-hero-subtitle">{subtitle}</p>
+      <p class="seo-hero-desc">{description}</p>
+      <div class="seo-hero-keywords">
+        {keywords.map((kw) => (
+          <span class="seo-keyword-tag">{kw}</span>
+        ))}
+      </div>
+      <div class="seo-hero-actions">
+        <a href={ctaHref} class="seo-cta-primary">{ctaText}</a>
+        <a href={locale === 'es' ? '/casos' : `/${locale}/casos`} class="seo-cta-secondary">
+          {locale === 'es' ? 'Ver casos de éxito' : locale === 'fr' ? 'Voir les cas de succès' : locale === 'pt' ? 'Ver casos de sucesso' : 'View success cases'}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="seo-features">
+    <div class="seo-features-container">
+      <h2 class="seo-section-title">
+        {locale === 'es' ? '¿Por qué SABERO?' : locale === 'fr' ? 'Pourquoi SABERO?' : locale === 'pt' ? 'Por que SABERO?' : 'Why SABERO?'}
+      </h2>
+      <div class="seo-features-grid">
+        {features.map((feature) => (
+          <div class="seo-feature-card">
+            <div class="seo-feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={feature.icon}></svg>
+            </div>
+            <h3 class="seo-feature-title">{feature.title}</h3>
+            <p class="seo-feature-desc">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="seo-cta-section">
+    <div class="seo-cta-container">
+      <h2 class="seo-cta-title">
+        {locale === 'es' ? '¿Listo para transformar tu negocio?' : locale === 'fr' ? 'Prêt à transformer votre entreprise?' : locale === 'pt' ? 'Pronto para transformar seu negócio?' : 'Ready to transform your business?'}
+      </h2>
+      <p class="seo-cta-desc">
+        {locale === 'es' ? 'Contáctanos hoy y descubre cómo podemos ayudarte a alcanzar tus objetivos.' : locale === 'fr' ? 'Contactez-nous dès aujourd\'hui et découvrez comment nous pouvons vous aider à atteindre vos objectifs.' : locale === 'pt' ? 'Entre em contato hoje e descubra como podemos ajudá-lo a alcançar seus objetivos.' : 'Contact us today and discover how we can help you achieve your goals.'}
+      </p>
+      <a href={ctaHref} class="seo-cta-primary seo-cta-large">{ctaText}</a>
+    </div>
+  </section>
+</div>
+
+<style>
+  .seo-landing {
+    overflow: hidden;
+  }
+
+  /* ---- Hero ---- */
+  .seo-hero {
+    position: relative;
+    padding: 100px 24px 80px;
+    text-align: center;
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d0d2b 100%);
+    overflow: hidden;
+  }
+
+  .seo-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0, 102, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(229, 57, 53, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, rgba(0, 102, 255, 0.04) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .seo-hero-content {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .seo-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4da6ff;
+    background: rgba(0, 102, 255, 0.1);
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    border-radius: 9999px;
+    margin-bottom: 24px;
+  }
+
+  .seo-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 16px;
+    line-height: 1.15;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .seo-hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #4da6ff;
+    margin: 0 0 12px;
+  }
+
+  .seo-hero-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    margin: 0 0 24px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .seo-hero-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .seo-keyword-tag {
+    display: inline-flex;
+    padding: 5px 12px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+  }
+
+  .seo-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .seo-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4da6ff 0%, #0066ff 50%, #0052cc 100%);
+    border: none;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 102, 255, 0.3);
+  }
+
+  .seo-cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 102, 255, 0.4);
+  }
+
+  .seo-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .seo-cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  /* ---- Features ---- */
+  .seo-features {
+    padding: 80px 24px;
+    background: #f8fafc;
+  }
+
+  .seo-features-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .seo-section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    text-align: center;
+    margin: 0 0 48px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .seo-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .seo-feature-card {
+    padding: 32px 28px;
+    background: #ffffff;
+    border: 1px solid #e8ecf2;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .seo-feature-card:hover {
+    border-color: #0066ff;
+    box-shadow: 0 8px 24px rgba(0, 102, 255, 0.08);
+    transform: translateY(-4px);
+  }
+
+  .seo-feature-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(229, 57, 53, 0.08));
+    border-radius: 14px;
+    margin-bottom: 20px;
+    color: #0066ff;
+  }
+
+  .seo-feature-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 10px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .seo-feature-desc {
+    font-size: 0.92rem;
+    color: #667085;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ---- CTA ---- */
+  .seo-cta-section {
+    padding: 80px 24px;
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d0d2b 100%);
+    text-align: center;
+  }
+
+  .seo-cta-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .seo-cta-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 16px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .seo-cta-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    margin: 0 0 32px;
+  }
+
+  .seo-cta-large {
+    padding: 16px 40px;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 640px) {
+    .seo-hero-title {
+      font-size: 2rem;
+    }
+    .seo-hero {
+      padding: 80px 16px 60px;
+    }
+    .seo-features {
+      padding: 60px 16px;
+    }
+    .seo-features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

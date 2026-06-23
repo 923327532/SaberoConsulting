@@ -10,16 +10,16 @@ interface Props {
   currentLocale: SupportedLocale;
   path: string;
   isOpen: boolean;
-  onClose?: string;
 }
 
-const { navigation, currentLocale, path, isOpen } = Astro.props;
-const megaMenuKeys = Object.keys(navigation.megaMenus);
+const { navigation, currentLocale, path } = Astro.props;
+const megaMenuKeys = Object.keys(navigation.megaMenus || {});
+const items = navigation.main || [];
 ---
 
-<div class={`mobile-menu ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>
+<div class="mobile-menu" data-mobile-menu>
   <div class="mobile-menu-overlay" data-close-mobile></div>
-  <div class="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mobile-menu-panel">
     <div class="mobile-menu-header">
       <span class="mobile-menu-title">{t(currentLocale, 'header.menu')}</span>
       <button class="mobile-close" data-close-mobile aria-label="Close menu">
@@ -29,34 +29,28 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
       </button>
     </div>
 
-    <nav class="mobile-nav" aria-label="Main navigation">
+    <nav class="mobile-nav">
       <ul class="mobile-nav-list">
-        {navigation.main.map((item) => {
-          const menuKey = megaMenuKeys.find((k) =>
-            item.href.includes(k) || item.label.toLowerCase().includes(k)
-          );
+        {items.map((item) => {
+          const menuKey = megaMenuKeys.find((k) => item.href.includes(k));
           const megaSection = menuKey ? navigation.megaMenus[menuKey] : null;
 
           return (
             <li class="mobile-nav-item">
-              <details class="mobile-accordion">
-                <summary class="mobile-accordion-trigger">
-                  <span>{item.label}</span>
-                  <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </summary>
-                {megaSection && (
+              {megaSection ? (
+                <details class="mobile-accordion">
+                  <summary class="mobile-accordion-trigger">
+                    <span>{item.label}</span>
+                    <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                  </summary>
                   <div class="mobile-accordion-content">
                     {megaSection.columns.map((col) => (
                       <div class="mobile-col">
-                        {col.title && (
-                          <h4 class="mobile-col-title">{col.title}</h4>
-                        )}
-                        {col.text && (
-                          <p class="mobile-col-text">{col.text}</p>
-                        )}
-                        {col.items.length > 0 && (
+                        {col.title && <h4 class="mobile-col-title">{col.title}</h4>}
+                        {col.text && <p class="mobile-col-text">{col.text}</p>}
+                        {(col.items || []).length > 0 && (
                           <ul class="mobile-col-list">
                             {col.items.map((subItem) => (
                               <li>
@@ -70,8 +64,12 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
                       </div>
                     ))}
                   </div>
-                )}
-              </details>
+                </details>
+              ) : (
+                <a href={localizeNavHref(item.href, currentLocale)} class="mobile-simple-link">
+                  {item.label}
+                </a>
+              )}
             </li>
           );
         })}
@@ -79,7 +77,7 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     </nav>
 
     <div class="mobile-cta">
-      <a href={localizeNavHref('/contacto', currentLocale)} class="btn btn-primary mobile-contact-btn">
+      <a href={localizeNavHref('/contacto', currentLocale)} class="mobile-contact-btn">
         {t(currentLocale, 'header.cta')}
       </a>
     </div>
@@ -89,26 +87,49 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
 </div>
 
 <script>
-  document.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement;
-    const closeTrigger = target.closest('[data-close-mobile]') as HTMLElement | null;
-    if (closeTrigger) {
-      const menu = closeTrigger.closest('.mobile-menu');
-      if (menu) {
-        menu.classList.remove('open');
-        menu.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
+  // This script handles toggling the mobile menu
+  const menu = document.querySelector('[data-mobile-menu]');
+  const toggleBtn = document.querySelector('[data-toggle-mobile]');
+
+  function openMobile() {
+    if (!menu) return;
+    menu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobile() {
+    if (!menu) return;
+    menu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  toggleBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (menu?.classList.contains('open')) {
+      closeMobile();
+    } else {
+      openMobile();
     }
   });
 
-  document.addEventListener('astro:page-load', () => {
-    const menu = document.querySelector('.mobile-menu');
-    if (menu) {
-      menu.classList.remove('open');
-      menu.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+  // Close on overlay click or close button
+  menu?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('[data-close-mobile]') || target.classList.contains('mobile-menu-overlay')) {
+      closeMobile();
     }
+  });
+
+  // Close on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu?.classList.contains('open')) {
+      closeMobile();
+    }
+  });
+
+  // Close on astro page navigation
+  document.addEventListener('astro:page-load', () => {
+    closeMobile();
   });
 </script>
 
@@ -117,7 +138,7 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     display: none;
     position: fixed;
     inset: 0;
-    z-index: 1500;
+    z-index: 9999;
   }
 
   .mobile-menu.open {
@@ -125,39 +146,37 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
   }
 
   .mobile-menu-overlay {
-    position: absolute;
+    position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
   }
 
   .mobile-menu-panel {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     width: 100%;
     max-width: 400px;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-primary);
-    box-shadow: var(--shadow-xl);
+    background: #fff;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    z-index: 10000;
   }
 
   .mobile-menu-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-4) var(--space-6);
-    border-bottom: 1px solid var(--border-color);
+    padding: 16px 24px;
+    border-bottom: 1px solid #eaeef2;
   }
 
   .mobile-menu-title {
-    font-size: var(--text-lg);
+    font-size: 1.125rem;
     font-weight: 700;
+    color: #1a1a2e;
   }
 
   .mobile-close {
@@ -166,33 +185,41 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
     justify-content: center;
     width: 40px;
     height: 40px;
-    color: var(--text-secondary);
-    border-radius: var(--radius-md);
+    color: #475467;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
   }
 
   .mobile-close:hover {
-    background-color: var(--bg-tertiary);
+    background: #f5f7fa;
   }
 
   .mobile-nav-list {
-    display: flex;
-    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .mobile-accordion {
-    border-bottom: 1px solid var(--border-color);
+  .mobile-nav-item {
+    border-bottom: 1px solid #eaeef2;
   }
 
   .mobile-accordion-trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-4) var(--space-6);
-    font-size: var(--text-base);
+    padding: 16px 24px;
+    font-size: 1rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #1a1a2e;
     cursor: pointer;
     list-style: none;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
   }
 
   .mobile-accordion-trigger::-webkit-details-marker {
@@ -200,8 +227,9 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
   }
 
   .accordion-icon {
-    transition: transform var(--transition-base);
-    color: var(--text-tertiary);
+    transition: transform 0.2s ease;
+    color: #98a2b3;
+    flex-shrink: 0;
   }
 
   details[open] .accordion-icon {
@@ -209,52 +237,80 @@ const megaMenuKeys = Object.keys(navigation.megaMenus);
   }
 
   .mobile-accordion-content {
-    padding: 0 var(--space-6) var(--space-6);
+    padding: 0 24px 16px;
   }
 
   .mobile-col {
-    margin-bottom: var(--space-4);
+    margin-bottom: 16px;
   }
 
   .mobile-col-title {
-    font-size: var(--text-xs);
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--accent-color);
-    margin-bottom: var(--space-2);
+    color: #0066ff;
+    margin-bottom: 8px;
   }
 
   .mobile-col-text {
-    font-size: var(--text-sm);
-    color: var(--text-tertiary);
-    margin-bottom: var(--space-3);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #475467;
+    margin-bottom: 12px;
   }
 
   .mobile-col-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .mobile-sub-link {
     display: block;
-    padding: var(--space-2) 0;
-    font-size: var(--text-sm);
-    color: var(--text-secondary);
+    padding: 8px 0;
+    font-size: 0.875rem;
+    color: #475467;
     text-decoration: none;
   }
 
   .mobile-sub-link:hover {
-    color: var(--accent-color);
+    color: #0066ff;
+  }
+
+  .mobile-simple-link {
+    display: block;
+    padding: 16px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    text-decoration: none;
+  }
+
+  .mobile-simple-link:hover {
+    color: #0066ff;
   }
 
   .mobile-cta {
-    padding: var(--space-4) var(--space-6);
+    padding: 16px 24px;
+    border-top: 1px solid #eaeef2;
   }
 
   .mobile-contact-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #4da6ff, #0066ff 50%, #0052cc);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 102, 255, 0.2);
   }
 
   @media (min-width: 1025px) {

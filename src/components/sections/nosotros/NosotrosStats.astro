@@ -1,0 +1,72 @@
+---
+// ============================================
+// SABERO Consulting - Nosotros Stats
+// ============================================
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+
+const stats = [
+  { number: '2018', label: 'Fundación' },
+  { number: '+40', label: 'Profesionales' },
+  { number: '+30', label: 'Proyectos entregados' },
+  { number: '3', label: 'Continentes' },
+];
+---
+
+<section class="ns-stats" id="stats" data-reveal>
+  <div class="container">
+    <div class="ns-stats-grid">
+      {stats.map((s) => (
+        <div class="ns-stat">
+          <span class="ns-stat-num">{s.number}</span>
+          <span class="ns-stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ns-stats {
+    padding: 0;
+    background: var(--color-deep-blue);
+  }
+  .ns-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .ns-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .ns-stat + .ns-stat {
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .ns-stat-num {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--color-electric-blue);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .ns-stat-label {
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  @media (max-width: 640px) {
+    .ns-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .ns-stat:nth-child(3) { border-left: none; }
+  }
+</style>

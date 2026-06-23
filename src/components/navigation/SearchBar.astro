@@ -1,0 +1,367 @@
+---
+interface Props {
+  currentLocale: string;
+}
+
+const { currentLocale } = Astro.props;
+const placeholder = currentLocale === 'es' ? 'Buscar...' : currentLocale === 'fr' ? 'Rechercher...' : currentLocale === 'pt' ? 'Buscar...' : 'Search...';
+---
+
+<div class="sb-search-bar" data-search-bar data-locale={currentLocale}>
+  <button class="sb-search-toggle" aria-label="Search" data-search-toggle>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+  </button>
+  <div class="sb-search-expand" data-search-expand>
+    <div class="sb-search-input-group">
+      <svg class="sb-search-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <div class="sb-search-input-wrapper">
+        <input type="text" class="sb-search-input" placeholder={placeholder} data-search-input aria-label={placeholder} autocomplete="off" />
+        <span class="sb-search-autocomplete" data-search-autocomplete></span>
+      </div>
+      <button class="sb-search-close" data-search-close aria-label="Close search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const bar = document.querySelector('[data-search-bar]');
+  const toggle = bar?.querySelector('[data-search-toggle]');
+  const expand = bar?.querySelector('[data-search-expand]') as HTMLElement;
+  const input = bar?.querySelector('[data-search-input]') as HTMLInputElement;
+  const autocomplete = bar?.querySelector('[data-search-autocomplete]') as HTMLElement;
+  const close = bar?.querySelector('[data-search-close]');
+  const locale = bar?.getAttribute('data-locale') || 'es';
+
+  const searchItems = [
+    { label: 'Nuestra oferta', labelEn: 'Our offering', labelFr: 'Notre offre', labelPt: 'Nossa oferta', href: '/oferta/' },
+    { label: 'Industrias', labelEn: 'Industries', labelFr: 'Industries', labelPt: 'Indústrias', href: '/industrias/' },
+    { label: 'Casos e impacto', labelEn: 'Cases & impact', labelFr: 'Cas et impact', labelPt: 'Casos e impacto', href: '/casos/' },
+    { label: 'Insights', labelEn: 'Insights', labelFr: 'Insights', labelPt: 'Insights', href: '/insights/' },
+    { label: 'Nosotros', labelEn: 'About us', labelFr: 'À propos', labelPt: 'Sobre nós', href: '/nosotros/' },
+    { label: 'Contacto', labelEn: 'Contact', labelFr: 'Contact', labelPt: 'Contato', href: '/contacto/' },
+    { label: 'Careers', labelEn: 'Careers', labelFr: 'Carrières', labelPt: 'Carreiras', href: '/careers/' },
+    { label: 'Desarrollo de producto', labelEn: 'Product development', labelFr: 'Développement de produit', labelPt: 'Desenvolvimento de produto', href: '/oferta/' },
+    { label: 'Arquitectura tecnológica', labelEn: 'Technology architecture', labelFr: 'Architecture technologique', labelPt: 'Arquitetura tecnológica', href: '/oferta/' },
+    { label: 'Consultoría digital', labelEn: 'Digital consulting', labelFr: 'Consulting numérique', labelPt: 'Consultoria digital', href: '/oferta/' },
+    { label: 'Fábrica de Software', labelEn: 'Software Factory', labelFr: 'Usine Logicielle', labelPt: 'Fábrica de Software', href: '/fabrica-de-software/' },
+    { label: 'Automatizaciones', labelEn: 'Automation', labelFr: 'Automatisation', labelPt: 'Automação', href: '/automatizaciones/' },
+    { label: 'Inteligencia Artificial', labelEn: 'Artificial Intelligence', labelFr: 'Intelligence Artificielle', labelPt: 'Inteligência Artificial', href: '/inteligencia-artificial/' },
+    { label: 'Servicios Web y Mobile', labelEn: 'Web & Mobile Services', labelFr: 'Services Web et Mobile', labelPt: 'Serviços Web e Mobile', href: '/servicios-web/' },
+    { label: 'PropTech', labelEn: 'PropTech', labelFr: 'PropTech', labelPt: 'PropTech', href: '/industrias/' },
+    { label: 'Fintech y pagos', labelEn: 'Fintech & payments', labelFr: 'Fintech et paiements', labelPt: 'Fintech e pagamentos', href: '/industrias/' },
+    { label: 'Marketplaces y plataformas', labelEn: 'Marketplaces & platforms', labelFr: 'Marketplaces et plateformes', labelPt: 'Marketplaces e plataformas', href: '/industrias/' },
+    { label: 'Educación y EdTech', labelEn: 'Education & EdTech', labelFr: 'Éducation et EdTech', labelPt: 'Educação e EdTech', href: '/industrias/' },
+    { label: 'Logística y operaciones', labelEn: 'Logistics & operations', labelFr: 'Logistique et opérations', labelPt: 'Logística e operações', href: '/industrias/' },
+    { label: 'Soluciones internas empresariales', labelEn: 'Internal enterprise solutions', labelFr: "Solutions internes d'entreprise", labelPt: 'Soluções internas empresariais', href: '/industrias/' },
+    { label: 'Plataformas inmobiliarias', labelEn: 'Real estate platforms', labelFr: 'Plateformes immobilières', labelPt: 'Plataformas imobiliárias', href: '/casos/' },
+    { label: 'Procesamiento de pagos', labelEn: 'Payment processing', labelFr: 'Traitement des paiements', labelPt: 'Processamento de pagamentos', href: '/casos/' },
+    { label: 'Portales B2B y B2C', labelEn: 'B2B and B2C portals', labelFr: 'Portails B2B et B2C', labelPt: 'Portais B2B e B2C', href: '/casos/' },
+    { label: 'Gestión operativa y dashboards', labelEn: 'Operational management & dashboards', labelFr: 'Gestion opérationnelle et tableaux de bord', labelPt: 'Gestão operacional e dashboards', href: '/casos/' },
+    { label: 'Automatización de procesos', labelEn: 'Process automation', labelFr: 'Automatisation des processus', labelPt: 'Automação de processos', href: '/casos/' },
+    { label: 'Experiencias digitales', labelEn: 'Digital experiences', labelFr: 'Expériences numériques', labelPt: 'Experiências digitais', href: '/casos/' },
+    { label: 'Equipo', labelEn: 'Team', labelFr: 'Équipe', labelPt: 'Equipe', href: '/nosotros/' },
+    { label: 'Cultura', labelEn: 'Culture', labelFr: 'Culture', labelPt: 'Cultura', href: '/nosotros/' },
+    { label: 'Metodología', labelEn: 'Methodology', labelFr: 'Méthodologie', labelPt: 'Metodologia', href: '/nosotros/' },
+  ];
+
+  let selectedIndex = -1;
+  let currentSuggestions: any[] = [];
+
+  function getLabel(item: any, l: string): string {
+    const key = 'label' + l.charAt(0).toUpperCase() + l.slice(1);
+    return item[key] || item.label;
+  }
+
+  function normalize(text: string): string {
+    return text.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9\s]/g, '');
+  }
+
+  function filterResults(query: string): any[] {
+    if (!query || query.length < 1) return [];
+    const q = normalize(query);
+    return searchItems.filter((item: any) => {
+      const label = normalize(getLabel(item, locale));
+      return label.includes(q);
+    }).slice(0, 8);
+  }
+
+  function navigateTo(path: string) {
+    window.location.href = path;
+  }
+
+  function updateAutocomplete() {
+    const query = input?.value?.trim() || '';
+    if (!query) {
+      autocomplete.textContent = '';
+      autocomplete.style.display = 'none';
+      currentSuggestions = [];
+      selectedIndex = -1;
+      return;
+    }
+
+    currentSuggestions = filterResults(query);
+    selectedIndex = -1;
+
+    if (currentSuggestions.length > 0) {
+      const first = getLabel(currentSuggestions[0], locale);
+      // Show the remainder of the first suggestion after what user typed
+      const q = normalize(query);
+      const normalized = normalize(first);
+      if (normalized.startsWith(q)) {
+        const remainder = first.slice(query.length);
+        autocomplete.textContent = remainder;
+        autocomplete.style.display = 'block';
+      } else {
+        autocomplete.style.display = 'none';
+      }
+    } else {
+      autocomplete.style.display = 'none';
+    }
+  }
+
+  function acceptAutocomplete() {
+    if (currentSuggestions.length > 0 && selectedIndex === -1) {
+      const first = getLabel(currentSuggestions[0], locale);
+      input.value = first;
+      autocomplete.textContent = '';
+      autocomplete.style.display = 'none';
+      // Move cursor to end
+      input.setSelectionRange(first.length, first.length);
+    }
+  }
+
+  function openSearch() {
+    bar?.classList.add('open');
+    expand?.classList.add('open');
+    setTimeout(() => {
+      input?.focus();
+      updateAutocomplete();
+    }, 200);
+  }
+
+  function closeSearch() {
+    bar?.classList.remove('open');
+    expand?.classList.remove('open');
+    autocomplete.textContent = '';
+    autocomplete.style.display = 'none';
+    currentSuggestions = [];
+    selectedIndex = -1;
+    if (input) input.value = '';
+  }
+
+  toggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (bar?.classList.contains('open')) {
+      closeSearch();
+    } else {
+      openSearch();
+    }
+  });
+
+  close?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeSearch();
+  });
+
+  input?.addEventListener('input', () => {
+    updateAutocomplete();
+  });
+
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeSearch();
+    }
+    if (e.key === 'Tab' || e.key === 'ArrowRight') {
+      // Accept autocomplete suggestion
+      if (autocomplete.textContent) {
+        e.preventDefault();
+        acceptAutocomplete();
+      }
+    }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const query = input.value.trim();
+      if (query) {
+        // If there's an autocomplete suggestion, navigate to it
+        if (currentSuggestions.length > 0) {
+          navigateTo(currentSuggestions[0].href);
+        } else {
+          const basePath = locale === 'es' ? '' : '/' + locale;
+          window.location.href = basePath + '/buscar/?q=' + encodeURIComponent(query);
+        }
+      }
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (bar?.classList.contains('open') && !bar.contains(target)) {
+      closeSearch();
+    }
+  });
+</script>
+
+<style>
+  /* ============================================
+     SABERO Search Bar - Inline Autocomplete
+     ============================================ */
+
+  .sb-search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ---- Toggle Button ---- */
+  .sb-search-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #475467;
+    transition: all 0.2s ease;
+    padding: 0;
+  }
+
+  .sb-search-toggle:hover {
+    border-color: #0066ff;
+    color: #0066ff;
+    background: rgba(0, 102, 255, 0.04);
+  }
+
+  /* ---- Expand Panel ---- */
+  .sb-search-expand {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    transform-origin: right center;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.2s ease, opacity 0.15s ease, visibility 0.15s ease;
+    z-index: 1001;
+  }
+
+  .sb-search-expand.open {
+    transform: translateY(-50%) scaleY(1);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* ---- Input Group ---- */
+  .sb-search-input-group {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    padding: 0 0 0 12px;
+    width: 280px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .sb-search-input-group:focus-within {
+    border-color: #0066ff;
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+  }
+
+  .sb-search-input-icon {
+    flex-shrink: 0;
+    color: #98a2b3;
+  }
+
+  .sb-search-input-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .sb-search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 9px 10px;
+    font-size: 0.875rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1d2939;
+    background: transparent;
+    min-width: 0;
+    box-shadow: none;
+    height: auto;
+    line-height: 20px;
+    position: relative;
+    z-index: 2;
+    caret-color: #0066ff;
+  }
+
+  .sb-search-input::placeholder {
+    color: #98a2b3;
+    opacity: 1;
+  }
+
+  .sb-search-autocomplete {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.875rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #c0c8d4;
+    line-height: 20px;
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 20px);
+    z-index: 1;
+    display: none;
+  }
+
+  .sb-search-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #98a2b3;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    margin-right: 4px;
+    padding: 0;
+  }
+
+  .sb-search-close:hover {
+    color: #e53935;
+    background: rgba(229, 57, 53, 0.06);
+  }
+
+  @media (max-width: 1024px) {
+    .sb-search-bar {
+      display: none;
+    }
+  }
+</style>

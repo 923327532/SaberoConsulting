@@ -21,7 +21,7 @@ export const careersEn: CareersData = {
         title: 'Work that matters',
         description:
           'You participate in real products and solutions for businesses in the Americas and Europe. Every line of code, every design decision has direct business impact.',
-        image: '/images/careers/impact-team.jpg',
+        image: '/images/careers/impact.jpg',
       },
       {
         id: 'development',
@@ -30,7 +30,7 @@ export const careersEn: CareersData = {
         title: 'Continuous learning',
         description:
           'We take your growth seriously. You get progressive challenges, internal mentorship, training resources and exposure to modern technologies.',
-        image: '/images/careers/development-team.jpg',
+        image: '/images/careers/learning.jpg',
       },
       {
         id: 'collaboration',
@@ -39,7 +39,7 @@ export const careersEn: CareersData = {
         title: 'Teams that add up',
         description:
           'We work in multidisciplinary, close-knit teams focused on quality. No silos, no hierarchies that hold you back. The best idea wins.',
-        image: '/images/careers/collab-team.jpg',
+        image: '/images/careers/challenges.jpg',
       },
       {
         id: 'progress',
@@ -48,7 +48,7 @@ export const careersEn: CareersData = {
         title: 'Career with horizon',
         description:
           'We design professional growth paths with real ownership. From your first months, you have space to propose, lead and evolve your role.',
-        image: '/images/careers/progress-team.jpg',
+        image: '/images/careers/mentorship.jpg',
       },
     ],
   },

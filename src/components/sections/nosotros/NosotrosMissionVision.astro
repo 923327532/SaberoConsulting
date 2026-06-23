@@ -1,0 +1,143 @@
+---
+// ============================================
+// SABERO Consulting - Nosotros Mission & Vision
+// ============================================
+const mision = 'Convertir el talento latinoamericano en el motor de innovación digital global. Diseñamos, desarrollamos y evolucionamos plataformas que resuelven problemas reales de negocio, con la misma calidad, compromiso y excelencia que cualquier hub tecnológico del mundo.';
+const vision = 'Ser el partner de referencia para empresas que buscan escalar sus productos digitales desde América hacia el mundo, reconociendo que el talento y la cercanía cultural son ventajas competitivas invencibles.';
+---
+
+<section class="ns-mv" id="mision-vision" data-reveal>
+  <div class="container">
+    <div class="ns-mv-header">
+      <div class="ns-mv-tag">Nuestro propósito</div>
+      <h2 class="ns-mv-title">Misión y visión</h2>
+    </div>
+    <div class="ns-mv-grid">
+      <div class="ns-mv-card">
+        <div class="ns-mv-accent"></div>
+        <div class="ns-mv-body">
+          <h3 class="ns-mv-cardtitle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Misión
+          </h3>
+          <p>{mision}</p>
+        </div>
+      </div>
+      <div class="ns-mv-card">
+        <div class="ns-mv-accent"></div>
+        <div class="ns-mv-body">
+          <h3 class="ns-mv-cardtitle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            Visión
+          </h3>
+          <p>{vision}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ns-mv {
+    padding: 60px 0;
+    background: var(--color-off-white);
+    position: relative;
+  }
+  .ns-mv::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-electric-blue), transparent);
+  }
+  .ns-mv-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .ns-mv-tag {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-electric-blue);
+    background: var(--color-electric-blue-light);
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: 12px;
+  }
+  .ns-mv-title {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 800;
+    color: var(--color-deep-blue);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .ns-mv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .ns-mv-card {
+    display: flex;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1.5px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+  }
+  .ns-mv-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(135deg, #E62325, #1D5BF1);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .ns-mv-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+  .ns-mv-accent {
+    width: 6px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, #E62325, #1D5BF1);
+  }
+  .ns-mv-body {
+    padding: 40px 36px;
+    flex: 1;
+  }
+  .ns-mv-cardtitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--text-xl);
+    font-weight: 800;
+    color: var(--color-deep-blue);
+    margin: 0 0 16px;
+  }
+  .ns-mv-cardtitle svg {
+    color: var(--color-electric-blue);
+    flex-shrink: 0;
+  }
+  .ns-mv-card p {
+    font-size: var(--text-sm);
+    line-height: 1.9;
+    color: var(--color-gray-500);
+    margin: 0;
+  }
+  @media (max-width: 768px) {
+    .ns-mv { padding: 64px 0; }
+    .ns-mv-grid { grid-template-columns: 1fr; gap: 20px; }
+    .ns-mv-body { padding: 32px 28px; }
+  }
+</style>

@@ -21,7 +21,7 @@ export const careersPt: CareersData = {
         title: 'Trabalho que transcende',
         description:
           'Voce participa de produtos e solucoes reais para negocios na America e Europa. Cada linha de codigo, cada decisao de design tem impacto direto no negocio.',
-        image: '/images/careers/impact-team.jpg',
+        image: '/images/careers/impact.jpg',
       },
       {
         id: 'desenvolvimento',
@@ -30,7 +30,7 @@ export const careersPt: CareersData = {
         title: 'Aprendizado continuo',
         description:
           'Levamos seu crescimento a serio. Voce tem acesso a desafios progressivos, mentoria interna, recursos de formacao e exposicao a tecnologias atuais.',
-        image: '/images/careers/development-team.jpg',
+        image: '/images/careers/learning.jpg',
       },
       {
         id: 'colaboracao',
@@ -39,7 +39,7 @@ export const careersPt: CareersData = {
         title: 'Equipes que somam',
         description:
           'Trabalhamos em equipes multidisciplinares, proximas e orientadas a qualidade. Sem silos ou hierarquias que atrapalhem.',
-        image: '/images/careers/collab-team.jpg',
+        image: '/images/careers/challenges.jpg',
       },
       {
         id: 'progresso',
@@ -48,7 +48,7 @@ export const careersPt: CareersData = {
         title: 'Carreira com horizonte',
         description:
           'Projetamos rotas de crescimento profissional com ownership real. Desde seus primeiros meses, voce tem espaco para propor, liderar e evoluir.',
-        image: '/images/careers/progress-team.jpg',
+        image: '/images/careers/mentorship.jpg',
       },
     ],
   },
