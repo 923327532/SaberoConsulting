@@ -2,11 +2,34 @@
 // ============================================
 // SABERO Consulting - Nosotros Story (Timeline)
 // ============================================
+const defaultStoryImage = 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80';
+
 const milestones = [
-  { year: '2018', title: 'Fundación', desc: 'Nacimos en Lima con la convicción de que el talento latinoamericano puede competir al más alto nivel global.' },
-  { year: '2020', title: 'Crecimiento', desc: 'Proyectos más complejos, clientes en toda América. Plataformas que procesan pagos, conectan personas y automatizan operaciones.' },
-  { year: '2022', title: 'Expansión global', desc: 'Llegamos a Europa, consolidando presencia en 3 continentes. Cada proyecto es una relación de largo plazo.' },
-  { year: '2024', title: 'Presente', desc: '+40 profesionales, +30 proyectos, 3 continentes. Seguimos creciendo con la misma convicción.' },
+  {
+    year: '2018',
+    title: 'Fundación',
+    desc: 'Nacimos en Lima con la convicción de que el talento latinoamericano puede competir al más alto nivel global.',
+    image: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    year: '2020',
+    title: 'Crecimiento',
+    desc: 'Proyectos más complejos, clientes en toda América. Plataformas que procesan pagos, conectan personas y automatizan operaciones.',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80',
+    icon: 'cloud',
+  },
+  {
+    year: '2022',
+    title: 'Expansión global',
+    desc: 'Llegamos a Europa, consolidando presencia en 3 continentes. Cada proyecto es una relación de largo plazo.',
+    image: 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    year: '2024',
+    title: 'Presente',
+    desc: '+40 profesionales, +30 proyectos, 3 continentes. Seguimos creciendo con la misma convicción.',
+    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80',
+  },
 ];
 ---
 
@@ -17,31 +40,104 @@ const milestones = [
       <h2 class="ns-story-title">De Lima para el mundo</h2>
     </div>
     <div class="ns-story-body">
-      <div class="ns-story-timeline">
-        <div class="ns-story-line"></div>
-        {milestones.map((m, i) => (
-          <div class="ns-story-milestone" data-img={i}>
-            <div class="ns-story-milestone-dot"></div>
-            <div class="ns-story-milestone-year">{m.year}</div>
-            <h3 class="ns-story-milestone-title">{m.title}</h3>
-            <p class="ns-story-milestone-desc">{m.desc}</p>
+      <div class="ns-story-gear-panel">
+        <div class="ns-story-gear" style="--gear-rotation:0deg;">
+          <div class="ns-story-gear-ring"></div>
+          <div class="ns-story-gear-axis"></div>
+          <div class="ns-story-gear-core">SABERO</div>
+          <div class="ns-story-gear-launch">
+            <button type="button" aria-label="Descubrir historia">Descubrir historia</button>
           </div>
-        ))}
-        <div class="ns-story-quote">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-          <p>El talento latinoamericano puede competir al más alto nivel global.</p>
+
+          {milestones.map((step, i) => (
+            <button type="button" class={`ns-story-gear-step ${i === 0 ? 'is-active' : ''}`} data-step={i} aria-label={step.title}>
+              <span>{i + 1}</span>
+              <small>{step.title}</small>
+            </button>
+          ))}
         </div>
       </div>
-      <div class="ns-story-visual">
-        <div class="ns-story-img-frame">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="" loading="lazy" />
-          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80" alt="" loading="lazy" />
-          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="" loading="lazy" />
-          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" alt="" loading="lazy" />
-        </div>
+
+      <div class="ns-story-content">
+        {milestones.map((step, i) => (
+          <article class={`ns-story-step ${i === 0 ? 'is-active' : ''}`} data-step={i}>
+            <div class="ns-story-step-card">
+              <div class="ns-story-step-meta">
+                <span>{step.year}</span>
+              </div>
+              <h3>{step.title}</h3>
+              <p>{step.desc}</p>
+              {step.icon === 'cloud' ? (
+                <div class="ns-story-step-badge">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="#1D4ED8"/>
+                  </svg>
+                  <span>Cloud platform</span>
+                </div>
+              ) : null}
+              <div class="ns-story-step-image">
+                <img src={step.image} alt={step.title} loading="lazy" />
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
     </div>
   </div>
+
+  <script>
+    (() => {
+      const section = document.querySelector('.ns-story');
+      if (!section) return;
+
+      const buttons = Array.from(section.querySelectorAll('.ns-story-gear-step'));
+      const steps = Array.from(section.querySelectorAll('.ns-story-step'));
+      const gear = section.querySelector('.ns-story-gear');
+      const launch = section.querySelector('.ns-story-gear-launch');
+      let currentIndex = 0;
+      let ticking = false;
+
+      const revealStory = () => {
+        section.classList.add('has-revealed');
+        if (launch) launch.style.opacity = '0';
+      };
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        if (!entries[0]?.isIntersecting) return;
+        revealStory();
+        observer.unobserve(section);
+      }, { threshold: 0.65, rootMargin: '0px 0px 0px 0px' });
+
+      revealObserver.observe(section);
+
+      const setActiveStep = (index) => {
+        const nextIndex = Math.min(Math.max(index, 0), buttons.length - 1);
+        if (nextIndex === currentIndex) return;
+        currentIndex = nextIndex;
+
+        buttons.forEach((button, buttonIndex) => {
+          button.classList.toggle('is-active', buttonIndex === nextIndex);
+        });
+
+        steps.forEach((step, stepIndex) => {
+          step.classList.toggle('is-active', stepIndex === nextIndex);
+        });
+
+        if (gear) {
+          gear.style.setProperty('--gear-rotation', `${nextIndex * 90}deg`);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const index = Number(button.dataset.step);
+          setActiveStep(index);
+        });
+      });
+
+      setActiveStep(0);
+    })();
+  </script>
 </section>
 
 <style>
@@ -50,10 +146,12 @@ const milestones = [
     background: var(--color-white);
     position: relative;
   }
+
   .ns-story-header {
     text-align: center;
     margin-bottom: 36px;
   }
+
   .ns-story-tag {
     display: inline-block;
     font-size: var(--text-xs);
@@ -66,6 +164,7 @@ const milestones = [
     border-radius: var(--radius-full);
     margin-bottom: 12px;
   }
+
   .ns-story-header .ns-story-title {
     font-size: clamp(1.8rem, 3vw, 2.8rem);
     font-weight: 800;
@@ -73,156 +172,325 @@ const milestones = [
     letter-spacing: -0.02em;
     margin: 0;
   }
+
   .ns-story-body {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: 40px;
-    align-items: start;
+    align-items: center;
   }
-  .ns-story-timeline {
+
+  .ns-story-gear-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ns-story-gear {
     position: relative;
-    padding-left: 40px;
+    width: min(360px, 100%);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.95));
+    box-shadow: 0 24px 60px rgba(16, 52, 102, 0.12);
+    overflow: visible;
+    transform: rotate(var(--gear-rotation, 0deg));
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .ns-story-line {
+
+  .ns-story-gear-ring {
     position: absolute;
-    left: 15px;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
-    background: linear-gradient(180deg, var(--color-electric-blue), var(--color-electric-blue-light) 60%, transparent);
-    border-radius: 1px;
+    inset: 16%;
+    border: 12px solid rgba(33, 105, 255, 0.14);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
   }
-  .ns-story-milestone {
-    position: relative;
-    padding-bottom: 20px;
-  }
-  .ns-story-milestone:last-of-type {
-    padding-bottom: 0;
-  }
-  .ns-story-milestone-dot {
+
+  .ns-story-gear-axis {
     position: absolute;
-    left: -40px;
-    top: 4px;
+    left: 50%;
+    top: 62%;
     width: 32px;
     height: 32px;
+    transform: translate(-50%, -50%);
+    background: var(--color-electric-blue);
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px rgba(0, 113, 255, 0.1);
+  }
+
+  .ns-story-gear-core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    transform: translate(-50%, -50%);
     border-radius: 50%;
     background: var(--color-white);
-    border: 2.5px solid var(--color-electric-blue);
-    z-index: 1;
+    border: 1px solid rgba(33, 105, 255, 0.12);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all var(--transition-base);
-    box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.15);
-  }
-  .ns-story-milestone-dot::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--color-electric-blue);
-  }
-  .ns-story-milestone:hover .ns-story-milestone-dot {
-    box-shadow: 0 0 0 6px rgba(0, 102, 255, 0.15);
-    transform: scale(1.08);
-  }
-  .ns-story-milestone-year {
-    font-size: var(--text-xs);
+    font-size: 0.8rem;
     font-weight: 800;
+    letter-spacing: 0.22em;
     color: var(--color-electric-blue);
     text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 2px;
+    text-align: center;
+    padding: 1rem;
+    box-shadow: inset 0 0 0 1px rgba(33, 105, 255, 0.05);
   }
-  .ns-story-milestone-title {
-    font-size: var(--text-base);
-    font-weight: 700;
-    color: var(--color-deep-blue);
-    margin: 0 0 6px;
-  }
-  .ns-story-milestone-desc {
-    font-size: var(--text-sm);
-    color: var(--color-gray-500);
-    line-height: 1.7;
-    margin: 0;
-  }
-  .ns-story-quote {
+
+  .ns-story-gear-step {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 94px;
+    height: 94px;
+    border-radius: 50%;
+    border: 1px solid rgba(30, 78, 160, 0.12);
+    background: var(--color-white);
     display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    margin-top: 16px;
-    padding: 12px 16px;
-    background: var(--color-electric-blue-light);
-    border-radius: var(--radius-lg);
-    border-left: 3px solid var(--color-electric-blue);
-  }
-  .ns-story-quote svg {
-    color: var(--color-electric-blue);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .ns-story-quote p {
-    font-size: var(--text-sm);
-    font-weight: 600;
-    color: var(--color-deep-blue);
-    margin: 0;
-    font-style: italic;
-  }
-  .ns-story-visual {
-    position: relative;
-    top: 8px;
-    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    gap: 6px;
+    text-align: center;
+    padding: 14px 12px;
+    cursor: pointer;
+    transition: left 1.2s ease, top 1.2s ease, transform 1.2s ease, opacity 1.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-shadow: 0 12px 24px rgba(14, 40, 88, 0.08);
+    transform-origin: center;
+    opacity: 0;
+    pointer-events: none;
+    --step-scale: 0.65;
+    transform: translate(-50%, -50%) rotate(calc(var(--gear-rotation, 0deg) * -1)) scale(var(--step-scale));
   }
-  .ns-story-img-frame {
-    position: relative;
-    border-radius: 20px;
+
+  .ns-story .ns-story-gear-launch {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s ease;
+  }
+
+  .ns-story .ns-story-gear-launch button {
+    border: none;
+    background: var(--color-electric-blue);
+    color: #fff;
+    padding: 1rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    box-shadow: 0 20px 40px rgba(33, 105, 255, 0.22);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .ns-story .ns-story-gear-launch button:hover {
+    transform: translateY(-2px);
+  }
+
+  .ns-story.has-revealed .ns-story-gear-launch {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .ns-story.has-revealed .ns-story-gear-step {
+    opacity: 1;
+    pointer-events: auto;
+    --step-scale: 1;
+  }
+
+  .ns-story-gear-step span {
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: var(--color-electric-blue);
+  }
+
+  .ns-story-gear-step small {
+    font-size: 0.65rem;
+    line-height: 1.2;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gray-600);
+  }
+
+  .ns-story-gear-step.is-active {
+    background: var(--color-electric-blue);
+    color: var(--color-white);
+    box-shadow: 0 20px 40px rgba(33, 105, 255, 0.24);
+  }
+
+  .ns-story-gear-step.is-active span,
+  .ns-story-gear-step.is-active small {
+    color: var(--color-white);
+  }
+
+  .ns-story-gear-step:nth-of-type(1) {
+    transition-delay: 0.05s;
+  }
+
+  .ns-story-gear-step:nth-of-type(2) {
+    transition-delay: 0.1s;
+  }
+
+  .ns-story-gear-step:nth-of-type(3) {
+    transition-delay: 0.15s;
+  }
+
+  .ns-story-gear-step:nth-of-type(4) {
+    transition-delay: 0.2s;
+  }
+
+  .ns-story.has-revealed .ns-story-gear-step:nth-of-type(1) {
+    left: 50%;
+    top: 12%;
+  }
+
+  .ns-story.has-revealed .ns-story-gear-step:nth-of-type(2) {
+    left: auto;
+    right: 12%;
+    top: 50%;
+    transform: translate(50%, -50%) rotate(calc(var(--gear-rotation, 0deg) * -1)) scale(1);
+  }
+
+  .ns-story.has-revealed .ns-story-gear-step:nth-of-type(3) {
+    left: 50%;
+    bottom: 12%;
+    transform: translate(-50%, 50%) rotate(calc(var(--gear-rotation, 0deg) * -1)) scale(1);
+  }
+
+  .ns-story.has-revealed .ns-story-gear-step:nth-of-type(4) {
+    left: 12%;
+    top: 50%;
+  }
+
+  .ns-story-content {
+    display: grid;
+    gap: 24px;
+  }
+
+  .ns-story-step {
+    display: none;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+
+  .ns-story-step.is-active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ns-story-step-card {
+    background: var(--color-white);
+    border: 1px solid rgba(33, 105, 255, 0.08);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    box-shadow: 0 30px 60px rgba(16, 52, 102, 0.08);
+  }
+
+  .ns-story-step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: var(--color-electric-blue);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .ns-story-step-badge svg {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .ns-story-step-meta span {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: var(--radius-full);
+    background: var(--color-electric-blue-light);
+    color: var(--color-electric-blue);
+    font-size: var(--text-xs);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .ns-story-step-card h3 {
+    margin: 20px 0 14px;
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    color: var(--color-deep-blue);
+  }
+
+  .ns-story-step-card p {
+    margin: 0 0 24px;
+    line-height: 1.9;
+    color: var(--color-gray-600);
+  }
+
+  .ns-story-step-image {
+    border-radius: 22px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    aspect-ratio: 4 / 5;
-    max-width: 360px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
   }
-  .ns-story-img-frame img {
+
+  .ns-story-step-image img {
     width: 100%;
-    height: 100%;
+    height: 320px;
     object-fit: cover;
     display: block;
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.45s ease, transform 0.5s ease;
   }
-  .ns-story-img-frame img:first-child {
-    position: relative;
-    opacity: 1;
-  }
-  .ns-story-img-frame:hover img {
-    transform: scale(1.04);
-  }
-  .ns-story-body:not(:has(.ns-story-milestone:hover)) .ns-story-img-frame img:nth-child(1),
-  .ns-story-body:has([data-img="0"]:hover) .ns-story-img-frame img:nth-child(1) { opacity: 1; }
-  .ns-story-body:has([data-img="1"]:hover) .ns-story-img-frame img:nth-child(2) { opacity: 1; }
-  .ns-story-body:has([data-img="2"]:hover) .ns-story-img-frame img:nth-child(3) { opacity: 1; }
-  .ns-story-body:has([data-img="3"]:hover) .ns-story-img-frame img:nth-child(4) { opacity: 1; }
-  .ns-story-body:has([data-img="0"]:hover) .ns-story-img-frame img:not(:nth-child(1)),
-  .ns-story-body:has([data-img="1"]:hover) .ns-story-img-frame img:not(:nth-child(2)),
-  .ns-story-body:has([data-img="2"]:hover) .ns-story-img-frame img:not(:nth-child(3)),
-  .ns-story-body:has([data-img="3"]:hover) .ns-story-img-frame img:not(:nth-child(4)) { opacity: 0; }
-  .ns-story-img-frame::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(0deg, rgba(10, 22, 40, 0.08) 0%, transparent 50%);
-  }
+
   @media (max-width: 900px) {
-    .ns-story { padding: 48px 0; }
-    .ns-story-body { grid-template-columns: 1fr; gap: 32px; }
-    .ns-story-img-frame { aspect-ratio: 5 / 6; max-width: 480px; margin: 0 auto; }
+    .ns-story {
+      padding: 48px 0;
+    }
+
+    .ns-story-body {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .ns-story-gear {
+      width: min(420px, 100%);
+    }
+
+    .ns-story-step-card {
+      padding: 26px;
+    }
+
+    .ns-story-step-image img {
+      height: 260px;
+    }
   }
-  @media (max-width: 640px) {
-    .ns-story { padding: 36px 0; }
-    .ns-story-body { gap: 24px; }
-    .ns-story-quote { padding: 10px 14px; }
+
+  @media (max-width: 600px) {
+    .ns-story-header {
+      margin-bottom: 28px;
+    }
+
+    .ns-story-gear-step {
+      width: 84px;
+      height: 84px;
+      padding: 12px 10px;
+    }
+
+    .ns-story-gear-step small {
+      font-size: 0.62rem;
+    }
+
+    .ns-story-step-card {
+      padding: 24px;
+    }
+
+    .ns-story-step-image img {
+      height: 220px;
+    }
   }
 </style>
