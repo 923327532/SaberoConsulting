@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { data, locale } = Astro.props;
-const contactHref = locale === 'es' ? '/contacto' : `/${locale}/contacto`;
+const contactHref = locale === 'es' ? '/contacto/' : `/${locale}/contacto/`;
 const offerHref = locale === 'es' ? '/#servicios' : `/${locale}/#servicios`;
 ---
 

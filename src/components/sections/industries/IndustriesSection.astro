@@ -73,7 +73,7 @@ const labels = ui[locale as string] || ui.es;
         <h2 class="industries-cta-final-title">{labels.ctaTitle}</h2>
         <p class="industries-cta-final-text">{labels.ctaText}</p>
         <div class="industries-cta-final-buttons">
-          <a href={isEs ? '/contacto' : `/${locale}/contacto`} class="industries-cta-final-btn industries-cta-final-btn-primary">{labels.ctaPrimary}</a>
+          <a href={isEs ? '/contacto/' : `/${locale}/contacto/`} class="industries-cta-final-btn industries-cta-final-btn-primary">{labels.ctaPrimary}</a>
           <a href={isEs ? '/#oferta' : `/${locale}/#oferta`} class="industries-cta-final-btn industries-cta-final-btn-secondary">{labels.ctaSecondary}</a>
         </div>
       </div>
@@ -92,7 +92,7 @@ const labels = ui[locale as string] || ui.es;
 
     let currentIndex = 0;
     let cardsPerView = getCardsPerView();
-    let autoScrollInterval;
+    let autoScrollInterval: number | undefined;
 
     function getCardsPerView() {
       const w = window.innerWidth;
@@ -107,10 +107,11 @@ const labels = ui[locale as string] || ui.es;
     }
 
     function update() {
-      const cardWidth = cards[0].offsetWidth + 16;
+      const firstCard = cards[0] as HTMLElement;
+      const cardWidth = firstCard.offsetWidth + 16;
       const maxIndex = getMaxIndex();
       if (currentIndex > maxIndex) currentIndex = maxIndex;
-      track.style.transform = 'translateX(-' + (currentIndex * cardWidth) + 'px)';
+      (track as HTMLElement).style.transform = 'translateX(-' + (currentIndex * cardWidth) + 'px)';
     }
 
     function next() {
@@ -121,13 +122,13 @@ const labels = ui[locale as string] || ui.es;
 
     function startAutoScroll() {
       stopAutoScroll();
-      autoScrollInterval = setInterval(next, 4000);
+      autoScrollInterval = window.setInterval(next, 4000);
     }
 
     function stopAutoScroll() {
-      if (autoScrollInterval) {
-        clearInterval(autoScrollInterval);
-        autoScrollInterval = null;
+      if (autoScrollInterval !== undefined) {
+        window.clearInterval(autoScrollInterval);
+        autoScrollInterval = undefined;
       }
     }
 
@@ -153,10 +154,10 @@ const labels = ui[locale as string] || ui.es;
     startAutoScroll();
 
     // Debounced resize
-    let resizeTimer;
+    let resizeTimer: number | undefined;
     window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(onResize, 150);
+      if (resizeTimer !== undefined) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(onResize, 150);
     });
   })();
 </script>
