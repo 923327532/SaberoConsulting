@@ -199,18 +199,18 @@ const c = content[locale] || content.es;
 
   <script>
     (() => {
-      const section = document.querySelector('.ns-story');
+      const section = document.querySelector('.ns-story') as HTMLElement | null;
       if (!section) return;
 
-      const buttons = Array.from(section.querySelectorAll('.ns-story-gear-step'));
-      const steps = Array.from(section.querySelectorAll('.ns-story-step'));
-      const gear = section.querySelector('.ns-story-gear');
-      const launch = section.querySelector('.ns-story-gear-launch');
+      const buttons = Array.from(section.querySelectorAll<HTMLElement>('.ns-story-gear-step'));
+      const steps = Array.from(section.querySelectorAll<HTMLElement>('.ns-story-step'));
+      const gear = section.querySelector<HTMLElement>('.ns-story-gear');
+      const launch = section.querySelector<HTMLElement>('.ns-story-gear-launch');
       let currentIndex = 0;
 
       const revealStory = () => {
         section.classList.add('has-revealed');
-        if (launch) (launch).style.opacity = '0';
+        if (launch) launch.style.opacity = '0';
       };
 
       const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -221,7 +221,7 @@ const c = content[locale] || content.es;
 
       revealObserver.observe(section);
 
-      const setActiveStep = (index) => {
+      const setActiveStep = (index: number) => {
         const nextIndex = Math.min(Math.max(index, 0), buttons.length - 1);
         if (nextIndex === currentIndex) return;
         currentIndex = nextIndex;
@@ -235,13 +235,13 @@ const c = content[locale] || content.es;
         });
 
         if (gear) {
-          (gear).style.setProperty('--gear-rotation', `${nextIndex * 90}deg`);
+          gear.style.setProperty('--gear-rotation', `${nextIndex * 90}deg`);
         }
       };
 
       buttons.forEach((button) => {
         button.addEventListener('click', () => {
-          const index = Number((button).dataset.step);
+          const index = Number(button.dataset.step);
           setActiveStep(index);
         });
       });
