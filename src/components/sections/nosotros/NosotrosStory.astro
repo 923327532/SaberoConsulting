@@ -87,15 +87,14 @@ const milestones = [
 
   <script>
     (() => {
-      const section = document.querySelector('.ns-story');
+      const section = document.querySelector<HTMLElement>('.ns-story');
       if (!section) return;
 
-      const buttons = Array.from(section.querySelectorAll('.ns-story-gear-step'));
-      const steps = Array.from(section.querySelectorAll('.ns-story-step'));
-      const gear = section.querySelector('.ns-story-gear');
-      const launch = section.querySelector('.ns-story-gear-launch');
+      const buttons = Array.from(section.querySelectorAll<HTMLElement>('.ns-story-gear-step'));
+      const steps = Array.from(section.querySelectorAll<HTMLElement>('.ns-story-step'));
+      const gear = section.querySelector<HTMLElement>('.ns-story-gear');
+      const launch = section.querySelector<HTMLElement>('.ns-story-gear-launch');
       let currentIndex = 0;
-      let ticking = false;
 
       const revealStory = () => {
         section.classList.add('has-revealed');
@@ -110,7 +109,7 @@ const milestones = [
 
       revealObserver.observe(section);
 
-      const setActiveStep = (index) => {
+      const setActiveStep = (index: number) => {
         const nextIndex = Math.min(Math.max(index, 0), buttons.length - 1);
         if (nextIndex === currentIndex) return;
         currentIndex = nextIndex;
