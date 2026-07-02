@@ -37,9 +37,16 @@ export function generateOrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: siteSettings.name,
+    alternateName: 'Sabero',
     url: siteSettings.url,
     logo: `${siteSettings.url}/images/saberologo.png`,
     description: siteSettings.description,
+    sameAs: [
+      siteSettings.social.linkedin,
+      siteSettings.social.instagram,
+      siteSettings.social.youtube,
+      siteSettings.social.facebook,
+    ],
     contactPoint: {
       '@type': 'ContactPoint',
       email: siteSettings.contact.email,
