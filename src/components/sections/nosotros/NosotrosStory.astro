@@ -199,11 +199,7 @@ const c = content[locale] || content.es;
 
   <script>
     (() => {
-<<<<<<< HEAD
-      const section = document.querySelector<HTMLElement>('.ns-story');
-=======
       const section = document.querySelector('.ns-story') as HTMLElement | null;
->>>>>>> d5e0251dd4bc475382545fdb468badfe7fa7ec6f
       if (!section) return;
 
       const buttons = Array.from(section.querySelectorAll<HTMLElement>('.ns-story-gear-step'));
